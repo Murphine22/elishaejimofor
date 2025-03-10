@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ArrowRight, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
@@ -19,13 +19,23 @@ const menuItems = [
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [activeItem, setActiveItem] = useState<string | null>(null)
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+    if (!isOpen) {
+      // Reset scroll position when opening menu
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }
 
   const handleNavigation = (page: string) => {
+    setActiveItem(page)
     onNavigate(page)
     setIsOpen(false)
+    document.body.style.overflow = 'auto'
   }
 
   return (
@@ -34,7 +44,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="relative z-[200] hover:bg-transparent"
+        className="fixed top-4 right-4 z-[200] hover:bg-transparent"
         aria-label="Toggle mobile menu"
       >
         <AnimatePresence mode="wait">
@@ -70,7 +80,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[150]"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150]"
               onClick={toggleMenu}
             />
 
@@ -79,16 +89,16 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-80 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[175]"
+              className="fixed right-0 top-0 bottom-0 w-[280px] bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[175] overflow-y-auto"
             >
-              <div className="p-6">
+              <div className="p-6 pt-20">
                 <motion.h2 
                   className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Menu
+                  Navigation
                 </motion.h2>
 
                 <nav className="space-y-2">
@@ -103,23 +113,25 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
                         stiffness: 300,
                         delay: index * 0.1,
                       }}
-                      onHoverStart={() => setHoveredItem(item.id)}
-                      onHoverEnd={() => setHoveredItem(null)}
                     >
                       <motion.button
                         onClick={() => handleNavigation(item.id)}
-                        className="w-full p-4 flex items-center space-x-4 rounded-lg relative overflow-hidden group"
+                        className={`w-full p-4 flex items-center space-x-4 rounded-lg relative overflow-hidden group ${
+                          activeItem === item.id ? 'bg-primary/10' : ''
+                        }`}
                         whileHover={{ scale: 1.02, x: 4 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
                           initial={false}
-                          animate={{ scale: hoveredItem === item.id ? 1 : 0.95 }}
+                          animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
                           transition={{ type: "spring", stiffness: 300, damping: 25 }}
                         />
                         
-                        <span className="relative z-10 text-2xl">{item.icon}</span>
+                        <span className="relative z-10 text-2xl transform transition-transform group-hover:scale-110">
+                          {item.icon}
+                        </span>
                         
                         <div className="flex-1 relative z-10">
                           <span className="block text-lg font-medium">{item.label}</span>
@@ -129,7 +141,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
                         <motion.div
                           className="relative z-10 opacity-0 group-hover:opacity-100 transform transition-all"
                           initial={{ x: -10 }}
-                          animate={{ x: hoveredItem === item.id ? 0 : -10 }}
+                          whileHover={{ x: 0 }}
                         >
                           <ChevronRight className="h-5 w-5 text-primary" />
                         </motion.div>
