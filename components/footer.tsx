@@ -27,24 +27,34 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#home" className="hover:text-primary transition-colors">
+                <button onClick={() => setActivePage("home")} className="hover:text-primary transition-colors">
                   Home
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#about" className="hover:text-primary transition-colors">
+                <button onClick={() => setActivePage("about")} className="hover:text-primary transition-colors">
                   About
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#projects" className="hover:text-primary transition-colors">
+                <button onClick={() => setActivePage("services")} className="hover:text-primary transition-colors">
+                  Services
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActivePage("skills")} className="hover:text-primary transition-colors">
+                  Skills
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActivePage("projects")} className="hover:text-primary transition-colors">
                   Projects
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#blog" className="hover:text-primary transition-colors">
+                <button onClick={() => setActivePage("blog")} className="hover:text-primary transition-colors">
                   Blog
-                </a>
+                </button>
               </li>
               <li>
                 <button onClick={() => setActivePage("contact")} className="hover:text-primary transition-colors">

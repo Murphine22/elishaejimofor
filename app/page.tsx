@@ -26,6 +26,7 @@ import { SettingsButton } from "@/components/settings-button"
 import Link from "next/link"
 import { FaArrowRight } from "react-icons/fa"
 import { AdminControlPanel } from "@/components/admin-control-panel"
+import { MobileMenu } from "@/components/mobile-menu"
 
 export default function Home() {
   const [activePage, setActivePage] = useState("home")
@@ -154,6 +155,7 @@ export default function Home() {
                 </button>
               </motion.div>
             </div>
+            <MobileMenu onNavigate={handleNavigation} />
           </div>
         </div>
       </header>
