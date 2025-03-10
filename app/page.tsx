@@ -27,6 +27,7 @@ import Link from "next/link"
 import { FaArrowRight } from "react-icons/fa"
 import { AdminControlPanel } from "@/components/admin-control-panel"
 import { MobileMenu } from "@/components/mobile-menu"
+import { ClientReviews } from "@/components/client-reviews"
 
 export default function Home() {
   const [activePage, setActivePage] = useState("home")
@@ -247,6 +248,15 @@ export default function Home() {
               >
                 <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Featured Advertisements</h2>
                 <AdvertisementSlider />
+              </motion.div>
+
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="mt-8 md:mt-16"
+              >
+                <ClientReviews />
               </motion.div>
             </motion.div>
           )}

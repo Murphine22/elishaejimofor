@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
@@ -10,15 +10,16 @@ interface MobileMenuProps {
 }
 
 const menuItems = [
-  { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "blog", label: "Blog" }
+  { id: "about", label: "About", icon: "👤" },
+  { id: "services", label: "Services", icon: "🛠️" },
+  { id: "skills", label: "Skills", icon: "💡" },
+  { id: "projects", label: "Projects", icon: "🚀" },
+  { id: "blog", label: "Blog", icon: "📝" }
 ]
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
@@ -42,7 +43,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
               <X className="h-6 w-6" />
             </motion.div>
@@ -52,7 +53,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               initial={{ rotate: 90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
               <Menu className="h-6 w-6" />
             </motion.div>
@@ -78,36 +79,59 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
-              transition={{ type: "spring", damping: 20, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-64 bg-background border-l shadow-xl z-50 p-6"
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="fixed right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-50 p-6"
             >
-              <div className="mt-12 space-y-2">
+              <div className="mt-12 space-y-1">
                 {menuItems.map((item, index) => (
                   <motion.div
                     key={item.id}
-                    initial={{ x: 20, opacity: 0 }}
+                    initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{
+                      type: "spring",
+                      damping: 20,
+                      stiffness: 300,
+                      delay: index * 0.1,
+                    }}
+                    onHoverStart={() => setHoveredItem(item.id)}
+                    onHoverEnd={() => setHoveredItem(null)}
                   >
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start text-lg font-medium relative group"
+                    <button
                       onClick={() => handleNavigation(item.id)}
+                      className="w-full p-3 flex items-center space-x-4 rounded-lg relative overflow-hidden group"
                     >
-                      <span className="relative z-10">{item.label}</span>
-                      <motion.div
-                        className="absolute inset-0 bg-primary/10 rounded-md -z-10"
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileHover={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.2 }}
+                      <motion.span
+                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                        initial={false}
+                        animate={{
+                          scale: hoveredItem === item.id ? 1 : 0.95,
+                        }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
                       />
-                    </Button>
+                      <span className="relative z-10 text-xl">{item.icon}</span>
+                      <span className="relative z-10 text-lg font-medium">{item.label}</span>
+                      <motion.div
+                        className="absolute right-3 opacity-0 group-hover:opacity-100"
+                        initial={{ x: -10 }}
+                        animate={{ x: hoveredItem === item.id ? 0 : -10 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                      </motion.div>
+                    </button>
                   </motion.div>
                 ))}
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              />
+              
               <motion.div
                 className="absolute bottom-8 left-6 right-6 h-1 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50 rounded-full"
                 initial={{ scaleX: 0, opacity: 0 }}
