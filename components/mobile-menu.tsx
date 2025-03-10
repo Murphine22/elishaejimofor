@@ -40,7 +40,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="relative z-[1000] hover:bg-transparent"
+        className="fixed top-4 right-4 z-[9999] hover:bg-transparent"
         aria-label="Toggle navigation menu"
       >
         <AnimatePresence mode="wait">
@@ -72,11 +72,19 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         {isOpen && (
           <>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[900]"
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ 
+                opacity: 1,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)"
+              }}
+              exit={{ 
+                opacity: 0,
+                backdropFilter: "blur(0px)",
+                WebkitBackdropFilter: "blur(0px)"
+              }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/60 z-[9990]"
               onClick={toggleMenu}
             />
 
@@ -85,7 +93,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-16 right-4 w-64 bg-background rounded-lg border shadow-lg z-[950] overflow-hidden"
+              className="fixed top-16 right-4 w-64 bg-background/95 backdrop-blur-md rounded-lg border shadow-xl z-[9995] overflow-hidden"
             >
               <motion.div
                 className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-primary"
