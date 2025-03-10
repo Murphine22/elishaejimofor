@@ -34,7 +34,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="relative z-[100] hover:bg-transparent"
+        className="relative z-[200] hover:bg-transparent"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -64,25 +64,23 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90]"
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[150]"
               onClick={toggleMenu}
             />
 
-            {/* Menu content */}
             <motion.div
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[95] p-6"
+              className="fixed right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[175] p-6"
             >
-              <div className="mt-12 space-y-1">
+              <div className="mt-16 space-y-2">
                 {menuItems.map((item, index) => (
                   <motion.div
                     key={item.id}
@@ -94,37 +92,34 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
                       stiffness: 300,
                       delay: index * 0.1,
                     }}
-                    onHoverStart={() => setHoveredItem(item.id)}
-                    onHoverEnd={() => setHoveredItem(null)}
                   >
-                    <button
+                    <motion.button
                       onClick={() => handleNavigation(item.id)}
-                      className="w-full p-3 flex items-center space-x-4 rounded-lg relative overflow-hidden group"
+                      className="w-full p-4 flex items-center space-x-4 rounded-lg relative overflow-hidden group"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       <motion.span
-                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100"
                         initial={false}
-                        animate={{
-                          scale: hoveredItem === item.id ? 1 : 0.95,
-                        }}
+                        animate={{ scale: hoveredItem === item.id ? 1 : 0.95 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
                       />
-                      <span className="relative z-10 text-xl">{item.icon}</span>
+                      <span className="relative z-10 text-2xl">{item.icon}</span>
                       <span className="relative z-10 text-lg font-medium">{item.label}</span>
                       <motion.div
-                        className="absolute right-3 opacity-0 group-hover:opacity-100"
+                        className="absolute right-4 opacity-0 group-hover:opacity-100"
                         initial={{ x: -10 }}
                         animate={{ x: hoveredItem === item.id ? 0 : -10 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
                       >
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="h-5 w-5" />
                       </motion.div>
-                    </button>
+                    </motion.button>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Decorative elements */}
               <motion.div
                 className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"
                 initial={{ opacity: 0 }}
