@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
@@ -10,162 +10,73 @@ interface MobileMenuProps {
 }
 
 const menuItems = [
-  { id: "about", label: "About", icon: "👤", description: "Learn more about me" },
-  { id: "services", label: "Services", icon: "🛠️", description: "What I offer" },
-  { id: "skills", label: "Skills", icon: "💡", description: "My expertise" },
-  { id: "projects", label: "Projects", icon: "🚀", description: "View my work" },
-  { id: "blog", label: "Blog", icon: "📝", description: "Read my articles" }
+  { id: "about", label: "About" },
+  { id: "services", label: "Services" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "blog", label: "Blog" }
 ]
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [activeItem, setActiveItem] = useState<string | null>(null)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
-    if (!isOpen) {
-      // Reset scroll position when opening menu
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
   }
 
   const handleNavigation = (page: string) => {
-    setActiveItem(page)
     onNavigate(page)
     setIsOpen(false)
-    document.body.style.overflow = 'auto'
   }
 
   return (
-    <div className="block sm:hidden">
+    <div className="block sm:hidden relative">
       <Button
         variant="ghost"
-        size="icon"
         onClick={toggleMenu}
-        className="fixed top-4 right-4 z-[200] hover:bg-transparent"
-        aria-label="Toggle mobile menu"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-accent"
       >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              <X className="h-6 w-6" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="menu"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              <Menu className="h-6 w-6" />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <span className="font-medium">Menu</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown className="h-5 w-5" />
+        </motion.div>
       </Button>
 
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150]"
-              onClick={toggleMenu}
-            />
-
-            <motion.div
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-[280px] bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[175] overflow-y-auto"
-            >
-              <div className="p-6 pt-20">
-                <motion.h2 
-                  className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-48 rounded-lg bg-popover border shadow-lg z-50"
+          >
+            <nav className="py-2">
+              {menuItems.map((item, index) => (
+                <motion.button
+                  key={item.id}
+                  className="w-full px-4 py-2 text-left hover:bg-accent transition-colors flex items-center justify-between group"
+                  onClick={() => handleNavigation(item.id)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ x: 4 }}
                 >
-                  Navigation
-                </motion.h2>
-
-                <nav className="space-y-2">
-                  {menuItems.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        damping: 20,
-                        stiffness: 300,
-                        delay: index * 0.1,
-                      }}
-                    >
-                      <motion.button
-                        onClick={() => handleNavigation(item.id)}
-                        className={`w-full p-4 flex items-center space-x-4 rounded-lg relative overflow-hidden group ${
-                          activeItem === item.id ? 'bg-primary/10' : ''
-                        }`}
-                        whileHover={{ scale: 1.02, x: 4 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
-                          initial={false}
-                          animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        />
-                        
-                        <span className="relative z-10 text-2xl transform transition-transform group-hover:scale-110">
-                          {item.icon}
-                        </span>
-                        
-                        <div className="flex-1 relative z-10">
-                          <span className="block text-lg font-medium">{item.label}</span>
-                          <span className="text-sm text-muted-foreground">{item.description}</span>
-                        </div>
-
-                        <motion.div
-                          className="relative z-10 opacity-0 group-hover:opacity-100 transform transition-all"
-                          initial={{ x: -10 }}
-                          whileHover={{ x: 0 }}
-                        >
-                          <ChevronRight className="h-5 w-5 text-primary" />
-                        </motion.div>
-                      </motion.button>
-                    </motion.div>
-                  ))}
-                </nav>
-              </div>
-
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              />
-              
-              <motion.div
-                className="absolute bottom-8 left-6 right-6 h-1 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50 rounded-full"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              />
-            </motion.div>
-          </>
+                  <span className="font-medium">{item.label}</span>
+                  <motion.div
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    initial={{ x: -10 }}
+                    whileHover={{ x: 0 }}
+                  >
+                    →
+                  </motion.div>
+                </motion.button>
+              ))}
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

@@ -18,7 +18,7 @@ const reviews: Review[] = [
     id: 1,
     name: "Deacon Chinedu",
     role: "Leader",
-    company: "DIGC (Dunamis International Gospel Center, Ushering Department)",
+    company: "DIGC (Ushering Department)",
     rating: 5,
     comment: "Elisha's work on our website redesign was exceptional. The attention to detail and modern design elements transformed our online presence."
   },
