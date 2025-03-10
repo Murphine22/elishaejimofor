@@ -2,36 +2,20 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronRight, Home, User, Briefcase, Code, BookOpen, Mail } from "lucide-react"
+import { Menu, X, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
   onNavigate: (page: string) => void
 }
 
-const menuSections = [
-  {
-    title: "Main",
-    items: [
-      { id: "home", label: "Home", icon: <Home className="w-5 h-5" />, description: "Back to homepage" },
-      { id: "about", label: "About", icon: <User className="w-5 h-5" />, description: "Learn more about me" },
-    ]
-  },
-  {
-    title: "Professional",
-    items: [
-      { id: "services", label: "Services", icon: <Briefcase className="w-5 h-5" />, description: "What I offer" },
-      { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" />, description: "My expertise" },
-      { id: "projects", label: "Projects", icon: "🚀", description: "View my work" },
-    ]
-  },
-  {
-    title: "Content",
-    items: [
-      { id: "blog", label: "Blog", icon: <BookOpen className="w-5 h-5" />, description: "Read my articles" },
-      { id: "contact", label: "Contact", icon: <Mail className="w-5 h-5" />, description: "Get in touch" },
-    ]
-  }
+const menuItems = [
+  { id: "about", label: "About", description: "Learn more about me" },
+  { id: "services", label: "Services", description: "Explore my services" },
+  { id: "skills", label: "Skills", description: "View my expertise" },
+  { id: "projects", label: "Projects", description: "See my work" },
+  { id: "blog", label: "Blog", description: "Read my articles" },
+  { id: "contact", label: "Contact", description: "Get in touch" }
 ]
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
@@ -56,8 +40,8 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="fixed top-4 right-4 z-[1000] hover:bg-transparent"
-        aria-label="Toggle mobile menu"
+        className="relative z-[1000] hover:bg-transparent"
+        aria-label="Toggle navigation menu"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -97,102 +81,66 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
             />
 
             <motion.div
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-[280px] bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[950] overflow-y-auto"
+              className="fixed top-16 right-4 w-64 bg-background rounded-lg border shadow-lg z-[950] overflow-hidden"
             >
-              <div className="p-6 pt-20">
-                <motion.h2 
-                  className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Menu
-                </motion.h2>
-
-                <nav className="space-y-6">
-                  {menuSections.map((section, sectionIndex) => (
-                    <motion.div
-                      key={section.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: sectionIndex * 0.1 }}
-                    >
-                      <h3 className="text-sm font-medium text-muted-foreground mb-2 px-2">
-                        {section.title}
-                      </h3>
-                      <div className="space-y-1">
-                        {section.items.map((item, itemIndex) => (
-                          <motion.div
-                            key={item.id}
-                            initial={{ x: 50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{
-                              type: "spring",
-                              damping: 20,
-                              stiffness: 300,
-                              delay: (sectionIndex * section.items.length + itemIndex) * 0.1,
-                            }}
-                          >
-                            <motion.button
-                              onClick={() => handleNavigation(item.id)}
-                              className={`w-full p-3 flex items-center space-x-4 rounded-lg relative overflow-hidden group ${
-                                activeItem === item.id ? 'bg-primary/10' : ''
-                              }`}
-                              whileHover={{ scale: 1.02, x: 4 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
-                                initial={false}
-                                animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                              />
-                              
-                              <span className="relative z-10 flex items-center justify-center transform transition-transform group-hover:scale-110">
-                                {typeof item.icon === 'string' ? (
-                                  <span className="text-2xl">{item.icon}</span>
-                                ) : (
-                                  item.icon
-                                )}
-                              </span>
-                              
-                              <div className="flex-1 relative z-10">
-                                <span className="block text-base font-medium">{item.label}</span>
-                                <span className="text-xs text-muted-foreground">{item.description}</span>
-                              </div>
-
-                              <motion.div
-                                className="relative z-10 opacity-0 group-hover:opacity-100 transform transition-all duration-200"
-                                initial={{ x: -10 }}
-                                whileHover={{ x: 0 }}
-                              >
-                                <ChevronRight className="h-4 w-4 text-primary" />
-                              </motion.div>
-                            </motion.button>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-                </nav>
-              </div>
-
               <motion.div
-                className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-primary"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
               />
-              
+
+              <nav className="p-2">
+                {menuItems.map((item, index) => (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => handleNavigation(item.id)}
+                    className={`w-full p-3 flex items-center text-left rounded-md relative overflow-hidden group ${
+                      activeItem === item.id ? 'bg-primary/10' : ''
+                    }`}
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      type: "spring",
+                      damping: 20,
+                      stiffness: 300,
+                      delay: index * 0.1,
+                    }}
+                    whileHover={{ x: 4 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
+                      initial={false}
+                      animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    />
+                    
+                    <div className="flex-1 relative z-10">
+                      <span className="block text-base font-medium">{item.label}</span>
+                      <span className="text-xs text-muted-foreground">{item.description}</span>
+                    </div>
+
+                    <motion.div
+                      className="relative z-10 opacity-0 group-hover:opacity-100"
+                      initial={{ x: -10 }}
+                      whileHover={{ x: 0 }}
+                    >
+                      <ChevronRight className="h-4 w-4 text-primary" />
+                    </motion.div>
+                  </motion.button>
+                ))}
+              </nav>
+
               <motion.div
-                className="absolute bottom-8 left-6 right-6 h-1 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50 rounded-full"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                className="h-1 bg-gradient-to-r from-primary/50 via-purple-500/50 to-primary/50"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
               />
             </motion.div>
           </>
