@@ -29,12 +29,12 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
   }
 
   return (
-    <div className="relative sm:hidden">
+    <div className="block sm:hidden">
       <Button
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="relative z-50 hover:bg-transparent"
+        className="relative z-[100] hover:bg-transparent"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -70,7 +70,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90]"
               onClick={toggleMenu}
             />
 
@@ -80,7 +80,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-50 p-6"
+              className="fixed right-0 top-0 bottom-0 w-72 bg-gradient-to-b from-background via-background/95 to-background border-l shadow-2xl z-[95] p-6"
             >
               <div className="mt-12 space-y-1">
                 {menuItems.map((item, index) => (
