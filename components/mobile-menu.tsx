@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -19,115 +19,97 @@ const menuItems = [
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedPage, setSelectedPage] = useState<string | null>(null)
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement
-      if (isOpen && !target.closest('.mobile-menu-container')) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen])
-
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [isOpen])
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = isOpen ? 'auto' : 'hidden'
   }
 
   const handleNavigation = (page: string) => {
-    setSelectedPage(page)
     onNavigate(page)
     setIsOpen(false)
+    document.body.style.overflow = 'auto'
   }
 
   return (
-    <div className="block sm:hidden mobile-menu-container">
-      <div className="fixed top-0 left-0 right-0 z-[1000] bg-background/95 backdrop-blur-sm border-b px-4 py-2">
-        <Button
-          variant="ghost"
-          onClick={toggleMenu}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-accent w-full justify-between"
-          aria-expanded={isOpen}
-          aria-controls="mobile-menu"
+    <div className="block sm:hidden">
+      <Button
+        variant="ghost"
+        onClick={toggleMenu}
+        className="fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-2 rounded-lg bg-background/80 backdrop-blur-sm border shadow-md hover:bg-accent"
+      >
+        <span className="font-medium">Menu</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
         >
-          <span className="font-medium">Navigation Menu</span>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ChevronDown className="h-5 w-5" />
-          </motion.div>
-        </Button>
-      </div>
+          <ChevronDown className="h-5 w-5" />
+        </motion.div>
+      </Button>
 
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-[1001]"
-              onClick={() => setIsOpen(false)}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+              onClick={toggleMenu}
             />
-            
+
+            {/* Dropdown Menu */}
             <motion.div
-              id="mobile-menu"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="fixed top-[60px] left-4 right-4 bg-popover rounded-lg border shadow-lg z-[1002] overflow-hidden"
+              className="fixed top-16 right-4 w-64 rounded-lg bg-background border shadow-lg z-50"
             >
               <nav className="py-2">
                 {menuItems.map((item, index) => (
                   <motion.button
                     key={item.id}
-                    className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 group
-                      ${selectedPage === item.id ? 'bg-accent/50' : 'hover:bg-accent/80'}`}
+                    className="w-full px-6 py-4 text-left hover:bg-accent/50 active:bg-accent transition-colors flex items-center gap-4 group border-b last:border-none"
                     onClick={() => handleNavigation(item.id)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ x: 4 }}
                   >
-                    <span className="text-xl group-hover:scale-110 transition-transform">
+                    <span className="text-2xl group-hover:scale-110 transition-transform">
                       {item.icon}
                     </span>
-                    <span className="font-medium">{item.label}</span>
-                    <motion.span
-                      className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                    <div className="flex-1">
+                      <span className="block text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                        {item.label}
+                      </span>
+                    </div>
+                    <motion.div
+                      className="text-primary opacity-0 group-hover:opacity-100 transition-all"
                       initial={{ x: -10 }}
                       whileHover={{ x: 0 }}
                     >
                       →
-                    </motion.span>
+                    </motion.div>
                   </motion.button>
                 ))}
               </nav>
+
+              {/* Decorative gradient line */}
+              <motion.div
+                className="absolute bottom-0 left-2 right-2 h-1 bg-gradient-to-r from-primary via-purple-500 to-primary rounded-full"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              />
             </motion.div>
           </>
         )}
       </AnimatePresence>
-      
-      {/* Spacer for fixed header */}
-      <div className="h-[60px]" />
     </div>
   )
 } 
