@@ -2,19 +2,36 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronRight, Home, User, Briefcase, Code, BookOpen, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
   onNavigate: (page: string) => void
 }
 
-const menuItems = [
-  { id: "about", label: "About", icon: "👤", description: "Learn more about me" },
-  { id: "services", label: "Services", icon: "🛠️", description: "What I offer" },
-  { id: "skills", label: "Skills", icon: "💡", description: "My expertise" },
-  { id: "projects", label: "Projects", icon: "🚀", description: "View my work" },
-  { id: "blog", label: "Blog", icon: "📝", description: "Read my articles" }
+const menuSections = [
+  {
+    title: "Main",
+    items: [
+      { id: "home", label: "Home", icon: <Home className="w-5 h-5" />, description: "Back to homepage" },
+      { id: "about", label: "About", icon: <User className="w-5 h-5" />, description: "Learn more about me" },
+    ]
+  },
+  {
+    title: "Professional",
+    items: [
+      { id: "services", label: "Services", icon: <Briefcase className="w-5 h-5" />, description: "What I offer" },
+      { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" />, description: "My expertise" },
+      { id: "projects", label: "Projects", icon: "🚀", description: "View my work" },
+    ]
+  },
+  {
+    title: "Content",
+    items: [
+      { id: "blog", label: "Blog", icon: <BookOpen className="w-5 h-5" />, description: "Read my articles" },
+      { id: "contact", label: "Contact", icon: <Mail className="w-5 h-5" />, description: "Get in touch" },
+    ]
+  }
 ]
 
 export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
@@ -93,54 +110,72 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Navigation
+                  Menu
                 </motion.h2>
 
-                <nav className="space-y-2">
-                  {menuItems.map((item, index) => (
+                <nav className="space-y-6">
+                  {menuSections.map((section, sectionIndex) => (
                     <motion.div
-                      key={item.id}
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        damping: 20,
-                        stiffness: 300,
-                        delay: index * 0.1,
-                      }}
+                      key={section.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: sectionIndex * 0.1 }}
                     >
-                      <motion.button
-                        onClick={() => handleNavigation(item.id)}
-                        className={`w-full p-4 flex items-center space-x-4 rounded-lg relative overflow-hidden group ${
-                          activeItem === item.id ? 'bg-primary/10' : ''
-                        }`}
-                        whileHover={{ scale: 1.02, x: 4 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
-                          initial={false}
-                          animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        />
-                        
-                        <span className="relative z-10 text-2xl transform transition-transform group-hover:scale-110">
-                          {item.icon}
-                        </span>
-                        
-                        <div className="flex-1 relative z-10">
-                          <span className="block text-lg font-medium">{item.label}</span>
-                          <span className="text-sm text-muted-foreground">{item.description}</span>
-                        </div>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-2 px-2">
+                        {section.title}
+                      </h3>
+                      <div className="space-y-1">
+                        {section.items.map((item, itemIndex) => (
+                          <motion.div
+                            key={item.id}
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{
+                              type: "spring",
+                              damping: 20,
+                              stiffness: 300,
+                              delay: (sectionIndex * section.items.length + itemIndex) * 0.1,
+                            }}
+                          >
+                            <motion.button
+                              onClick={() => handleNavigation(item.id)}
+                              className={`w-full p-3 flex items-center space-x-4 rounded-lg relative overflow-hidden group ${
+                                activeItem === item.id ? 'bg-primary/10' : ''
+                              }`}
+                              whileHover={{ scale: 1.02, x: 4 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 opacity-0 group-hover:opacity-100"
+                                initial={false}
+                                animate={{ scale: activeItem === item.id ? 1 : 0.95 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                              />
+                              
+                              <span className="relative z-10 flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                {typeof item.icon === 'string' ? (
+                                  <span className="text-2xl">{item.icon}</span>
+                                ) : (
+                                  item.icon
+                                )}
+                              </span>
+                              
+                              <div className="flex-1 relative z-10">
+                                <span className="block text-base font-medium">{item.label}</span>
+                                <span className="text-xs text-muted-foreground">{item.description}</span>
+                              </div>
 
-                        <motion.div
-                          className="relative z-10 opacity-0 group-hover:opacity-100 transform transition-all duration-200"
-                          initial={{ x: -10 }}
-                          whileHover={{ x: 0 }}
-                        >
-                          <ChevronRight className="h-5 w-5 text-primary" />
-                        </motion.div>
-                      </motion.button>
+                              <motion.div
+                                className="relative z-10 opacity-0 group-hover:opacity-100 transform transition-all duration-200"
+                                initial={{ x: -10 }}
+                                whileHover={{ x: 0 }}
+                              >
+                                <ChevronRight className="h-4 w-4 text-primary" />
+                              </motion.div>
+                            </motion.button>
+                          </motion.div>
+                        ))}
+                      </div>
                     </motion.div>
                   ))}
                 </nav>
