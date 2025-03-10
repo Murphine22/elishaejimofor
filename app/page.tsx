@@ -260,7 +260,7 @@ export default function Home() {
               </motion.div>
             </motion.div>
           )}
-          {activePage === "about" && <About />}
+          {activePage === "about" && <About onNavigate={handleNavigation} />}
           {activePage === "skills" && <Skills />}
           {activePage === "projects" && <Projects />}
           {activePage === "services" && <Services />}

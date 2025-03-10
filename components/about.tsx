@@ -10,7 +10,11 @@ import { EditableContent } from "@/components/editable-content"
 import { useState, useEffect } from "react"
 import { useAdmin } from "@/components/admin-context"
 
-export const About = () => {
+interface AboutProps {
+  onNavigate: (page: string) => void
+}
+
+export const About = ({ onNavigate }: AboutProps) => {
   const { isAdmin, isEditMode } = useAdmin()
   const [timeline, setTimeline] = useState([
     { year: 2022, event: "Freelance Graphics Designer" },
@@ -233,7 +237,11 @@ export const About = () => {
                 Download CV
               </EditableContent>
             </Button>
-            <Button variant="outline" className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2"
+              onClick={() => onNavigate("projects")}
+            >
               <ExternalLink className="h-4 w-4" />
               <EditableContent section="about" field="portfolioButton" type="text" defaultValue="Portfolio">
                 Portfolio
