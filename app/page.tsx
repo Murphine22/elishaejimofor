@@ -179,9 +179,9 @@ export default function Home() {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
                     <TypeAnimation
                       sequence={[
-                        "Welcome to My Website",
+                        "Hi, I'm Elisha Ejimofor",
                         1000,
-                        "FRONT-END Developer",
+                        "A FRONT-END Developer",
                         1000,
                         "Web Developer",
                         1000,
