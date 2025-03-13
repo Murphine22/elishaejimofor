@@ -40,7 +40,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="fixed top-4 right-4 z-[9999] hover:bg-transparent"
+        className="fixed top-4 right-4 z-[10000] hover:bg-transparent shadow-md bg-background/80 backdrop-blur-sm"
         aria-label="Toggle navigation menu"
       >
         <AnimatePresence mode="wait">
@@ -86,6 +86,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-background/60 z-[9990]"
               onClick={toggleMenu}
+              style={{ pointerEvents: "auto" }}
             />
 
             <motion.div
@@ -94,6 +95,7 @@ export const MobileMenu = ({ onNavigate }: MobileMenuProps) => {
               exit={{ y: -20, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="fixed top-16 right-4 w-64 bg-background/95 backdrop-blur-md rounded-lg border shadow-xl z-[9995] overflow-hidden"
+              style={{ pointerEvents: "auto" }}
             >
               <motion.div
                 className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-primary"

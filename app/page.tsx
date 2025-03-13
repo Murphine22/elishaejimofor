@@ -102,7 +102,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-background/80 relative overflow-hidden">
       <ScrollProgress />
 
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative overflow-hidden">
+      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-cyan-500/10 -z-10" />
         <div className="container flex h-16 items-center justify-between px-4 lg:px-8">
           <motion.div
@@ -272,7 +272,7 @@ export default function Home() {
       <Footer setActivePage={handleNavigation} />
       
       {/* Fixed buttons with responsive positioning */}
-      <div className="fixed right-2 sm:right-4 bottom-16 sm:bottom-24 flex flex-col items-center gap-2 sm:gap-4 z-50">
+      <div className="fixed right-2 sm:right-4 bottom-16 sm:bottom-24 flex flex-col items-center gap-2 sm:gap-4 z-40">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -300,7 +300,7 @@ export default function Home() {
       </div>
 
       {/* Mobile bottom navigation bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur border-t py-2 px-4 flex justify-between items-center sm:hidden z-40">
+      <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur border-t py-2 px-4 flex justify-between items-center sm:hidden z-30">
         <ThemeToggle />
         <button
           onClick={() => handleNavigation("contact")}
