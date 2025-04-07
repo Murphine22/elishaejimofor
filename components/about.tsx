@@ -229,7 +229,7 @@ export const About = ({ onNavigate }: AboutProps) => {
             <Button 
               className="flex items-center gap-2"
               onClick={() => {
-                window.open("https://www.dropbox.com/scl/fi/wrrsvzw86euu58ekc18el/Elisha-s-Resume-Oct.-24.pdf?rlkey=8bi8dldb4pvb8zcdzvtpptwky&st=eze78m8l&dl=1", "_blank")
+                window.open("https://www.dropbox.com/home/June%20CV%20Elisha%20Ejimofor#")
               }}
             >
               <Download className="h-4 w-4" />
