@@ -7,7 +7,7 @@ import { Code, Palette, FileText, Terminal, Zap, Users, Clock, DollarSign, Check
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { EditableContent, EditableContentProps } from "@/components/editable-content"
+// Removed EditableContent for this file to avoid type mismatch
 import { useAdmin } from "@/components/admin-context"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
@@ -451,15 +451,9 @@ export const Services = () => {
       transition={{ duration: 0.5 }}
       className="space-y-6 bg-background p-8 rounded-lg shadow-lg"
     >
-      <h2 className="text-3xl font-bold mb-6 text-center">
-        <EditableContent id="services-title" type="text" defaultValue="Services I Offer">
-          Services I Offer
-        </EditableContent>
-      </h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">Services I Offer</h2>
       <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-        <EditableContent id="services-subtitle" type="text" multiline={true} defaultValue="I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.">
-          I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.
-        </EditableContent>
+        I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -477,24 +471,14 @@ export const Services = () => {
                   <div className={`p-2 rounded-full ${service.iconColor.replace('text-', 'bg-')}/10 mr-3`}>
                     <service.icon className={`h-6 w-6 ${service.iconColor}`} />
                   </div>
-                  <h3 className="text-xl font-bold">
-                    <EditableContent id={`service-title-${index}`} type="text" defaultValue={service.title}>
-                      {service.title}
-                    </EditableContent>
-                  </h3>
+                  <h3 className="text-xl font-bold">{service.title}</h3>
                 </div>
-                <p className="text-muted-foreground mb-4">
-                  <EditableContent id={`service-description-${index}`} type="text" multiline defaultValue={service.description}>
-                    {service.description}
-                  </EditableContent>
-                </p>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
                 <ul className="space-y-2 mb-4">
                   {service.details.map((detail, detailIndex) => (
                     <li key={detailIndex} className="flex items-start">
                       <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                      <EditableContent id={`service-detail-${index}-${detailIndex}`} type="text" defaultValue={detail}>
-                        {detail}
-                      </EditableContent>
+                      <span>{detail}</span>
                     </li>
                   ))}
                 </ul>
