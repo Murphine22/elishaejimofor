@@ -14,12 +14,12 @@ const categories = ["All", "Web", "Mobile", "AI/ML", "Blockchain", "UI/UX"];
 
 const projects = [
   {
-    title: "Udacu Finance app",
+    title: "Ush-App Finance app",
     description: "A full-stack Financial Overview App with React and Node.js",
-    image: "https://i.pinimg.com/474x/4f/36/86/4f3686ae86e1b29c94b776c7a300e160.jpg",
+    image: "https://i.imgur.com/zwu5LOp.jpeg",
     tags: ["React", "Node.js", "Superbase","Stackblitz"],
-    link: "https://udafa.vercel.app",
-    github: "https://stackblitz.com/~/github.com/Murphine22/Udacu-App",
+    link: "https://ush-app.vercel.app",
+    github: "https://github.com/Murphine22/Ush-App",
     category: "Web",
     color: "from-blue-500 to-cyan-500"
   },
@@ -200,7 +200,7 @@ export const Projects = () => {
                   <p className="text-muted-foreground mb-4">{featuredProject.description}</p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {featuredProject.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="bg-background/50 backdrop-blur-sm">
+                      <Badge key={tag} className="bg-background/50 backdrop-blur-sm">
                         {tag}
                       </Badge>
                     ))}
@@ -212,7 +212,10 @@ export const Projects = () => {
                       <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
                     </a>
                   </Button>
-                  <Button variant="outline" asChild>
+                  <Button 
+                    className="border border-input bg-background hover:bg-accent hover:text-accent-foreground" 
+                    asChild
+                  >
                     <a href={featuredProject.github} target="_blank" rel="noopener noreferrer">
                       <Github className="mr-2 h-4 w-4" /> Source Code
                     </a>
@@ -266,7 +269,6 @@ export const Projects = () => {
                 <X className="w-16 h-16 text-muted-foreground" />
                 <p className="mt-4 text-muted-foreground">No projects found in this category</p>
                 <Button 
-                  variant="outline" 
                   className="mt-4"
                   onClick={() => setSelectedCategory("All")}
                 >
@@ -314,12 +316,12 @@ export const Projects = () => {
                       <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
                       <div className="flex flex-wrap gap-1.5 mb-2">
                         {project.tags.slice(0, 3).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
+                          <Badge key={tag} className="bg-secondary text-secondary-foreground text-xs">
                       {tag}
                     </Badge>
                   ))}
                         {project.tags.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge className="text-xs border border-input bg-background text-foreground shadow-sm">
                             +{project.tags.length - 3}
                           </Badge>
                         )}
@@ -327,21 +329,19 @@ export const Projects = () => {
               </CardContent>
                     <CardFooter className="p-5 pt-0 flex justify-between items-center">
                       <div className="flex gap-2">
-                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0" asChild>
+                        <Button className="h-8 w-8 p-0 hover:bg-accent hover:text-accent-foreground" asChild>
                           <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="View source code">
                             <Github className="h-4 w-4" />
                           </a>
                         </Button>
-                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0" asChild>
+                        <Button className="h-8 w-8 p-0" asChild>
                           <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label="View live demo">
                             <ExternalLink className="h-4 w-4" />
                           </a>
                         </Button>
                       </div>
                       <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="text-xs group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1 transition-transform"
+                        className="h-9 px-3 bg-transparent hover:bg-accent hover:text-accent-foreground text-xs group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1 transition-transform"
                         onClick={() => setFeaturedProject(project)}
                       >
                         Details <ArrowRight className="ml-1 h-3 w-3" />

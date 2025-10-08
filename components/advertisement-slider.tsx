@@ -152,8 +152,6 @@ export const AdvertisementSlider = () => {
       </div>
 
       <Button
-        variant="outline"
-        size="icon"
         className="absolute left-2 top-1/2 transform -translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm z-10"
         onClick={handlePrevious}
       >
@@ -161,8 +159,6 @@ export const AdvertisementSlider = () => {
       </Button>
 
       <Button
-        variant="outline"
-        size="icon"
         className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm z-10"
         onClick={handleNext}
       >

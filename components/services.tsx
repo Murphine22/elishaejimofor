@@ -57,7 +57,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Simple landing page or brochure website (up to 5 pages)",
-        priceNGN: 250000,
+        priceNGN: 200000,
         duration: "1-2 weeks",
         features: [
           "Responsive design",
@@ -70,7 +70,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Multi-page website with custom features (up to 10 pages)",
-        priceNGN: 500000,
+        priceNGN: 400000,
         duration: "2-3 weeks",
         features: [
           "All Basic features",
@@ -84,7 +84,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Full-featured web application or e-commerce site",
-        priceNGN: 1200000,
+        priceNGN: 1000000,
         duration: "4-6 weeks",
         features: [
           "All Standard features",
@@ -114,7 +114,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Simple UI design for existing products or websites",
-        priceNGN: 200000,
+        priceNGN: 500000,
         duration: "3-5 days",
         features: [
           "UI audit and recommendations",
@@ -126,7 +126,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive UI/UX design for new or existing products",
-        priceNGN: 400000,
+        priceNGN: 150000,
         duration: "1-2 weeks",
         features: [
           "User research",
@@ -140,7 +140,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "End-to-end UX/UI design process with extensive research",
-        priceNGN: 800000,
+        priceNGN: 300000,
         duration: "2-4 weeks",
         features: [
           "In-depth user research",
@@ -172,7 +172,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Essential content for small websites or projects",
-        priceNGN: 100000,
+        priceNGN: 50000,
         duration: "3-5 days",
         features: [
           "Up to 5 pages of website copy",
@@ -184,7 +184,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive content package for growing businesses",
-        priceNGN: 250000,
+        priceNGN: 100000,
         duration: "1-2 weeks",
         features: [
           "Up to 10 pages of website copy",
@@ -198,7 +198,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Full-scale content strategy and creation",
-        priceNGN: 600000,
+        priceNGN: 250000,
         duration: "2-3 weeks",
         features: [
           "Complete website copy",
@@ -230,7 +230,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Essential prompt engineering for specific use cases",
-        priceNGN: 150000,
+        priceNGN: 25000,
         duration: "2-3 days",
         features: [
           "Prompt analysis and optimization",
@@ -242,7 +242,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive prompt engineering for business applications",
-        priceNGN: 350000,
+        priceNGN: 50000,
         duration: "1-2 weeks",
         features: [
           "Custom prompt design",
@@ -256,7 +256,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "End-to-end AI solution development with advanced prompting",
-        priceNGN: 800000,
+        priceNGN: 100000,
         duration: "2-3 weeks",
         features: [
           "Advanced prompt engineering",
@@ -288,7 +288,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Essential performance audit and basic optimizations",
-        priceNGN: 150000,
+        priceNGN: 75000,
         duration: "2-3 days",
         features: [
           "Performance audit",
@@ -301,7 +301,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive performance optimization for websites",
-        priceNGN: 300000,
+        priceNGN: 150000,
         duration: "1 week",
         features: [
           "Detailed performance audit",
@@ -316,7 +316,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Full-scale optimization for complex applications",
-        priceNGN: 700000,
+        priceNGN: 250000,
         duration: "2 weeks",
         features: [
           "Comprehensive system audit",
@@ -349,7 +349,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "One-time consultation session for specific issues",
-        priceNGN: 100000,
+        priceNGN: 50000,
         duration: "2 hours",
         features: [
           "2-hour consultation session",
@@ -361,7 +361,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Ongoing consultation for projects or teams",
-        priceNGN: 400000,
+        priceNGN: 100000,
         duration: "1 month",
         features: [
           "Weekly consultation sessions",
@@ -374,7 +374,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Comprehensive technical advisory for organizations",
-        priceNGN: 1000000,
+        priceNGN: 150000,
         duration: "3 months",
         features: [
           "Bi-weekly strategy sessions",
@@ -500,7 +500,6 @@ export const Services = () => {
                   ))}
                 </ul>
                 <Button
-                  variant="outline"
                   className="w-full mt-2 bg-gradient-to-r hover:text-white hover:from-primary hover:to-purple-600 transition-all duration-300"
                   onClick={() => openPackagesDialog(service)}
                 >
@@ -572,7 +571,6 @@ export const Services = () => {
                             <CardFooter className="p-6 pt-0">
                               <Button 
                                 className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-muted hover:bg-muted/90'}`}
-                                variant={index === 1 ? "default" : "outline"}
                                 onClick={() => navigateToContact(pkg.name)}
                               >
                                 Contact for {pkg.name}
@@ -647,7 +645,6 @@ export const Services = () => {
                         <Button 
                           key={index}
                           className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-muted hover:bg-muted/90'}`}
-                          variant={index === 1 ? "default" : "outline"}
                           onClick={() => navigateToContact(pkg.name)}
                         >
                           {pkg.name}
@@ -691,9 +688,12 @@ export const Services = () => {
                         </div>
                       </CardContent>
                       <CardFooter className="p-6 pt-0">
-                        <Button 
-                          className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-muted hover:bg-muted/90'}`}
-                          variant={index === 1 ? "default" : "outline"}
+                        <Button
+                          className={`w-full ${
+                            index === 1
+                              ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                              : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'
+                          }`}
                           onClick={() => navigateToContact(pkg.name)}
                         >
                           Contact for {pkg.name}
