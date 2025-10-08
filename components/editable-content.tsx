@@ -213,7 +213,7 @@ export const EditableContent = <T extends EditableSection>({
   if (!isEditing) {
     return (
       <div 
-        className={`group relative ${className} ${isEditMode ? "cursor-pointer hover:outline hover:outline-2 hover:outline-primary/50 hover:outline-dashed" : ""}`}
+        className={`group relative ${className} ${isEditMode ? "cursor-pointer hover:outline-2 hover:outline-primary/50 hover:outline-dashed" : ""}`}
         onClick={handleEdit}
       >
         {/* Render current content */}

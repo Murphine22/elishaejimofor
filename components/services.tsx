@@ -457,7 +457,7 @@ export const Services = () => {
         </EditableContent>
       </h2>
       <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-        <EditableContent id="services-subtitle" type="text" multiline defaultValue="I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.">
+        <EditableContent id="services-subtitle" type="text" multiline={true} defaultValue="I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.">
           I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.
         </EditableContent>
       </p>
