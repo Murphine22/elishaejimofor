@@ -3,6 +3,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "target": "ES6",
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "react"],
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,

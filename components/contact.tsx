@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, CheckCircle, Loader2, Send, ArrowRight } from "lucide-react"
+// @ts-ignore: Cannot find module '@formspree/react' or its corresponding type declarations.
 import { useForm, ValidationError } from '@formspree/react'
 import { useEffect, useState } from "react"
 import Image from "next/image"

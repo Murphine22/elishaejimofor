@@ -183,8 +183,8 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const profileImages = [
-    "https://i.pinimg.com/474x/4b/0e/2b/4b0e2b4c967ed625e7c7c1ae05743ced.jpg",
-    "https://i.pinimg.com/474x/a2/03/97/a20397082fc6d98261e54e2431e2508c.jpg"
+    "https://i.imgur.com/Xo6UwrZ.jpeg",
+    "https://i.imgur.com/DX7X2WO.jpeg"
   ]
   
   // Image rotation effect
@@ -229,7 +229,7 @@ export const About = ({ onNavigate }: AboutProps) => {
             <Button 
               className="flex items-center gap-2"
               onClick={() => {
-                window.open("https://www.dropbox.com/scl/fi/j9ds20jhc0l3db40v219u/Elisha-s-Web-Dev-Resume-25.pdf?rlkey=22pqsfv4uzbrr3gmp4w8d9oo7&st=kfpy58ni&dl=0")
+                window.open("https://www.dropbox.com/scl/fi/hys7y7nsp2xt4yy2yzdru/Elisha-s-FrontEnd-Resume-1.pdf?rlkey=6j72wm3rrexklitjf1f2epnh5&st=5e9ojsfs&dl=0")
               }}
             >
               <Download className="h-4 w-4" />
@@ -237,8 +237,7 @@ export const About = ({ onNavigate }: AboutProps) => {
                 Download CV
               </EditableContent>
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
               className="flex items-center gap-2"
               onClick={() => onNavigate("projects")}
             >

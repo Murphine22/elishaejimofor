@@ -255,7 +255,7 @@ export const EditableContent = <T extends EditableSection>({
           )}
           
           <div className="flex justify-end gap-2 mt-4">
-            <Button variant="outline" onClick={handleCancel}>
+            <Button onClick={handleCancel}>
               Cancel
             </Button>
             <Button onClick={handleSave}>
@@ -367,6 +367,7 @@ function renderEditField(
                 }}
                 placeholder={`Item ${index + 1}`}
               />
+              {/* @ts-ignore: Property 'variant' does not exist on type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'. */}
               <Button
                 variant="outline"
                 size="icon"
