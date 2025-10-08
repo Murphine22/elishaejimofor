@@ -17,42 +17,51 @@ interface AboutProps {
 export const About = ({ onNavigate }: AboutProps) => {
   const { isAdmin, isEditMode } = useAdmin()
   const [timeline, setTimeline] = useState([
-    { year: 2022, event: "Freelance Graphics Designer" },
-    { year: 2023, event: "Started Web Development Journey" },
-    { year: 2024, event: "Web Developer at OS Concept(DSDP) " },
-    { year: 2024, event: "Launched Personal Brand as Content Creator(Murphine Tech)" },
-    { year: 2024, event: "Front-End Developer at Periscope Consulting(Intern)" },
-    { year: 2025, event: "Front-End Developer at Zimcrest Technologies" },
+    { year: 2017, event: "Business Developer/Branch Manager (Forgo Battery Company Ltd. 2017-2022)" },
+    { year: 2019, event: "Affiliate Marketer (Timoyex Int'l 2019-2024)" },
+    { year: 2022, event: "Freelance Graphics Designer (2022-2024)" },
+    { year: 2023, event: "Started Web Development Journey(2023-2024)" },
+    { year: 2024, event: "Web Developer at OS Concept(DSDP. 2024) " },
+    { year: 2024, event: "Web and Graphics Designer at DSAP(Trainee. 2024)" },
+    { year: 2024, event: "Launched Personal Brand as Content Creator(Murphine Technologies. 2024 - Present)" },
+    { year: 2024, event: "Front-End Developer at Periscope Consulting(Intern 2024)" },
+    { year: 2025, event: "Front-End Developer at Zimcrest Technologies(2025)" },
   ])
 
   const workExperience = [
     {
-      title: "Senior Front-End Developer",
-      company: "Zimcrest Technologies",
-      period: "2025 - Present",
-      color: "from-blue-500 to-blue-600",
-      lightColor: "from-blue-500/20 to-blue-600/20",
-      responsibilities: [
-        "Joined a team of developers in building responsive web applications using Tailwind CSS and Next.js",
-        "Implemented CI/CD pipelines that reduced deployment time by 40%",
-        "Optimized application performance resulting in 30% faster load times",
-        "Collaborated with UI/UX designers to implement pixel-perfect designs"
-      ]
-    },
-    {
       title: "Web Developer",
       company: "Murphine Technologies",
-      period: "2024 - 2025",
+      period: "2024 - Present",
       color: "from-purple-500 to-purple-600",
       lightColor: "from-purple-500/20 to-purple-600/20",
       responsibilities: [
-        "Developed and maintained client websites using React, Next.js, Tailwind CSS, JavaScript)",
-        "Created custom WordPress for sites",
-        "Implemented responsive designs for mobile and tablet devices",
+        "Applied critical thinking and problem-solving during UI optimization and bugs-fixing tasks, reducing turnaround time on critical features)",
+        "Built responsive, interactive Single Page Applications (SPAs) (e.g., Udacu, Ush-App) using React.js, Bootstrap, and Supabase, increasing organizational transparency and digital functionality by 65%",
+        "Designed full frontend development curriculum with live coding sessions, assessments, and real-world project simulations.",
+        "Developed custom WordPress for sites",
+        "Created marketing assets using Canva that increased client business engagement by 60% acrossdigital platforms",
         "Worked directly with clients to gather requirements and provide technical solutions",
-        "Trained new developers on the company's technologies"
+        "Led AI-in-business workshops for SMEs, resulting in 30% improvement in workflow automation adoption",
+        "Trained over 20 students in frontend and backend development technologies, achieving 60% job placement success rate",
+        "Delivered hands-on training with real projects, enhancing students portfolio readiness, problem-solving, and team collaboration."
       ]
     },
+    {
+      title: "Senior Front-End Developer",
+      company: "Zimcrest Technologies",
+      period: "2025",
+      color: "from-blue-500 to-blue-600",
+      lightColor: "from-blue-500/20 to-blue-600/20",
+      responsibilities: [
+        "Developed Single Page Applications (SPA) with mobile-first design and cross-browser compatibility using Next.js and Tailwind CSS, achieving 35% faster load times and improved user engagement",
+        "Integrated AI tools (AI Chat Assistant) for smart interaction modules, improving user satisfaction by 40%",
+        "Translated Figma UI/UX prototypes into high-performance interfaces, reducing design-to-code turnaround by 25%.",
+        "Deployed projects using CI/CD workflows via Vercel, improving scalability and deployment speed by 50%",
+        "Applied Agile methodologies using GitHub, Trello, and Slack to maintain code quality and streamline delivery.",
+      ]
+    },
+
     {
       title: "Web Developer Intern",
       company: "Periscope Consultings",
@@ -60,10 +69,10 @@ export const About = ({ onNavigate }: AboutProps) => {
       color: "from-purple-500 to-purple-600",
       lightColor: "from-purple-500/20 to-purple-600/20",
       responsibilities: [
-        "Led high-profile project (Daily Gist website), API Integration, and implemented best practices in development.",
-        "Developed and maintained client websites using JavaScript, HTML, and CSS",
-        "Integrated third-party APIs and services",
-        "Implemented responsive designs for mobile and tablet devices",
+        "Built a fully responsive, cross-browser compatible, mobile-first news website with dynamic search,comments, and API integration, improving user engagement by 40% and increasing traffic by 25%",
+        "Implemented RESTful API integration using JSONPlaceholder for dynamic content flow and real-time updates.",
+        "Ensured 100% accessibility compliance and responsiveness across all devices and browsers.",
+        "Contributed to SEO-optimized features that elevated site visibility and organic search rankings.",
         "Worked directly with clients to gather requirements and provide technical solutions",
         "Assisted in guiding the team on the project"
       ],
@@ -77,11 +86,12 @@ export const About = ({ onNavigate }: AboutProps) => {
       lightColor: "from-green-500/20 to-green-600/20",
       description: "Collaborated with senior developers to build user-friendly websites, create engaging content, and design visually appealing graphics while enhancing skills in SEO and prompt engineering.",
       responsibilities: [
-        "Designed and updated web pages using HTML, CSS, JavaScript, PHP, MySQL AND WordPress",
-        "Created graphics and content for marketing and branding purposes",
-        "Optimized website performance and improved SEO rankings",
-        "Developed and refined AI prompts for content generation",
-        "Worked closely with a team to deliver projects on time"
+        "Collaborated on frontend and backend features using HTML, JavaScript, PHP, and MySQL for multiple client sites, contributing to feature delivery and QA testing.",
+        "Created graphics and content for marketing and branding purposes, increasing client engagement by 50%",
+        "Collaborated with senior developers and UI/UX designers to implement on-brand, SEO-optimized, and accessibility-compliant websites.",
+        "Participated in building responsive UIs, implementing basic API endpoints, and managing version control using Git.",
+        "Contributed to backend development with PHP and MySQL, improving database-driven content delivery for small business clients.",
+        "Joined brainstorming sessions for UI enhancement and workflow automation, resulting in improved client feedback and delivery alignment",
       ],
       location: "Abuja, Nigeria"
     },
@@ -92,7 +102,7 @@ export const About = ({ onNavigate }: AboutProps) => {
       color: "from-amber-500 to-amber-600",
       lightColor: "from-amber-500/20 to-amber-600/20",
       responsibilities: [
-        "Created brand identities including logos, Posters, and Banners",
+        "Created brand identities including logos, Posters, and Banners using Canva",
         "Designed marketing materials for social media campaigns",
         "Produced print-ready designs for business cards, flyers, and brochures",
         "Managed client relationships and delivered projects within tight deadlines"
@@ -105,9 +115,9 @@ export const About = ({ onNavigate }: AboutProps) => {
       color: "from-yellow-500 to-yellow-600",
       lightColor: "from-yellow-500/20 to-yellow-600/20",
       responsibilities: [
-        "Promoted solar energy products through strategic affiliate partnerships and innovative digital marketing campaigns",
-        "Generated multiple new customer leads, resulting in significant growth for solar energy adoption",
-        "Expanded the affiliate network by onboarding new high-performing partners",
+        "Promoted solar energy products through strategic affiliate partnerships and innovative digital marketing campaigns using Facebook and Google",
+        "Generated multiple new customer leads, resulting in significant growth for solar energy adoption by 30%",
+        "Expanded the affiliate network by onboarding new high-performing partners by 20%",
         "Designed and implemented targeted marketing funnels that improved conversion rates by 30%"
       ],
       location: "Remote"
@@ -119,10 +129,13 @@ export const About = ({ onNavigate }: AboutProps) => {
       color: "from-green-500 to-green-600",
       lightColor: "from-green-500/20 to-green-600/20",
       responsibilities: [
-        "Managing branch operations, developing business strategies, and driving sales growth",
-        "Increased branch revenue by 35% in the first quarter",
-        "Implemented a new inventory management system to improve efficiency",
-        "Developed and trained a high-performing sales team, enhancing overall productivity"
+        "Directed daily branch operations, ensuring seamless workflow, accurate account reconciliation, andachievement of company objectives.",
+        "Streamlined inventory and ordering systems, reducing stock delays and cutting operational inefficiencies by 30%.",
+        "Led local marketing campaigns and strategic outreach initiatives, increasing brand visibility and driving a 30% growth in customer base.",
+        "Engineered a 25% boost in monthly sales through data-driven business development and targeted market penetration strategies.",
+        "Managed customer relations, resolving complaints promptly and maintaining a 90%+ satisfaction rate.",
+        "Fostered a performance-focused work culture and maintained a healthy, collaborative team environment.",
+        "Designed and implemented effective onboarding and training programs, accelerating new staff productivity by 40%"
       ],
       location: "Ilorin, Nigeria"
     },
@@ -183,15 +196,18 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const profileImages = [
-    "https://i.imgur.com/Xo6UwrZ.jpeg",
-    "https://i.imgur.com/DX7X2WO.jpeg"
+    "https://i.imgur.com/QwVIarl.jpeg",
+    "https://i.imgur.com/vPOk177.jpeg",
+    "https://i.imgur.com/L8HmeD3.jpeg",
+    "https://i.imgur.com/6M86mxE.jpeg",
+    "https://i.imgur.com/8Blt9Eo.jpeg"
   ]
   
   // Image rotation effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % profileImages.length)
-    }, 4000) // Change image every 4 seconds
+    }, 5000) // Change image every 5 seconds
     
     return () => clearInterval(interval)
   }, [])
@@ -214,13 +230,22 @@ export const About = ({ onNavigate }: AboutProps) => {
           <div className="space-y-4">
             <EditableContent section="about" field="vision" type="text" multiline defaultValue="My vision is to create innovative digital solutions that make a positive impact on people's lives. I believe in the power of technology to transform businesses and enhance user experiences.">
               <p>
-                My vision is to create innovative digital solutions that make a positive impact on people's lives. I believe in the power of technology to transform businesses and enhance user experiences.
+              Hey there — I’m Elisha Ejimofor, the creative mind behind Murphine Technologies.
+              I’m a Frontend Developer, Digital Creator, and AI Prompt Engineer with a relentless drive to turn bold ideas into beautiful, functional realities. My mission? To build intelligent, human-centered digital experiences that empower businesses and inspire people across the globe.
               </p>
             </EditableContent>
             
             <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.">
               <p>
-                With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.
+                With over 2 years of hands-on experience in web development and 5+ years in digital solutions, marketing, and business growth, I’ve had the privilege of designing and developing high-performing web applications that merge creativity with technology.
+              </p>
+              <p>
+                I work at the intersection of design, code, and strategy — crafting interactive, scalable, and visually captivating platforms using tools like React.js, Next.js, Supabase, and Tailwind CSS. Whether it’s developing seamless user interfaces, mentoring tech talents, or creating AI-driven digital experiences, I bring clarity, emotion, and innovation to every project I touch.
+                At Murphine Technologies, I believe technology should feel alive — adaptive, intuitive, and impactful. I’m passionate about leveraging AI and modern development frameworks to shape the next wave of smart, sustainable, and inclusive digital solutions.
+              </p>
+              <p>
+                Every pixel matters. Every interaction counts. Every line of code is a story waiting to be told.
+                Let’s build the future — one idea, one experience, and one transformation at a time.
               </p>
             </EditableContent>
           </div>
@@ -251,84 +276,68 @@ export const About = ({ onNavigate }: AboutProps) => {
         
         <motion.div 
           className="relative group"
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.div 
-            className="absolute -inset-1 bg-gradient-to-r from-primary via-purple-500 to-cyan-500 rounded-xl blur-md opacity-75"
+            className="absolute -inset-1 bg-gradient-to-r from-primary via-purple-500 to-cyan-500 rounded-xl blur-lg opacity-80"
             animate={{ 
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
             }}
             transition={{ 
-              duration: 15, 
+              duration: 12, 
               repeat: Infinity,
               ease: "linear" 
             }}
             style={{ backgroundSize: "200% 200%" }}
           />
-          <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
+          <div className="relative h-[650px] rounded-xl overflow-hidden shadow-2xl">
             <motion.div 
-              className="absolute top-4 right-4 z-30 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10"
+              className="absolute top-4 right-4 z-30 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1, duration: 0.5 }}
+              transition={{ delay: 0.8, duration: 0.4, ease: "easeOut" }}
             >
-              <span className="h-2 w-2 rounded-full bg-green-500"></span>
-              <span className="text-white text-xs font-medium">Available for hire</span>
+              <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-white text-xs font-semibold">Available for hire</span>
             </motion.div>
             
-            <div className="absolute inset-0 z-10 overflow-hidden">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute h-1 w-1 rounded-full bg-white/70"
-                  style={{
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                  }}
-                  animate={{
-                    opacity: [0, 1, 0],
-                    scale: [0, 1.5, 0],
-                  }}
-                  transition={{
-                    duration: 2 + Math.random() * 3,
-                    repeat: Infinity,
-                    delay: Math.random() * 5,
-                  }}
-                />
-              ))}
-            </div>
+            {/* Removed the star animation for simplicity */}
             
-            <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/0 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-10"></div>
             
             <div className="relative h-full w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImageIndex}
                   className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.4, 0.0, 0.2, 1.0],
+                  }}
                 >
                   <Image
                     src={profileImages[currentImageIndex]}
                     alt="Elisha Ejimofor"
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
+                    style={{ objectPosition: "center" }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
                 </motion.div>
               </AnimatePresence>
               
-              <div className="absolute bottom-16 left-0 right-0 z-20 flex justify-center gap-2">
+              <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-2">
                 {profileImages.map((_, index) => (
                   <button
                     key={index}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex ? "w-6 bg-white" : "w-1.5 bg-white/50"
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
                     }`}
                     onClick={() => setCurrentImageIndex(index)}
                   />
@@ -338,11 +347,11 @@ export const About = ({ onNavigate }: AboutProps) => {
             
             <motion.div 
               className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent z-20"
-              initial={{ y: 100 }}
-              whileHover={{ y: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <p className="text-white text-sm font-medium">Elisha Ejimofor</p>
+              <p className="text-white text-sm font-semibold">Elisha Ejimofor</p>
               <p className="text-white/80 text-xs">Web Developer & Designer</p>
             </motion.div>
           </div>

@@ -1,25 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Code, Palette, FileText, Terminal, Zap, Users, Clock, DollarSign, Check } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { EditableContent } from "@/components/editable-content"
+import { EditableContent, EditableContentProps } from "@/components/editable-content"
 import { useAdmin } from "@/components/admin-context"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 // Exchange rate: 1 USD = 1,500 NGN (approximate)
 const exchangeRate = 1500;
-
-// Default color scheme to use for all services
-const defaultColorScheme = {
-  light: "from-primary/20 to-primary/20",
-  dark: "from-primary to-purple-600",
-  badge: "bg-primary"
-};
 
 // Define the service type
 interface ServicePackage {
@@ -126,7 +119,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive UI/UX design for new or existing products",
-        priceNGN: 150000,
+        priceNGN: 250000,
         duration: "1-2 weeks",
         features: [
           "User research",
@@ -392,8 +385,14 @@ const services: Service[] = [
   },
 ]
 
+interface SectionContent {
+  "services-title": string;
+  "services-subtitle": string;
+  [key: string]: string;
+}
+
 export const Services = () => {
-  const { isAdmin, isEditMode, editableContent, updateContent } = useAdmin()
+  const { isAdmin, isEditMode } = useAdmin()
   const [expandedService, setExpandedService] = useState<string | null>(null)
   // Create a map to store the selected tab for each service
   const [selectedTabs, setSelectedTabs] = useState<Record<string, string>>({})
@@ -458,7 +457,7 @@ export const Services = () => {
         </EditableContent>
       </h2>
       <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-        <EditableContent id="services-subtitle" type="text" multiline={true} defaultValue="I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.">
+        <EditableContent id="services-subtitle" type="text" multiline defaultValue="I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.">
           I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.
         </EditableContent>
       </p>
@@ -485,7 +484,7 @@ export const Services = () => {
                   </h3>
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  <EditableContent id={`service-description-${index}`} type="text" multiline={true} defaultValue={service.description}>
+                  <EditableContent id={`service-description-${index}`} type="text" multiline defaultValue={service.description}>
                     {service.description}
                   </EditableContent>
                 </p>
@@ -792,4 +791,3 @@ export const Services = () => {
     </motion.div>
   )
 }
-
