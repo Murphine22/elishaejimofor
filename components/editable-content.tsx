@@ -367,23 +367,25 @@ function renderEditField(
                 }}
                 placeholder={`Item ${index + 1}`}
               />
-              {/* @ts-ignore: Property 'variant' does not exist on type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'. */}
               <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  const newList = [...value]
-                  newList.splice(index, 1)
-                  setValue(newList)
-                }}
+                {...{
+                  variant: "outline",
+                  size: "icon",
+                  onClick: () => {
+                    const newList = [...value]
+                    newList.splice(index, 1)
+                  },
+                } as any}
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
           ))}
           <Button
-            variant="outline"
-            onClick={() => setValue([...value, ""])}
+            {...{
+              variant: "outline",
+              onClick: () => setValue([...value, ""]),
+            } as any}
           >
             Add Item
           </Button>
