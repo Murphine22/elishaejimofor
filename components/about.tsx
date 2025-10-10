@@ -40,7 +40,7 @@ export const About = ({ onNavigate }: AboutProps) => {
         "Built responsive, interactive Single Page Applications (SPAs) (e.g., Udacu, Ush-App) using React.js, Bootstrap, and Supabase, increasing organizational transparency and digital functionality by 65%",
         "Designed full frontend development curriculum with live coding sessions, assessments, and real-world project simulations.",
         "Developed custom WordPress for sites",
-        "Created marketing assets using Canva that increased client business engagement by 60% acrossdigital platforms",
+        "Created marketing assets using Canva that increased client business engagement by 60% across digital platforms",
         "Worked directly with clients to gather requirements and provide technical solutions",
         "Led AI-in-business workshops for SMEs, resulting in 30% improvement in workflow automation adoption",
         "Trained over 20 students in frontend and backend development technologies, achieving 60% job placement success rate",

@@ -190,6 +190,8 @@ export default function Home() {
                         1000,
                         "Graphics Designer",
                         1000,
+                        "Digital Marketer",
+                        1000,
                         "Content Creator",
                         1000,
                         "Prompt Engineer",
