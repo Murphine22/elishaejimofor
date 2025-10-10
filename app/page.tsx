@@ -151,7 +151,7 @@ export default function Home() {
                   onClick={() => handleNavigation("contact")}
                   className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-xl flex items-center justify-center text-sm md:text-base"
                 >
-                  <span className="mr-2">Hire Me</span>
+                  <span className="mr-2">Get in Touch</span>
                   <FaArrowRight className="h-3 w-3 md:h-4 md:w-4" />
                 </button>
               </motion.div>
@@ -195,6 +195,8 @@ export default function Home() {
                         "Content Creator",
                         1000,
                         "Prompt Engineer",
+                        1000,
+                        "Digital skills Tutor",
                         1000,
                       ]}
                       wrapper="span"

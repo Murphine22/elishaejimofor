@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft } from "lucide-react"
 
+
 interface NavigationProps {
   activePage: string
   setActivePage: (page: string) => void

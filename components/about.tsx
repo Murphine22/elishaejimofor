@@ -129,7 +129,7 @@ export const About = ({ onNavigate }: AboutProps) => {
       color: "from-green-500 to-green-600",
       lightColor: "from-green-500/20 to-green-600/20",
       responsibilities: [
-        "Directed daily branch operations, ensuring seamless workflow, accurate account reconciliation, andachievement of company objectives.",
+        "Directed daily branch operations, ensuring seamless workflow, accurate account reconciliation, and achievement of company objectives.",
         "Streamlined inventory and ordering systems, reducing stock delays and cutting operational inefficiencies by 30%.",
         "Led local marketing campaigns and strategic outreach initiatives, increasing brand visibility and driving a 30% growth in customer base.",
         "Engineered a 25% boost in monthly sales through data-driven business development and targeted market penetration strategies.",
@@ -200,6 +200,7 @@ export const About = ({ onNavigate }: AboutProps) => {
     "https://i.imgur.com/vPOk177.jpeg",
     "https://i.imgur.com/L8HmeD3.jpeg",
     "https://i.imgur.com/6M86mxE.jpeg",
+    "https://i.imgur.com/cTIFMyY.jpeg",
     "https://i.imgur.com/8Blt9Eo.jpeg"
   ]
   
@@ -300,7 +301,7 @@ export const About = ({ onNavigate }: AboutProps) => {
               transition={{ delay: 0.8, duration: 0.4, ease: "easeOut" }}
             >
               <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-white text-xs font-semibold">Available for hire</span>
+              <span className="text-white text-xs font-semibold">Let's Collaborate </span>
             </motion.div>
             
             {/* Removed the star animation for simplicity */}
