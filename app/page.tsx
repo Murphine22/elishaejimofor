@@ -184,7 +184,7 @@ export default function Home() {
                       sequence={[
                         "Hi, I'm Elisha Ejimofor",
                         1000,
-                        "A FRONT-END Developer",
+                        "A Frontend Developer",
                         1000,
                         "Web Developer",
                         1000,
