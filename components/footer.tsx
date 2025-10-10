@@ -81,7 +81,6 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
             {[
               { Icon: Github, link: "https://github.com/Murphine22", label: "GitHub" },
               { Icon: Linkedin, link: "https://linkedin.com/in/murphine22", label: "LinkedIn" },
-              { Icon: Twitter, link: "https://twitter.com/yourhandle", label: "Twitter" },
               { Icon: Facebook, link: "https://facebook.com/yourusername", label: "Facebook" },
               { Icon: Instagram, link: "https://instagram.com/yourusername", label: "Instagram" },
               { Icon: Mail, link: "mailto:elishaejimofor@gmail.com", label: "Email" },

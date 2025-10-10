@@ -310,7 +310,7 @@ export default function Home() {
           onClick={() => handleNavigation("contact")}
           className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm flex items-center gap-2"
         >
-          <span>Hire Me</span>
+          <span>Get in Touch</span>
           <FaArrowRight className="h-3 w-3" />
         </button>
       </div>
