@@ -42,7 +42,6 @@ const nextConfig = {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
-    optimizeCss: true,
     optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
   },
   // Performance optimizations
