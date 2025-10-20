@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AdminProvider } from "@/components/admin-context"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </AdminProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
