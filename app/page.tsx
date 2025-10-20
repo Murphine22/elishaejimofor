@@ -19,7 +19,7 @@ import { ArrowRight, ChevronDown } from "lucide-react"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { TypeAnimation } from "react-type-animation"
 import { DigitalClock } from "@/components/digital-clock"
-import { AdvertisementSlider } from "@/components/advertisement-slider"
+import { FeaturedAdvertisements } from "@/components/featured-advertisements"
 import Image from "next/image"
 import { UserAuthButton } from "@/components/user-auth-button"
 import { SettingsButton } from "@/components/settings-button"
@@ -78,8 +78,11 @@ export default function Home() {
   }, [])
 
   const handleNavigation = (page: string) => {
+    console.log('Navigating to:', page)
     setActivePage(page)
     window.history.pushState(null, "", `#${page}`)
+    // Scroll to top smoothly when navigating
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const renderFloatingButton = (id: string) => {
@@ -247,13 +250,12 @@ export default function Home() {
               </div>
 
               <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
                 className="mt-8 md:mt-16"
               >
-                <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Featured Advertisements</h2>
-                <AdvertisementSlider />
+                <FeaturedAdvertisements />
               </motion.div>
 
               <motion.div

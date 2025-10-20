@@ -3,12 +3,13 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Download, ExternalLink, Briefcase, GraduationCap, Award, Sparkles, TrendingUp, Rocket, Star, Zap } from "lucide-react"
+import { Download, ExternalLink, Briefcase, GraduationCap, Award, Sparkles, TrendingUp, Rocket, Star, Zap, Code2, Palette, Brain } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import { EditableContent } from "@/components/editable-content"
 import { useState, useEffect } from "react"
 import { useAdmin } from "@/components/admin-context"
+import { AboutHero } from "@/components/about-hero"
 
 interface AboutProps {
   onNavigate: (page: string) => void
@@ -282,7 +283,6 @@ export const About = ({ onNavigate }: AboutProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const profileImages = [
     "https://i.imgur.com/QwVIarl.jpeg",
-    "https://i.imgur.com/vPOk177.jpeg",
     "https://i.imgur.com/L8HmeD3.jpeg",
     "https://i.imgur.com/6M86mxE.jpeg",
     "https://i.imgur.com/cTIFMyY.jpeg",
@@ -304,144 +304,329 @@ export const About = ({ onNavigate }: AboutProps) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8 bg-background p-8 rounded-lg shadow-lg"
+      className="space-y-12"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div>
-          <h2 className="text-3xl font-bold mb-4">
-            <EditableContent section="about" field="title" type="text" defaultValue="About Me">
-              About Me
-            </EditableContent>
-          </h2>
-          <div className="space-y-4">
-            <EditableContent section="about" field="vision" type="text" multiline defaultValue="My vision is to create innovative digital solutions that make a positive impact on people's lives. I believe in the power of technology to transform businesses and enhance user experiences.">
-              <p>
-              Hey there — I’m Elisha Ejimofor, the creative mind behind Murphine Technologies.
-              I’m a Frontend Developer, Digital Creator, and AI Prompt Engineer with a relentless drive to turn bold ideas into beautiful, functional realities. My mission? To build intelligent, human-centered digital experiences that empower businesses and inspire people across the globe.
-              </p>
-            </EditableContent>
-            
-            <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.">
-              <p>
-                With over 2 years of hands-on experience in web development and 5+ years in digital solutions, marketing, and business growth, I’ve had the privilege of designing and developing high-performing web applications that merge creativity with technology.
-              </p>
-              <p>
-                I work at the intersection of design, code, and strategy — crafting interactive, scalable, and visually captivating platforms using tools like React.js, Next.js, Supabase, and Tailwind CSS. Whether it’s developing seamless user interfaces, mentoring tech talents, or creating AI-driven digital experiences, I bring clarity, emotion, and innovation to every project I touch.
-                At Murphine Technologies, I believe technology should feel alive — adaptive, intuitive, and impactful. I’m passionate about leveraging AI and modern development frameworks to shape the next wave of smart, sustainable, and inclusive digital solutions.
-              </p>
-              <p>
-                Every pixel matters. Every interaction counts. Every line of code is a story waiting to be told.
-                Let’s build the future — one idea, one experience, and one transformation at a time.
-              </p>
-            </EditableContent>
-          </div>
-          
-          <div className="flex gap-4 mt-6">
-            <Button 
-              className="flex items-center gap-2"
-              onClick={() => {
-                window.open("https://www.dropbox.com/scl/fi/vnfp18qd73ezquk5fad9y/Elisha-s-Frontend-CV-Updated.pdf?rlkey=s7x2z9j6bvv4ag9mbxotq1mk3&st=sao2augz&dl=0")
+      {/* New Hero Section */}
+      <AboutHero onNavigate={onNavigate} />
+
+      {/* The Full Story - Ultra Interactive Section */}
+      <div className="relative overflow-hidden rounded-3xl">
+        {/* Animated Gradient Background */}
+        <motion.div
+          className="absolute inset-0 opacity-40"
+          animate={{
+            background: [
+              "radial-gradient(circle at 0% 0%, rgba(120, 119, 198, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 100%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 0%, rgba(120, 119, 198, 0.4) 0%, transparent 50%)",
+            ],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Floating Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-gradient-to-br from-primary to-purple-600 rounded-full opacity-30"
+              initial={{
+                x: Math.random() * 100 + "%",
+                y: Math.random() * 100 + "%",
               }}
-            >
-              <Download className="h-4 w-4" />
-              <EditableContent section="about" field="resumeButton" type="text" defaultValue="Download CV">
-                Download CV
-              </EditableContent>
-            </Button>
-            <Button
-              className="flex items-center gap-2"
-              onClick={() => onNavigate("projects")}
-            >
-              <ExternalLink className="h-4 w-4" />
-              <EditableContent section="about" field="portfolioButton" type="text" defaultValue="Portfolio">
-                Portfolio
-              </EditableContent>
-            </Button>
-          </div>
+              animate={{
+                x: [null, Math.random() * 100 + "%"],
+                y: [null, Math.random() * 100 + "%"],
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
         </div>
-        
-        <motion.div 
-          className="relative group"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <motion.div 
-            className="absolute -inset-1 bg-gradient-to-r from-primary via-purple-500 to-cyan-500 rounded-xl blur-lg opacity-80"
-            animate={{ 
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{ 
-              duration: 12, 
-              repeat: Infinity,
-              ease: "linear" 
-            }}
-            style={{ backgroundSize: "200% 200%" }}
-          />
-          <div className="relative h-[650px] rounded-xl overflow-hidden shadow-2xl">
-            <motion.div 
-              className="absolute top-4 right-4 z-30 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.4, ease: "easeOut" }}
+
+        <div className="relative z-10 bg-gradient-to-br from-background/95 via-background/90 to-background/95 backdrop-blur-xl p-8 md:p-12 border-2 border-primary/20">
+          {/* Header with Icon */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <motion.div
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full mb-6 border border-primary/30"
+              whileHover={{ scale: 1.05 }}
+              animate={{
+                boxShadow: [
+                  "0 0 20px rgba(120, 119, 198, 0.3)",
+                  "0 0 40px rgba(236, 72, 153, 0.3)",
+                  "0 0 20px rgba(120, 119, 198, 0.3)",
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
-              <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-white text-xs font-semibold">Let's Collaborate </span>
+              <Sparkles className="w-5 h-5 text-primary" />
+              <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+                THE FULL STORY
+              </span>
+              <Sparkles className="w-5 h-5 text-pink-600" />
             </motion.div>
-            
-            {/* Removed the star animation for simplicity */}
-            
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-10"></div>
-            
-            <div className="relative h-full w-full">
-              <AnimatePresence mode="wait">
+
+            <motion.h3
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600 animate-gradient">
+                Crafting Digital Experiences
+              </span>
+              <br />
+              <span className="text-2xl md:text-4xl text-muted-foreground font-normal">
+                That Transform & Inspire
+              </span>
+            </motion.h3>
+          </motion.div>
+
+          {/* Interactive Story Cards */}
+          <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {/* Card 1: Experience */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-blue-500/10 p-6 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all cursor-pointer"
+              >
+                {/* Glow Effect */}
                 <motion.div
-                  key={currentImageIndex}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{
-                    duration: 0.7,
-                    ease: [0.4, 0.0, 0.2, 1.0],
+                  className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{
+                    scale: [1, 1.2, 1],
                   }}
-                >
-                  <Image
-                    src={profileImages[currentImageIndex]}
-                    alt="Elisha Ejimofor"
-                    fill
-                    className="object-cover object-center"
-                    style={{ objectPosition: "center" }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
-                </motion.div>
-              </AnimatePresence>
-              
-              <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-2">
-                {profileImages.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
-                    }`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  />
-                ))}
-              </div>
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+
+                <div className="relative z-10">
+                  <motion.div
+                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Code2 className="w-7 h-7 text-white" />
+                  </motion.div>
+
+                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">
+                    2+ Years of Innovation
+                  </h4>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    With over 2 years of hands-on experience in web development and 5+ years in digital solutions, marketing, and business growth, I've had the privilege of designing and developing high-performing web applications that merge creativity with technology.
+                  </p>
+                </div>
+
+                {/* Decorative Corner */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full" />
+              </motion.div>
+
+              {/* Card 2: Intersection */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-purple-500/10 p-6 border-2 border-purple-500/20 hover:border-purple-500/40 transition-all cursor-pointer"
+              >
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                />
+
+                <div className="relative z-10">
+                  <motion.div
+                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Palette className="w-7 h-7 text-white" />
+                  </motion.div>
+
+                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                    Design × Code × Strategy
+                  </h4>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    I work at the intersection of design, code, and strategy — crafting interactive, scalable, and visually captivating platforms using tools like React.js, Next.js, Supabase, and Tailwind CSS. Whether it's developing seamless user interfaces, mentoring tech talents, or creating AI-driven digital experiences, I bring clarity, emotion, and innovation to every project I touch.
+                  </p>
+                </div>
+
+                {/* Decorative Corner */}
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-pink-500/20 to-transparent rounded-tr-full" />
+              </motion.div>
+
+              {/* Card 3: Philosophy */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500/10 via-red-500/10 to-orange-500/10 p-6 border-2 border-orange-500/20 hover:border-orange-500/40 transition-all cursor-pointer"
+              >
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                />
+
+                <div className="relative z-10">
+                  <motion.div
+                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4 shadow-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Brain className="w-7 h-7 text-white" />
+                  </motion.div>
+
+                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-500">
+                    Technology That Feels Alive
+                  </h4>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    At Murphine Technologies, I believe technology should feel alive — adaptive, intuitive, and impactful. I'm passionate about leveraging AI and modern development frameworks to shape the next wave of smart, sustainable, and inclusive digital solutions.
+                  </p>
+                </div>
+
+                {/* Decorative Corner */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-transparent rounded-bl-full" />
+              </motion.div>
+
+              {/* Card 4: Mission Statement */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-green-500/10 p-6 border-2 border-green-500/20 hover:border-green-500/40 transition-all cursor-pointer"
+              >
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+                />
+
+                <div className="relative z-10">
+                  <motion.div
+                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4 shadow-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Rocket className="w-7 h-7 text-white" />
+                  </motion.div>
+
+                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
+                    Building The Future
+                  </h4>
+
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Every pixel matters. Every interaction counts. Every line of code is a story waiting to be told.
+                  </p>
+
+                  <p className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
+                    Let's build the future — one idea, one experience, and one transformation at a time.
+                  </p>
+                </div>
+
+                {/* Decorative Corner */}
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-emerald-500/20 to-transparent rounded-tr-full" />
+              </motion.div>
             </div>
-            
-            <motion.div 
-              className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent z-20"
-              initial={{ y: 80, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+          </EditableContent>
+
+          {/* Tech Stack Showcase */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-primary/5 via-purple-600/5 to-pink-600/5 border border-primary/20"
+          >
+            <h4 className="text-center text-xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+              Powered By Modern Technologies
+            </h4>
+
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                { name: "React.js", color: "from-cyan-500 to-blue-500" },
+                { name: "Next.js", color: "from-gray-700 to-gray-900" },
+                { name: "Tailwind CSS", color: "from-cyan-400 to-blue-600" },
+                { name: "Supabase", color: "from-green-500 to-emerald-600" },
+                { name: "TypeScript", color: "from-blue-600 to-blue-800" },
+                { name: "Framer Motion", color: "from-pink-500 to-rose-600" },
+                { name: "AI Integration", color: "from-purple-500 to-indigo-600" },
+              ].map((tech, index) => (
+                <motion.div
+                  key={tech.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className={`px-5 py-2.5 rounded-full bg-gradient-to-r ${tech.color} text-white font-semibold text-sm shadow-lg cursor-pointer`}
+                >
+                  {tech.name}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Call to Action */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="mt-12 text-center"
+          >
+            <motion.div
+              className="inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <p className="text-white text-sm font-semibold">Elisha Ejimofor</p>
-              <p className="text-white/80 text-xs">Web Developer & Designer</p>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 text-white font-bold px-8 py-6 text-lg rounded-full shadow-2xl group"
+                onClick={() => onNavigate("projects")}
+              >
+                <Zap className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                Explore My Work
+                <ExternalLink className="w-5 h-5 ml-2 group-hover:rotate-45 transition-transform" />
+              </Button>
             </motion.div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
 
       {/* My Journey Section - Ultra Modern & Interactive */}

@@ -2,11 +2,15 @@
     "cSpell.words": [
         "CFHI",
         "cmdk",
+        "dvnj",
         "Elementor",
+        "fepq",
         "Fitopia",
         "formspree",
         "GSAP",
         "hashchange",
+        "morphism",
+        "Outskill",
         "Pluggins",
         "roadmapping",
         "shadcn",
@@ -15,6 +19,12 @@
         "Sprea",
         "Superbase",
         "vaul",
-        "Wireframing"
-    ]
+        "vercel",
+        "VMNBLB",
+        "Wireframing",
+        "Wqag",
+        "wztk",
+        "zgkf"
+    ],
+    "css.lint.unknownAtRules": "ignore"
 }
