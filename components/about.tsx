@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Download, ExternalLink, Briefcase, GraduationCap, Award } from "lucide-react"
+import { Download, ExternalLink, Briefcase, GraduationCap, Award, Sparkles, TrendingUp, Rocket, Star, Zap } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import { EditableContent } from "@/components/editable-content"
@@ -17,22 +17,99 @@ interface AboutProps {
 export const About = ({ onNavigate }: AboutProps) => {
   const { isAdmin, isEditMode } = useAdmin()
   const [timeline, setTimeline] = useState([
-    { year: 2017, event: "Business Developer/Branch Manager (Forgo Battery Company Ltd. 2017-2022)" },
-    { year: 2019, event: "Affiliate Marketer (Timoyex Int'l 2019-2024)" },
-    { year: 2022, event: "Freelance Graphics Designer (2022-2024)" },
-    { year: 2023, event: "Started Web Development Journey(2023-2024)" },
-    { year: 2024, event: "Web Developer at OS Concept(DSDP. 2024) " },
-    { year: 2024, event: "Web and Graphics Designer at DSAP(Trainee. 2024)" },
-    { year: 2024, event: "Launched Personal Brand as Content Creator(Murphine Technologies. 2024 - Present)" },
-    { year: 2024, event: "Front-End Developer at Periscope Consulting(Intern 2024)" },
-    { year: 2025, event: "Front-End Developer at Zimcrest Technologies(2025)" },
+    { 
+      year: 2017, 
+      event: "Business Developer/Branch Manager",
+      company: "Forgo Battery Company Ltd",
+      period: "2017-2022",
+      icon: Briefcase,
+      gradient: "from-orange-500 to-red-500",
+      description: "Led business development and branch operations"
+    },
+    { 
+      year: 2019, 
+      event: "Affiliate Marketer",
+      company: "Timoyex Int'l",
+      period: "2019-2024",
+      icon: TrendingUp,
+      gradient: "from-green-500 to-emerald-500",
+      description: "Drove digital marketing campaigns and affiliate partnerships"
+    },
+    { 
+      year: 2022, 
+      event: "Freelance Graphics Designer",
+      company: "Self-employed",
+      period: "2022-2024",
+      icon: Sparkles,
+      gradient: "from-pink-500 to-rose-500",
+      description: "Created visual identities and marketing materials for clients"
+    },
+    { 
+      year: 2023, 
+      event: "Started Web Development Journey",
+      company: "Self-Learning",
+      period: "2023-2024",
+      icon: Rocket,
+      gradient: "from-purple-500 to-violet-500",
+      description: "Embarked on intensive web development training"
+    },
+    { 
+      year: 2024, 
+      event: "Web Developer",
+      company: "OS Concept (DSDP)",
+      period: "2024",
+      icon: Zap,
+      gradient: "from-blue-500 to-cyan-500",
+      description: "Built responsive web applications and collaborated with teams"
+    },
+    { 
+      year: 2024, 
+      event: "Web and Graphics Designer",
+      company: "DSAP",
+      period: "Trainee 2024",
+      icon: Star,
+      gradient: "from-amber-500 to-yellow-500",
+      description: "Designed user interfaces and marketing graphics"
+    },
+    { 
+      year: 2024, 
+      event: "Front-End Developer",
+      company: "Periscope Consulting",
+      period: "Intern 2024",
+      icon: Briefcase,
+      gradient: "from-indigo-500 to-purple-500",
+      description: "Developed dynamic web applications with modern frameworks"
+    },
+    { 
+      year: 2024, 
+      event: "Launched Personal Brand as Digital Specialist",
+      company: "Murphine Technologies",
+      period: "2024 - Present",
+      icon: Rocket,
+      gradient: "from-purple-500 to-pink-500",
+      description: "Founded digital agency offering web development and AI solutions",
+      featured: true
+    },
+    { 
+      year: 2025, 
+      event: "Front-End Developer",
+      company: "Zimcrest Technologies",
+      period: "2025",
+      icon: Zap,
+      gradient: "from-cyan-500 to-blue-500",
+      description: "Building scalable SPAs with Next.js and modern tech stack",
+      featured: true
+    },
   ])
+  
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [selectedMilestone, setSelectedMilestone] = useState<number | null>(null)
 
   const workExperience = [
     {
       title: "Web Developer",
       company: "Murphine Technologies",
-      period: "2024 - Present",
+      period: "2024 - Present" ,
       color: "from-purple-500 to-purple-600",
       lightColor: "from-purple-500/20 to-purple-600/20",
       responsibilities: [
@@ -161,6 +238,14 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const training = [
     {
+      title: "Generative AI Mastermind",
+      provider: "Outskill",
+      year: "2025",
+      color: "from-indigo-500 to-indigo-600",
+      lightColor: "from-indigo-500/20 to-orange-600/20",
+      description: "Completed an advanced global program focused on the strategic and technical applications of Generative AI in business, design, and digital innovation."
+    },
+    {
       title: "Advanced React and Next.js",
       provider: "Murphine Technologies",
       year: "2024",
@@ -255,7 +340,7 @@ export const About = ({ onNavigate }: AboutProps) => {
             <Button 
               className="flex items-center gap-2"
               onClick={() => {
-                window.open("https://www.dropbox.com/scl/fi/hys7y7nsp2xt4yy2yzdru/Elisha-s-FrontEnd-Resume-1.pdf?rlkey=6j72wm3rrexklitjf1f2epnh5&st=5e9ojsfs&dl=0")
+                window.open("https://www.dropbox.com/scl/fi/vnfp18qd73ezquk5fad9y/Elisha-s-Frontend-CV-Updated.pdf?rlkey=s7x2z9j6bvv4ag9mbxotq1mk3&st=sao2augz&dl=0")
               }}
             >
               <Download className="h-4 w-4" />
@@ -359,27 +444,206 @@ export const About = ({ onNavigate }: AboutProps) => {
         </motion.div>
       </div>
 
-      <Card className="overflow-hidden border-none shadow-lg">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-600/10 -z-10"></div>
-          <CardContent className="p-6">
-          <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">My Journey</h3>
-            <div className="space-y-4">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center space-x-4"
-                >
-                <span className="text-primary font-bold bg-primary/10 px-2 py-1 rounded">{item.year}</span>
-                <div className="flex-1 border-b border-primary/20"></div>
-                <span className="text-muted-foreground">{item.event}</span>
-                </motion.div>
-              ))}
+      {/* My Journey Section - Ultra Modern & Interactive */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 via-purple-600/5 to-pink-600/5 border-2 border-primary/10 p-8 md:p-12">
+        {/* Animated Background */}
+        <motion.div
+          className="absolute inset-0 opacity-20"
+          animate={{
+            background: [
+              "radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%)",
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
+
+        <div className="relative z-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <motion.div
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-purple-600/10 px-4 py-2 rounded-full mb-4"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Rocket className="w-4 h-4 text-primary" />
+              <span className="text-sm font-bold text-primary">Career Timeline</span>
+            </motion.div>
+            
+            <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+              My Journey
+            </h3>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              From business development to digital innovation — a story of continuous growth and transformation
+            </p>
+          </motion.div>
+
+          {/* Interactive Timeline */}
+          <div className="relative">
+            {/* Vertical Line */}
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-purple-600 to-pink-600 transform md:-translate-x-1/2" />
+
+            {/* Timeline Items */}
+            <div className="space-y-12">
+              {timeline.map((item, index) => {
+                const isLeft = index % 2 === 0
+                const isHovered = hoveredIndex === index
+                const isSelected = selectedMilestone === index
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className={`relative flex items-center ${
+                      isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } flex-row`}
+                    onHoverStart={() => setHoveredIndex(index)}
+                    onHoverEnd={() => setHoveredIndex(null)}
+                  >
+                    {/* Year Badge (Mobile & Desktop) */}
+                    <motion.div
+                      className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 z-20"
+                      whileHover={{ scale: 1.2, rotate: 360 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div
+                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-xl cursor-pointer border-4 border-background`}
+                        onClick={() => setSelectedMilestone(isSelected ? null : index)}
+                      >
+                        <item.icon className="w-8 h-8 text-white" />
+                      </div>
+                    </motion.div>
+
+                    {/* Content Card */}
+                    <motion.div
+                      className={`ml-28 md:ml-0 ${
+                        isLeft ? 'md:mr-auto md:pr-16' : 'md:ml-auto md:pl-16'
+                      } md:w-5/12 w-full`}
+                      animate={{
+                        scale: isHovered || isSelected ? 1.05 : 1,
+                        x: isHovered ? (isLeft ? -10 : 10) : 0,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                      <Card
+                        className={`overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+                          item.featured
+                            ? 'border-primary shadow-2xl bg-gradient-to-br from-primary/5 to-purple-600/5'
+                            : isHovered || isSelected
+                            ? 'border-primary/50 shadow-xl'
+                            : 'border-border shadow-lg'
+                        }`}
+                        onClick={() => setSelectedMilestone(isSelected ? null : index)}
+                      >
+                        {/* Top Accent Bar */}
+                        <div className={`h-2 bg-gradient-to-r ${item.gradient}`} />
+
+                        <CardContent className="p-6">
+                          {/* Year Badge */}
+                          <div className="flex items-center justify-between mb-3">
+                            <motion.div
+                              className={`px-3 py-1 rounded-full bg-gradient-to-r ${item.gradient} text-white text-sm font-bold shadow-lg`}
+                              animate={{ scale: isHovered ? 1.1 : 1 }}
+                            >
+                              {item.year}
+                            </motion.div>
+                            {item.featured && (
+                              <motion.div
+                                animate={{ rotate: [0, 10, -10, 0] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                              >
+                                <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+                              </motion.div>
+                            )}
+                          </div>
+
+                          {/* Title */}
+                          <h4 className="text-xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+                            {item.event}
+                          </h4>
+
+                          {/* Company */}
+                          <p className="text-primary font-semibold mb-2">
+                            {item.company}
+                          </p>
+
+                          {/* Period */}
+                          <p className="text-sm text-muted-foreground mb-3">
+                            {item.period}
+                          </p>
+
+                          {/* Description */}
+                          <AnimatePresence>
+                            {(isSelected || isHovered) && (
+                              <motion.p
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-muted-foreground text-sm leading-relaxed"
+                              >
+                                {item.description}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
+
+                          {/* Hover Indicator */}
+                          {!isSelected && (
+                            <motion.p
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: isHovered ? 1 : 0 }}
+                              className="text-xs text-primary mt-2 font-medium"
+                            >
+                              Click to expand →
+                            </motion.p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Stats Summary */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16"
+          >
+            {[
+              { icon: Briefcase, label: "Years Experience", value: "8+" },
+              { icon: Rocket, label: "Career Milestones", value: "9" },
+              { icon: TrendingUp, label: "Industries", value: "5+" },
+              { icon: Star, label: "Current Roles", value: "2" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1 + index * 0.1 }}
+                whileHover={{ y: -5, scale: 1.05 }}
+                className="bg-gradient-to-br from-card to-card/50 backdrop-blur-sm rounded-2xl p-4 text-center border border-primary/10 hover:border-primary/30 transition-all"
+              >
+                <stat.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-muted-foreground font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
       <Tabs defaultValue="experience" className="mt-10">
         <TabsList className="grid w-full grid-cols-3 bg-background border border-primary/20">

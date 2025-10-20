@@ -119,7 +119,7 @@ export default function Home() {
               className="relative w-8 h-8 overflow-hidden rounded-full"
             >
               <Image
-                src="https://i.pinimg.com/474x/4b/0e/2b/4b0e2b4c967ed625e7c7c1ae05743ced.jpg"
+                src="https://i.imgur.com/QwVIarl.jpeg"
                 alt="Elisha Ejimofor Logo"
                 width={32}
                 height={32}
@@ -191,6 +191,8 @@ export default function Home() {
                         "Graphics Designer",
                         1000,
                         "Digital Marketer",
+                        1000,
+                        "AI Enthusiast",
                         1000,
                         "Content Creator",
                         1000,

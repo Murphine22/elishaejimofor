@@ -1,13 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Code, Palette, FileText, Terminal, Zap, Users, Clock, DollarSign, Check } from "lucide-react"
+import { 
+  Code, Palette, FileText, Terminal, Zap, Users, Clock, DollarSign, Check, 
+  ArrowRight, Sparkles, Star, TrendingUp, Package, Shield, Rocket, Award, X
+} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-// Removed EditableContent for this file to avoid type mismatch
 import { useAdmin } from "@/components/admin-context"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
@@ -31,6 +33,7 @@ interface Service {
   packages: ServicePackage[];
   category: string;
   iconColor: string;
+  gradient: string;
 }
 
 const services: Service[] = [
@@ -39,6 +42,7 @@ const services: Service[] = [
     icon: Code,
     category: "Development",
     iconColor: "text-blue-500",
+    gradient: "from-blue-500 via-cyan-500 to-teal-500",
     description: "Custom websites and web applications tailored to your needs",
     details: [
       "Responsive design for all devices",
@@ -96,6 +100,7 @@ const services: Service[] = [
     icon: Palette,
     category: "Design",
     iconColor: "text-purple-500",
+    gradient: "from-purple-500 via-pink-500 to-rose-500",
     description: "User-centered design solutions that enhance user experience",
     details: [
       "User research and persona development",
@@ -154,6 +159,7 @@ const services: Service[] = [
     icon: FileText,
     category: "Content",
     iconColor: "text-green-500",
+    gradient: "from-green-500 via-emerald-500 to-teal-500",
     description: "Engaging content that resonates with your target audience",
     details: [
       "Blog posts and articles",
@@ -208,11 +214,12 @@ const services: Service[] = [
     ]
   },
   {
-    title: "Prompt Engineering",
+    title: "AI Integration",
     icon: Terminal,
     category: "AI",
     iconColor: "text-amber-500",
-    description: "Expert AI prompt design for optimal results with language models",
+    gradient: "from-amber-500 via-orange-500 to-red-500",
+    description: "Expert AI prompt design and integration for optimal results",
     details: [
       "Custom prompt design",
       "AI system optimization",
@@ -270,6 +277,7 @@ const services: Service[] = [
     icon: Zap,
     category: "Technical",
     iconColor: "text-red-500",
+    gradient: "from-red-500 via-pink-500 to-purple-500",
     description: "Speed up your website or application for better user experience",
     details: [
       "Website speed optimization",
@@ -331,6 +339,7 @@ const services: Service[] = [
     icon: Users,
     category: "Advisory",
     iconColor: "text-cyan-500",
+    gradient: "from-cyan-500 via-blue-500 to-indigo-500",
     description: "Expert advice on technology strategy and implementation",
     details: [
       "Technology stack selection",
@@ -383,6 +392,190 @@ const services: Service[] = [
       }
     ]
   },
+  {
+    title: "Digital Marketing",
+    icon: TrendingUp,
+    category: "Marketing",
+    iconColor: "text-pink-500",
+    gradient: "from-pink-500 via-rose-500 to-red-500",
+    description: "Strategic digital marketing campaigns that drive growth and engagement",
+    details: [
+      "Social media marketing",
+      "SEO and content marketing",
+      "Email marketing campaigns",
+      "Analytics and reporting"
+    ],
+    packages: [
+      {
+        name: "Basic",
+        description: "Essential digital marketing for startups and small businesses",
+        priceNGN: 80000,
+        duration: "1 month",
+        features: [
+          "Social media management (2 platforms)",
+          "3 posts per week",
+          "Basic SEO optimization",
+          "Monthly performance report",
+          "Email support"
+        ]
+      },
+      {
+        name: "Standard",
+        description: "Comprehensive marketing for growing businesses",
+        priceNGN: 150000,
+        duration: "1 month",
+        popular: true,
+        features: [
+          "Social media management (4 platforms)",
+          "5 posts per week",
+          "Advanced SEO strategy",
+          "Email marketing campaign",
+          "Content calendar",
+          "Bi-weekly performance reports",
+          "Priority support"
+        ]
+      },
+      {
+        name: "Premium",
+        description: "Full-scale digital marketing with advanced strategies",
+        priceNGN: 300000,
+        duration: "1 month",
+        features: [
+          "All Standard features",
+          "Daily content posting",
+          "Paid advertising management",
+          "Influencer outreach",
+          "Video content creation",
+          "Comprehensive analytics dashboard",
+          "Weekly strategy calls",
+          "24/7 priority support"
+        ]
+      }
+    ]
+  },
+  {
+    title: "AI Promotion & Optimization",
+    icon: Sparkles,
+    category: "AI Marketing",
+    iconColor: "text-violet-500",
+    gradient: "from-violet-500 via-purple-500 to-fuchsia-500",
+    description: "Leverage AI tools to optimize and promote your business effectively",
+    details: [
+      "AI-powered content generation",
+      "Automated marketing workflows",
+      "AI chatbot implementation",
+      "Predictive analytics"
+    ],
+    packages: [
+      {
+        name: "Basic",
+        description: "Introduction to AI marketing tools and automation",
+        priceNGN: 60000,
+        duration: "One-time setup",
+        features: [
+          "AI tool selection and setup",
+          "Basic chatbot implementation",
+          "Content generation templates",
+          "1 hour training session",
+          "Documentation"
+        ]
+      },
+      {
+        name: "Standard",
+        description: "Comprehensive AI marketing automation",
+        priceNGN: 120000,
+        duration: "Setup + 1 month support",
+        popular: true,
+        features: [
+          "All Basic features",
+          "Advanced chatbot with custom training",
+          "AI content generation system",
+          "Email automation with AI",
+          "Social media AI scheduling",
+          "2 training sessions",
+          "1 month of optimization support"
+        ]
+      },
+      {
+        name: "Premium",
+        description: "Enterprise AI marketing solution with ongoing optimization",
+        priceNGN: 250000,
+        duration: "Setup + 3 months support",
+        features: [
+          "All Standard features",
+          "Custom AI model fine-tuning",
+          "Predictive analytics dashboard",
+          "Multi-channel AI automation",
+          "A/B testing with AI insights",
+          "Personalization engine",
+          "Weekly optimization reports",
+          "3 months of dedicated support"
+        ]
+      }
+    ]
+  },
+  {
+    title: "Digital Skills Tutoring",
+    icon: Award,
+    category: "Education",
+    iconColor: "text-indigo-500",
+    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
+    description: "One-on-one tutoring to master in-demand digital skills",
+    details: [
+      "Web development fundamentals",
+      "UI/UX design principles",
+      "Digital marketing basics",
+      "AI tools and prompt engineering"
+    ],
+    packages: [
+      {
+        name: "Basic",
+        description: "Introduction to digital skills (4 sessions)",
+        priceNGN: 40000,
+        duration: "4 sessions (1 hour each)",
+        features: [
+          "4 one-hour sessions",
+          "Choose 1 skill area",
+          "Learning materials included",
+          "Practice assignments",
+          "Email support between sessions"
+        ]
+      },
+      {
+        name: "Standard",
+        description: "Comprehensive skill development (8 sessions)",
+        priceNGN: 70000,
+        duration: "8 sessions (1.5 hours each)",
+        popular: true,
+        features: [
+          "8 sessions (1.5 hours each)",
+          "Choose up to 2 skill areas",
+          "Comprehensive learning materials",
+          "Hands-on projects",
+          "Code/design reviews",
+          "Certificate of completion",
+          "Priority email support"
+        ]
+      },
+      {
+        name: "Premium",
+        description: "Intensive mentorship program (12 sessions)",
+        priceNGN: 120000,
+        duration: "12 sessions (2 hours each)",
+        features: [
+          "12 sessions (2 hours each)",
+          "All skill areas covered",
+          "Personalized learning path",
+          "Real-world project development",
+          "Portfolio building assistance",
+          "Job interview preparation",
+          "Lifetime access to materials",
+          "Certificate of completion",
+          "3 months post-training support"
+        ]
+      }
+    ]
+  },
 ]
 
 interface SectionContent {
@@ -393,12 +586,9 @@ interface SectionContent {
 
 export const Services = () => {
   const { isAdmin, isEditMode } = useAdmin()
-  const [expandedService, setExpandedService] = useState<string | null>(null)
-  // Create a map to store the selected tab for each service
-  const [selectedTabs, setSelectedTabs] = useState<Record<string, string>>({})
-  // State for the selected service packages dialog
   const [selectedService, setSelectedService] = useState<Service | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
   // Function to format price in NGN and USD
   const formatPrice = (priceNGN: number) => {
@@ -445,54 +635,162 @@ export const Services = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6 bg-background p-8 rounded-lg shadow-lg"
+      className="relative min-h-screen py-16 overflow-hidden"
     >
-      <h2 className="text-3xl font-bold mb-6 text-center">Services I Offer</h2>
-      <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-        I provide comprehensive solutions tailored to your specific needs, combining technical expertise with creative vision to deliver exceptional results.
-      </p>
+      {/* Animated Background */}
+      <motion.div
+        className="absolute inset-0 opacity-20"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 50%)",
+            "radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%)",
+            "radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.3) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 50%)",
+          ],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {services.map((service, index) => (
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <motion.div
-            key={service.title}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-purple-600/10 px-6 py-3 rounded-full mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Rocket className="w-5 h-5 text-primary" />
+            <span className="text-sm font-bold text-primary">Professional Services</span>
+          </motion.div>
+
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+            Services I Offer
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Comprehensive solutions tailored to your needs, combining <span className="font-bold text-primary">technical expertise</span> with <span className="font-bold text-purple-600">creative vision</span>
+          </p>
+
+          {/* Stats */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
+            transition={{ delay: 0.4 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto"
           >
-            <Card className="h-full overflow-hidden border-none shadow-lg">
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.iconColor.replace('text-', 'from-')}/10 to-purple-600/10 -z-10`}></div>
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className={`p-2 rounded-full ${service.iconColor.replace('text-', 'bg-')}/10 mr-3`}>
-                    <service.icon className={`h-6 w-6 ${service.iconColor}`} />
-                  </div>
-                  <h3 className="text-xl font-bold">{service.title}</h3>
+            {[
+              { icon: Package, label: "Services", value: "9+" },
+              { icon: Star, label: "Satisfaction", value: "100%" },
+              { icon: TrendingUp, label: "Success Rate", value: "98%" },
+              { icon: Award, label: "Projects", value: "30+" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+                whileHover={{ y: -5, scale: 1.05 }}
+                className="bg-gradient-to-br from-card to-card/50 backdrop-blur-sm rounded-2xl p-4 border border-primary/10 hover:border-primary/30 transition-all"
+              >
+                <stat.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                  {stat.value}
                 </div>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <ul className="space-y-2 mb-4">
-                  {service.details.map((detail, detailIndex) => (
-                    <li key={detailIndex} className="flex items-start">
-                      <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                      <span>{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  className="w-full mt-2 bg-gradient-to-r hover:text-white hover:from-primary hover:to-purple-600 transition-all duration-300"
-                  onClick={() => openPackagesDialog(service)}
-                >
-                  View Packages
-                </Button>
-              </CardContent>
-            </Card>
+                <div className="text-xs text-muted-foreground font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
-        ))}
-      </div>
+        </motion.div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onHoverStart={() => setHoveredCard(index)}
+              onHoverEnd={() => setHoveredCard(null)}
+              className="group relative"
+            >
+              <Card className="h-full overflow-hidden border-2 border-transparent hover:border-primary/50 transition-all duration-500 bg-gradient-to-br from-card via-card to-card/80 backdrop-blur-sm">
+                {/* Animated gradient background */}
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  animate={hoveredCard === index ? { scale: [1, 1.2, 1] } : {}}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+
+                {/* Top accent bar */}
+                <div className={`h-2 bg-gradient-to-r ${service.gradient}`} />
+
+                <CardContent className="p-8 relative">
+                  {/* Icon */}
+                  <motion.div
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 shadow-xl relative overflow-hidden group-hover:scale-110 transition-transform duration-500`}
+                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-white/20"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <service.icon className="w-8 h-8 text-white relative z-10" />
+                  </motion.div>
+
+                  {/* Category Badge */}
+                  <Badge className={`mb-4 bg-gradient-to-r ${service.gradient} text-white border-none`}>
+                    {service.category}
+                  </Badge>
+
+                  {/* Title */}
+                  <h3 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Details */}
+                  <ul className="space-y-3 mb-6">
+                    {service.details.map((detail, detailIndex) => (
+                      <motion.li
+                        key={detailIndex}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 + detailIndex * 0.05 }}
+                        className="flex items-start gap-2"
+                      >
+                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm">{detail}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {/* Button */}
+                  <Button
+                    onClick={() => openPackagesDialog(service)}
+                    className={`w-full bg-gradient-to-r ${service.gradient} hover:opacity-90 text-white font-bold py-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group/btn`}
+                  >
+                    <span>View Packages</span>
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       
       {/* Service Packages Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -763,14 +1061,58 @@ export const Services = () => {
         </DialogContent>
       </Dialog>
       
-      <div className="mt-10 p-6 bg-primary/5 rounded-lg border border-primary/20">
-        <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">Custom Solutions</h3>
-        <p className="text-muted-foreground mb-4">
-          Need something that doesn't fit into these packages? I offer custom solutions tailored to your specific requirements. Contact me to discuss your project, and I'll provide a personalized quote.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          <strong>Note:</strong> All prices are subject to change based on project complexity and specific requirements. The USD equivalent is approximate and based on an exchange rate of ₦{exchangeRate} to $1.
-        </p>
+        {/* Custom Solutions Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-purple-600/10 to-pink-600/10 border-2 border-primary/20 p-8 md:p-12"
+        >
+          <motion.div
+            className="absolute inset-0 opacity-30"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-600/20 blur-3xl" />
+          </motion.div>
+
+          <div className="relative z-10 text-center">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-primary to-purple-600 mb-6"
+            >
+              <Sparkles className="w-10 h-10 text-white" />
+            </motion.div>
+
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+              Need Something Custom?
+            </h3>
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Don't see what you're looking for? I offer <span className="font-bold text-primary">fully customized solutions</span> tailored to your unique requirements. Let's discuss your project and create something amazing together!
+            </p>
+            <Button
+              onClick={() => {
+                window.location.hash = "contact"
+                setTimeout(() => {
+                  const contactSection = document.getElementById("contact")
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }, 300)
+              }}
+              className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-bold px-8 py-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
+              size="lg"
+            >
+              <span>Get Custom Quote</span>
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+
+            <p className="text-sm text-muted-foreground mt-6">
+              <strong>Note:</strong> All prices are in Nigerian Naira (₦) with USD equivalent. Exchange rate: ₦{exchangeRate} = $1
+            </p>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   )

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Code, Palette, FileText, Terminal, Database, Globe, Lightbulb, Layers } from "lucide-react"
+import { Code, Palette, FileText, Terminal, Database, Globe, Lightbulb, Layers, Sparkles } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { EditableContent } from "@/components/editable-content"
@@ -109,74 +109,101 @@ const technicalSkills = [
       { name: "Web Accessibility (WCAG)", level: 70 },
       { name: "Progressive Web Apps", level: 75 },
     ]
+  },
+  {
+    title: "Generative AI",
+    icon: Sparkles,
+    color: "from-violet-500 to-violet-600",
+    lightColor: "from-violet-500/20 to-violet-600/20",
+    accentColor: "violet",
+    description: "Leveraging AI models and tools to create intelligent applications and automate workflows",
+    proficiency: 88,
+    technologies: [
+      { name: "OpenAI GPT Integration", level: 90 },
+      { name: "Google Gemini AI", level: 92 },
+      { name: "AI Chatbot Development", level: 88 },
+      { name: "LLM Fine-tuning", level: 75 },
+      { name: "AI Prompt Engineering", level: 95 },
+      { name: "AI API Integration", level: 85 },
+      { name: "AI-Powered Automation", level: 80 },
+    ]
   }
 ]
 
 const creativeSkills = [
   {
-    title: "Graphics Design",
+    title: "Visual Design & Branding",
     icon: Palette,
     color: "from-pink-500 to-pink-600",
     lightColor: "from-pink-500/20 to-pink-600/20",
     accentColor: "pink",
-    description: "Creating visually appealing designs for digital and print media",
-    proficiency: 75,
+    description: "Crafting stunning visual identities and immersive brand experiences that captivate audiences and drive engagement across all digital touchpoints",
+    proficiency: 85,
     technologies: [
-      { name: "Canva Pro", level: 90 },
-      { name: "Adobe Photoshop", level: 50 },
-      { name: "Adobe Illustrator", level: 52 },
-      { name: "UI/UX Design", level: 75 },
-      { name: "Brand Identity Design", level: 80 },
-      { name: "Figma", level: 65 },
+      { name: "Canva Pro (Advanced)", level: 95 },
+      { name: "Adobe Creative Suite", level: 72 },
+      { name: "UI/UX Design Mastery", level: 82 },
+      { name: "Brand Identity & Strategy", level: 88 },
+      { name: "Figma Prototyping", level: 78 },
+      { name: "Motion Graphics", level: 70 },
+      { name: "Color Theory & Typography", level: 90 },
+      { name: "Design Systems", level: 75 },
     ]
   },
   {
-    title: "Content Creation",
+    title: "Strategic Content Creation",
     icon: FileText,
     color: "from-green-500 to-green-600",
     lightColor: "from-green-500/20 to-green-600/20",
     accentColor: "green",
-    description: "Producing engaging and SEO-optimized content for various digital platforms",
-    proficiency: 88,
+    description: "Producing compelling, conversion-focused content that resonates with audiences, tells powerful stories, and drives measurable business results",
+    proficiency: 92,
     technologies: [
-      { name: "Blog Writing", level: 90 },
-      { name: "Copywriting", level: 85 },
-      { name: "Social Media Content", level: 92 },
-      { name: "Email Marketing", level: 65 },
-      { name: "Content Strategy", level: 85 },
-      { name: "SEO Writing", level: 88 },
+      { name: "Storytelling & Narrative Design", level: 95 },
+      { name: "SEO-Optimized Copywriting", level: 90 },
+      { name: "Social Media Strategy", level: 94 },
+      { name: "Email Marketing Campaigns", level: 78 },
+      { name: "Content Marketing Strategy", level: 88 },
+      { name: "Video Script Writing", level: 82 },
+      { name: "Technical Documentation", level: 85 },
+      { name: "Brand Voice Development", level: 90 },
     ]
   },
   {
-    title: "Prompt Engineering",
+    title: "AI Prompt Engineering",
     icon: Terminal,
     color: "from-amber-500 to-amber-600",
     lightColor: "from-amber-500/20 to-amber-600/20",
     accentColor: "amber",
-    description: "Crafting effective prompts for AI language models to generate high-quality outputs",
-    proficiency: 90,
+    description: "Mastering the art and science of AI communication to unlock unprecedented creative possibilities and automate complex workflows with precision",
+    proficiency: 95,
     technologies: [
-      { name: "GPT Prompt Design", level: 90 },
-      { name: "AI Content Generation", level: 95 },
-      { name: "Prompt Chaining", level: 90 },
-      { name: "AI Workflow Integration", level: 85 },
-      { name: "Prompt Debugging", level: 80 },
+      { name: "Advanced GPT Prompt Design", level: 96 },
+      { name: "AI Content Generation", level: 98 },
+      { name: "Multi-Model Prompt Chaining", level: 92 },
+      { name: "AI Workflow Automation", level: 90 },
+      { name: "Prompt Optimization & Testing", level: 88 },
+      { name: "Context Engineering", level: 94 },
+      { name: "AI Ethics & Best Practices", level: 85 },
     ]
   },
   {
-    title: "Creative Problem Solving",
+    title: "Innovation & Problem Solving",
     icon: Lightbulb,
     color: "from-cyan-500 to-cyan-600",
     lightColor: "from-cyan-500/20 to-cyan-600/20",
     accentColor: "cyan",
-    description: "Applying innovative thinking to solve complex problems and create unique solutions",
-    proficiency: 92,
+    description: "Transforming complex challenges into elegant solutions through creative thinking, strategic planning, and human-centered design methodologies",
+    proficiency: 94,
     technologies: [
-      { name: "Design Thinking", level: 90 },
-      { name: "Agile Methodology", level: 85 },
-      { name: "User-Centered Design", level: 88 },
-      { name: "Rapid Prototyping", level: 80 },
-      { name: "A/B Testing", level: 65 },
+      { name: "Design Thinking Framework", level: 93 },
+      { name: "Agile & Scrum Methodology", level: 88 },
+      { name: "User-Centered Design", level: 92 },
+      { name: "Rapid Prototyping & MVP", level: 85 },
+      { name: "A/B Testing & Optimization", level: 80 },
+      { name: "Creative Ideation Techniques", level: 95 },
+      { name: "Strategic Planning", level: 87 },
+      { name: "Innovation Management", level: 82 },
     ]
   }
 ]
@@ -369,27 +396,43 @@ export const Skills = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-10 p-6 bg-gradient-to-r from-primary/5 to-purple-600/5 rounded-lg border border-primary/20 hover:shadow-lg transition-all duration-300"
+        className="mt-10 p-8 bg-gradient-to-br from-primary/10 via-purple-600/10 to-cyan-500/10 rounded-2xl border-2 border-primary/30 hover:shadow-2xl hover:border-primary/50 transition-all duration-500 relative overflow-hidden group"
       >
-        <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-          Continuous Learning
-        </h3>
-        <EditableContent
-          section="skills"
-          field="continuousLearning"
-          type="text"
-          multiline
-          defaultValue="I believe in the power of continuous learning and regularly update my skills through online courses, workshops, and industry conferences. Currently, I'm expanding my knowledge in AI application development, Back-End Development, and Advance Prototyping."
-        >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-muted-foreground"
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          animate={{ x: ["0%", "100%", "0%"] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="p-2 rounded-full bg-gradient-to-r from-primary to-purple-600"
+            >
+              <Sparkles className="w-6 h-6 text-white" />
+            </motion.div>
+            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-cyan-500">
+              Continuous Innovation & Growth
+            </h3>
+          </div>
+          <EditableContent
+            section="skills"
+            field="continuousLearning"
+            type="text"
+            multiline
+            defaultValue="I'm passionate about staying at the cutting edge of technology and creativity. Through immersive online courses, hands-on workshops, and industry conferences, I continuously evolve my expertise. Currently mastering: Advanced AI/ML Integration, Full-Stack Development Architecture, Generative AI Applications, and Next-Generation UX Design. My commitment to lifelong learning ensures I deliver innovative, future-proof solutions that exceed expectations."
           >
-            I believe in the power of continuous learning and regularly update my skills through online courses, workshops, and industry conferences. Currently, I'm expanding my knowledge in AI application development, Back-End Development, and Advance Prototyping.
-          </motion.p>
-        </EditableContent>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-muted-foreground text-lg leading-relaxed"
+            >
+              I'm passionate about staying at the cutting edge of technology and creativity. Through immersive online courses, hands-on workshops, and industry conferences, I continuously evolve my expertise. Currently mastering: <span className="font-semibold text-primary">Advanced AI/ML Integration</span>, <span className="font-semibold text-purple-600">Full-Stack Development Architecture</span>, <span className="font-semibold text-cyan-600">Generative AI Applications</span>, and <span className="font-semibold text-pink-600">Next-Generation UX Design</span>. My commitment to lifelong learning ensures I deliver innovative, future-proof solutions that exceed expectations.
+            </motion.p>
+          </EditableContent>
+        </div>
       </motion.div>
     </motion.div>
   )

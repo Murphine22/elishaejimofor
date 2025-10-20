@@ -81,7 +81,10 @@ const getChatbotResponse = (input: string) => {
 export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([
-    { role: "assistant", content: "Hi there! I'm Elisha's virtual assistant. How can I help you today?" },
+    { 
+      role: "assistant", 
+      content: "Hi there! I'm Elisha's AI-powered assistant, enhanced with Google Gemini. I have comprehensive knowledge about Elisha's skills, projects, services, and this website. How can I help you today?" 
+    },
   ])
   const [input, setInput] = useState("")
   const [isTyping, setIsTyping] = useState(false)
@@ -95,26 +98,53 @@ export const Chatbot = () => {
     scrollToBottom()
   }, [messages]) //Corrected dependency
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (input.trim() === "") return
 
+    const userMessage = input
     // Add user message
-    setMessages([...messages, { role: "user", content: input }])
+    setMessages([...messages, { role: "user", content: userMessage }])
     setInput("")
 
-    // Simulate typing
+    // Show typing indicator
     setIsTyping(true)
 
-    // Simulate response delay
-    setTimeout(
-      () => {
-        const response = getChatbotResponse(input)
-        setMessages((prev) => [...prev, { role: "assistant", content: response }])
-        setIsTyping(false)
-      },
-      1000 + Math.random() * 1000,
-    ) // Random delay between 1-2 seconds
+    try {
+      // Call Gemini API through our backend
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          conversationHistory: messages,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to get response")
+      }
+
+      // Add AI response
+      setMessages((prev) => [...prev, { role: "assistant", content: data.response }])
+    } catch (error) {
+      console.error("Chat error:", error)
+      // Fallback to local responses if API fails
+      const fallbackResponse = getChatbotResponse(userMessage)
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: fallbackResponse + "\n\n(Note: Using offline mode. For enhanced responses, please check your connection.)",
+        },
+      ])
+    } finally {
+      setIsTyping(false)
+    }
   }
 
   return (
@@ -153,7 +183,7 @@ export const Chatbot = () => {
                     <div>
                       <CardTitle className="text-lg">Elisha's Assistant</CardTitle>
                       <Badge variant="outline" className="text-xs">
-                        AI Powered
+                        Powered by Gemini AI
                       </Badge>
                     </div>
                   </div>
