@@ -341,7 +341,7 @@ export const Projects = () => {
                         </Button>
                       </div>
                       <Button 
-                        className="h-9 px-3 bg-transparent hover:bg-accent hover:text-accent-foreground text-xs group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1 transition-transform"
+                        className="h-9 px-3 bg-transparent hover:bg-accent hover:text-accent-foreground text-xs group-hover:text-primary group-hover:translate-x-1 transition-all duration-300"
                         onClick={() => setFeaturedProject(project)}
                       >
                         Details <ArrowRight className="ml-1 h-3 w-3" />
