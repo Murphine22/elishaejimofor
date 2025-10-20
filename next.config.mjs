@@ -1,3 +1,5 @@
+import crypto from 'crypto'
+
 let userConfig = undefined
 try {
   userConfig = await import('./v0-user-next.config')
@@ -73,7 +75,7 @@ const nextConfig = {
                 return module.size() > 160000 && /node_modules[/\\]/.test(module.identifier());
               },
               name(module) {
-                const hash = require('crypto').createHash('sha1');
+                const hash = crypto.createHash('sha1');
                 hash.update(module.identifier());
                 return hash.digest('hex').substring(0, 8);
               },
