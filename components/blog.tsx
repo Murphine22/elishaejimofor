@@ -28,6 +28,7 @@ import {
   CheckCircle2
 } from "lucide-react"
 import Image from "next/image"
+import { additionalBlogPosts } from "@/data/additional-blog-posts"
 
 // News API Response Types
 interface NewsArticle {
@@ -166,14 +167,14 @@ export const BlogRedesigned = () => {
       
       console.log("Starting news fetch...")
       
-      let allArticles: NewsArticle[] = []
+      let fetchedArticles: NewsArticle[] = []
       let nextPage: string | null = null
       let fetchCount = 0
       const maxFetches = 3 // Fetch up to 3 pages to ensure we get 10+ articles
       const targetArticles = 10 // Target number of unique articles
       
       // Fetch multiple pages to get at least 10 unique articles
-      while (fetchCount < maxFetches && allArticles.length < 30) {
+      while (fetchCount < maxFetches && fetchedArticles.length < 30) {
         const url: string = nextPage 
           ? `https://newsdata.io/api/1/latest?apikey=pub_4d2953330db646e080671676a5fc1821&q=news&page=${nextPage}`
           : "https://newsdata.io/api/1/latest?apikey=pub_4d2953330db646e080671676a5fc1821&q=news"
@@ -203,13 +204,13 @@ export const BlogRedesigned = () => {
         console.log(`Page ${fetchCount + 1} data received:`, data)
         
         if (data.status === "success" && data.results && data.results.length > 0) {
-          allArticles = [...allArticles, ...data.results]
-          console.log(`Total articles so far: ${allArticles.length}`)
+          fetchedArticles = [...fetchedArticles, ...data.results]
+          console.log(`Total articles so far: ${fetchedArticles.length}`)
           
           fetchCount++
           
           // Check if there's a next page and we should continue
-          if (data.nextPage && fetchCount < maxFetches && allArticles.length < 30) {
+          if (data.nextPage && fetchCount < maxFetches && fetchedArticles.length < 30) {
             nextPage = data.nextPage
             // Add delay to avoid rate limiting
             await new Promise(resolve => setTimeout(resolve, 1000))
@@ -228,7 +229,7 @@ export const BlogRedesigned = () => {
       const seenTitles = new Set<string>()
       const uniqueArticles: NewsArticle[] = []
       
-      allArticles.forEach(article => {
+      fetchedArticles.forEach(article => {
         // Normalize title for comparison (lowercase, trim spaces)
         const normalizedTitle = article.title.toLowerCase().trim()
         
@@ -240,7 +241,7 @@ export const BlogRedesigned = () => {
         }
       })
       
-      console.log(`Total fetched: ${allArticles.length}, After deduplication: ${uniqueArticles.length}`)
+      console.log(`Total fetched: ${fetchedArticles.length}, After deduplication: ${uniqueArticles.length}`)
       
       if (uniqueArticles.length === 0) {
         throw new Error("No articles found in the API response")
@@ -251,13 +252,16 @@ export const BlogRedesigned = () => {
         .sort(() => Math.random() - 0.5)
         .slice(0, 10) // Take only first 10 articles
       
-      console.log(`Final articles to display: ${shuffledArticles.length}`)
+      // Combine with additional static blog posts
+      const allArticles = [...shuffledArticles, ...additionalBlogPosts]
       
-      setArticles(shuffledArticles)
+      console.log(`Final articles to display: ${allArticles.length} (${shuffledArticles.length} from API + ${additionalBlogPosts.length} static)`)
+      
+      setArticles(allArticles)
       
       // Initialize article states with random comments
       const initialStates: Record<string, ArticleState> = {}
-      shuffledArticles.forEach((article: NewsArticle) => {
+      allArticles.forEach((article: NewsArticle) => {
         const randomCommentCount = Math.floor(Math.random() * 15)
         initialStates[article.article_id] = {
           likes: Math.floor(Math.random() * 500) + 50,
@@ -273,11 +277,26 @@ export const BlogRedesigned = () => {
       console.error("Fetch error details:", err)
       const errorMessage = err instanceof Error ? err.message : "Unknown error occurred"
       
-      // Show detailed error to user
-      setError(`Failed to load news: ${errorMessage}. The API might be temporarily unavailable. Please try again in a few moments.`)
+      // Use static posts as fallback when API fails
+      console.log("API failed, loading static blog posts as fallback...")
+      setArticles(additionalBlogPosts)
       
-      // Optional: Load sample data as fallback (uncomment if needed)
-      // loadSampleData()
+      // Initialize article states for static posts
+      const initialStates: Record<string, ArticleState> = {}
+      additionalBlogPosts.forEach((article: NewsArticle) => {
+        const randomCommentCount = Math.floor(Math.random() * 15)
+        initialStates[article.article_id] = {
+          likes: Math.floor(Math.random() * 500) + 50,
+          comments: generateRandomComments(randomCommentCount),
+          isLiked: false,
+          isBookmarked: false,
+          views: Math.floor(Math.random() * 5000) + 100,
+        }
+      })
+      setArticleStates(initialStates)
+      
+      // Clear error since we have fallback content
+      setError(null)
     } finally {
       setLoading(false)
     }
