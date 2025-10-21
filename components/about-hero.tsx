@@ -50,11 +50,9 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
   const rotateYSpring = useSpring(rotateY, springConfig)
 
   const profileImages = [
-    "https://i.imgur.com/QwVIarl.jpeg",
-    "https://i.imgur.com/vPOk177.jpeg",
+    "https://i.imgur.com/pkfYrx1.jpeg",
     "https://i.imgur.com/L8HmeD3.jpeg",
     "https://i.imgur.com/6M86mxE.jpeg",
-    "https://i.imgur.com/cTIFMyY.jpeg",
     "https://i.imgur.com/8Blt9Eo.jpeg"
   ]
 

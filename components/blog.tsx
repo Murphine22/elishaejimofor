@@ -1,625 +1,936 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Heart, MessageSquare, Bookmark, Share2, Edit, Trash2, Send, Search } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog"
+import { 
+  Heart, 
+  MessageSquare, 
+  Bookmark, 
+  Share2, 
+  Search, 
+  TrendingUp,
+  Clock,
+  Eye,
+  ExternalLink,
+  Loader2,
+  Sparkles,
+  Filter,
+  X,
+  Send,
+  ThumbsUp,
+  AlertCircle,
+  CheckCircle2
+} from "lucide-react"
 import Image from "next/image"
 
-// Define the post and comment types
+// News API Response Types
+interface NewsArticle {
+  article_id: string
+  title: string
+  link: string
+  keywords: string[] | null
+  creator: string[] | null
+  video_url: string | null
+  description: string
+  content: string
+  pubDate: string
+  image_url: string | null
+  source_id: string
+  source_priority: number
+  source_url: string
+  source_icon: string | null
+  language: string
+  country: string[]
+  category: string[]
+  ai_tag: string
+  sentiment: string
+  sentiment_stats: string
+  ai_region: string
+  ai_org: string
+  duplicate: boolean
+}
+
+interface NewsResponse {
+  status: string
+  totalResults: number
+  results: NewsArticle[]
+  nextPage: string
+}
+
+// Local state types
+interface ArticleState {
+  likes: number
+  comments: Comment[]
+  isLiked: boolean
+  isBookmarked: boolean
+  views: number
+}
+
 interface Comment {
-  id: number
+  id: string
   user: string
   content: string
   timestamp: string
-}
-
-interface Post {
-  id: number
-  title: string
-  location: string
-  image: string
-  content: string
-  publisher: string
-  timestamp: string
   likes: number
-  comments: Comment[]
-  isPremium: boolean
-  category: string
-  categoryColor: string
 }
 
-// Sample blog posts
-const initialPosts: Post[] = [
-  {
-    id: 1,
-    title: "Nigeria's Tech Ecosystem Sees 40% Growth in 2023",
-    location: "Lagos, Nigeria",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "The Nigerian tech ecosystem has experienced unprecedented growth in 2023, with investments reaching an all-time high. Startups in fintech, healthtech, and edtech sectors have been the primary beneficiaries of this surge in funding and support.",
-    publisher: "TechAfrica News",
-    timestamp: "2023-11-15T10:30:00",
-    likes: 245,
-    comments: [
-      {
-        id: 1,
-        user: "John Doe",
-        content: "This is fantastic news for our tech industry!",
-        timestamp: "2023-11-15T11:45:00",
-      },
-      {
-        id: 2,
-        user: "Jane Smith",
-        content: "I'm excited to see what innovations come next.",
-        timestamp: "2023-11-15T13:20:00",
-      },
-    ],
-    isPremium: false,
-    category: "Business",
-    categoryColor: "from-green-500 to-green-600",
-  },
-  {
-    id: 2,
-    title: "Revolutionary AI Solution Developed by Kenyan Startup",
-    location: "Nairobi, Kenya",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A Kenyan startup has developed an AI solution that addresses unique African challenges in agriculture. The system uses machine learning to predict crop diseases and recommend preventive measures, potentially increasing yields by up to 30%.",
-    publisher: "African Innovation Digest",
-    timestamp: "2023-11-10T14:15:00",
-    likes: 189,
-    comments: [
-      {
-        id: 1,
-        user: "Robert Johnson",
-        content: "This could revolutionize farming across the continent!",
-        timestamp: "2023-11-10T16:30:00",
-      },
-    ],
-    isPremium: true,
-    category: "Technology",
-    categoryColor: "from-blue-500 to-blue-600",
-  },
-  {
-    id: 3,
-    title: "South Africa Launches First Quantum Computing Research Center",
-    location: "Cape Town, South Africa",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "South Africa has inaugurated its first quantum computing research center, marking a significant milestone in the continent's scientific advancement. The center aims to explore quantum applications in cryptography, drug discovery, and climate modeling.",
-    publisher: "Science & Tech Africa",
-    timestamp: "2023-11-05T09:45:00",
-    likes: 312,
-    comments: [],
-    isPremium: true,
-    category: "Science",
-    categoryColor: "from-purple-500 to-purple-600",
-  },
-  {
-    id: 4,
-    title: "Nigerian Fintech Startup Secures $10M in Series A Funding",
-    location: "Lagos, Nigeria",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A Lagos-based fintech startup has secured $10 million in Series A funding to expand its digital banking services across West Africa. The company aims to provide accessible financial services to the unbanked population through innovative mobile solutions.",
-    publisher: "African Business Review",
-    timestamp: "2023-11-02T08:30:00",
-    likes: 178,
-    comments: [],
-    isPremium: false,
-    category: "Finance",
-    categoryColor: "from-amber-500 to-amber-600",
-  },
-  {
-    id: 5,
-    title: "East African Tech Hub Launches Coding Bootcamp for Women",
-    location: "Kigali, Rwanda",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A prominent tech hub in Kigali has launched a specialized coding bootcamp aimed at increasing female representation in the tech industry. The program offers full scholarships to 100 women and includes mentorship from leading tech professionals.",
-    publisher: "East African Tech News",
-    timestamp: "2023-10-28T11:20:00",
-    likes: 256,
-    comments: [],
-    isPremium: false,
-    category: "Education",
-    categoryColor: "from-pink-500 to-pink-600",
-  },
-  {
-    id: 6,
-    title: "Ghana's Solar Energy Initiative Brings Power to Rural Communities",
-    location: "Accra, Ghana",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
-    content:
-      "A groundbreaking solar energy initiative in Ghana has successfully brought electricity to over 50 rural communities previously without power. The project utilizes innovative micro-grid technology and pay-as-you-go financing to make clean energy accessible.",
-    publisher: "Renewable Energy Africa",
-    timestamp: "2023-10-25T13:45:00",
-    likes: 423,
-    comments: [],
-    isPremium: false,
-    category: "Energy",
-    categoryColor: "from-yellow-500 to-yellow-600",
-  },
-  {
-    id: 7,
-    title: "African E-commerce Platform Expands to 10 New Countries",
-    location: "Nairobi, Kenya",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A leading African e-commerce platform has announced its expansion into 10 additional countries across the continent. The company's growth is fueled by a recent $50 million investment and strategic partnerships with local logistics providers.",
-    publisher: "Pan-African Business",
-    timestamp: "2023-10-20T09:15:00",
-    likes: 198,
-    comments: [],
-    isPremium: true,
-    category: "Business",
-    categoryColor: "from-green-500 to-green-600",
-  },
-  {
-    id: 8,
-    title: "New Cybersecurity Center Established to Protect African Digital Infrastructure",
-    location: "Johannesburg, South Africa",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A state-of-the-art cybersecurity center has been established in Johannesburg to protect Africa's growing digital infrastructure. The center will provide threat intelligence, incident response, and security training to organizations across the continent.",
-    publisher: "African Tech Security",
-    timestamp: "2023-10-15T11:30:00",
-    likes: 276,
-    comments: [],
-    isPremium: true,
-    category: "Technology",
-    categoryColor: "from-blue-500 to-blue-600",
-  },
-  {
-    id: 9,
-    title: "Morocco Unveils Ambitious Tech City Project",
-    location: "Casablanca, Morocco",
-    image: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2026&q=80",
-    content:
-      "Morocco has unveiled plans for a new tech city near Casablanca, designed to become a hub for technology innovation in North Africa. The project includes research facilities, startup incubators, and educational institutions focused on emerging technologies.",
-    publisher: "North African Tech Review",
-    timestamp: "2023-10-10T10:00:00",
-    likes: 312,
-    comments: [],
-    isPremium: false,
-    category: "Infrastructure",
-    categoryColor: "from-indigo-500 to-indigo-600",
-  },
-  {
-    id: 10,
-    title: "African Drone Delivery Network Expands Healthcare Access",
-    location: "Kigali, Rwanda",
-    image: "https://images.unsplash.com/photo-1508444845599-5c89863b1c44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
-    content:
-      "A drone delivery network in Rwanda has expanded its operations to deliver medical supplies to remote healthcare facilities. The initiative has reduced delivery times from hours to minutes, potentially saving countless lives in emergency situations.",
-    publisher: "Healthcare Innovation Africa",
-    timestamp: "2023-10-05T14:20:00",
-    likes: 405,
-    comments: [],
-    isPremium: true,
-    category: "Healthcare",
-    categoryColor: "from-red-500 to-red-600",
-  },
-  {
-    id: 11,
-    title: "Pan-African Coding Competition Attracts Record Participation",
-    location: "Virtual Event",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "The annual Pan-African Coding Competition has attracted a record number of participants this year, with over 10,000 developers from 30 African countries. The competition aims to showcase African tech talent and connect participants with global opportunities.",
-    publisher: "Code Africa",
-    timestamp: "2023-10-01T09:30:00",
-    likes: 287,
-    comments: [],
-    isPremium: false,
-    category: "Education",
-    categoryColor: "from-pink-500 to-pink-600",
-  },
-  {
-    id: 12,
-    title: "Egyptian AI Startup Develops Arabic Natural Language Processing Tool",
-    location: "Cairo, Egypt",
-    image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "An Egyptian AI startup has developed an advanced natural language processing tool specifically designed for Arabic dialects. The technology improves machine understanding of Arabic text and speech, with applications in customer service, education, and content moderation.",
-    publisher: "MENA Tech Journal",
-    timestamp: "2023-09-28T11:15:00",
-    likes: 198,
-    comments: [],
-    isPremium: true,
-    category: "Technology",
-    categoryColor: "from-blue-500 to-blue-600",
-  },
-  {
-    id: 13,
-    title: "Senegalese Entrepreneur Launches Sustainable Tech Manufacturing Facility",
-    location: "Dakar, Senegal",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    content:
-      "A Senegalese entrepreneur has launched West Africa's first sustainable tech manufacturing facility in Dakar. The factory produces solar-powered devices and employs circular economy principles to minimize environmental impact while creating local jobs.",
-    publisher: "West African Business",
-    timestamp: "2023-09-25T10:45:00",
-    likes: 342,
-    comments: [],
-    isPremium: false,
-    category: "Manufacturing",
-    categoryColor: "from-orange-500 to-orange-600",
-  },
-  {
-    id: 14,
-    title: "Web Assembly: The Future of Browser-Based Computing",
-    location: "Virtual Conference",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80",
-    content: "Web Assembly (Wasm) is revolutionizing browser-based computing by enabling high-performance applications to run natively in web browsers. This technology is making it possible to run complex applications like video editors, 3D games, and scientific simulations directly in the browser with near-native performance.",
-    publisher: "Tech Frontiers",
-    timestamp: "2024-03-15T09:30:00",
-    likes: 156,
-    comments: [],
-    isPremium: true,
-    category: "Technology",
-    categoryColor: "from-blue-500 to-blue-600"
-  },
-  {
-    id: 15,
-    title: "The Rise of Edge Computing in IoT Applications",
-    location: "San Francisco, USA",
-    image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "Edge computing is transforming IoT implementations by processing data closer to its source, reducing latency and bandwidth usage. This approach is particularly beneficial for real-time applications in smart cities, industrial automation, and autonomous vehicles where immediate data processing is crucial.",
-    publisher: "IoT Weekly",
-    timestamp: "2024-03-14T11:45:00",
-    likes: 203,
-    comments: [],
-    isPremium: false,
-    category: "Infrastructure",
-    categoryColor: "from-indigo-500 to-indigo-600"
-  },
-  {
-    id: 16,
-    title: "Quantum Computing Breakthrough in Error Correction",
-    location: "Cambridge, UK",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "Researchers have achieved a significant breakthrough in quantum error correction, bringing us closer to practical quantum computers. The new technique allows quantum systems to maintain coherence for longer periods, making complex quantum computations more feasible.",
-    publisher: "Quantum Tech Review",
-    timestamp: "2024-03-13T14:20:00",
-    likes: 289,
-    comments: [],
-    isPremium: true,
-    category: "Science",
-    categoryColor: "from-purple-500 to-purple-600"
-  },
-  {
-    id: 17,
-    title: "The Evolution of DevOps: GitOps and Platform Engineering",
-    location: "Berlin, Germany",
-    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "DevOps practices are evolving with the adoption of GitOps and the emergence of platform engineering. These approaches are streamlining deployment processes and improving collaboration between development and operations teams, leading to faster and more reliable software delivery.",
-    publisher: "DevOps Insights",
-    timestamp: "2024-03-12T10:15:00",
-    likes: 178,
-    comments: [],
-    isPremium: false,
-    category: "Technology",
-    categoryColor: "from-blue-500 to-blue-600"
-  },
-  {
-    id: 18,
-    title: "AI-Powered Code Generation: The Future of Programming",
-    location: "Toronto, Canada",
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "AI-powered code generation tools are revolutionizing software development by automating routine coding tasks and suggesting optimizations. These tools are becoming increasingly sophisticated, learning from vast repositories of code to provide context-aware suggestions and complete functional implementations.",
-    publisher: "AI Developer Weekly",
-    timestamp: "2024-03-11T13:30:00",
-    likes: 345,
-    comments: [],
-    isPremium: true,
-    category: "AI/ML",
-    categoryColor: "from-green-500 to-green-600"
-  },
-  {
-    id: 19,
-    title: "The Rise of Web3 and Decentralized Applications",
-    location: "Miami, USA",
-    image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "Web3 technologies and decentralized applications (dApps) are gaining momentum, offering new possibilities for digital ownership and peer-to-peer interactions. This shift towards decentralization is creating opportunities for innovative business models and user-owned platforms.",
-    publisher: "Blockchain Times",
-    timestamp: "2024-03-10T15:45:00",
-    likes: 267,
-    comments: [],
-    isPremium: false,
-    category: "Blockchain",
-    categoryColor: "from-yellow-500 to-yellow-600"
-  },
-  {
-    id: 20,
-    title: "The Impact of 5G on Mobile App Development",
-    location: "Seoul, South Korea",
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-    content: "5G technology is enabling a new generation of mobile applications with enhanced capabilities. Developers are leveraging high-speed, low-latency connections to create immersive AR experiences, real-time multiplayer games, and bandwidth-intensive applications that weren't possible before.",
-    publisher: "Mobile Tech Review",
-    timestamp: "2024-03-09T12:00:00",
-    likes: 198,
-    comments: [],
-    isPremium: false,
-    category: "Mobile",
-    categoryColor: "from-red-500 to-red-600"
-  }
-]
-
-export const Blog = () => {
-  const [posts, setPosts] = useState<Post[]>(initialPosts)
-  const [savedPosts, setSavedPosts] = useState<number[]>([])
-  const [likedPosts, setLikedPosts] = useState<number[]>([])
-  const [commentingOnPost, setCommentingOnPost] = useState<number | null>(null)
-  const [newComment, setNewComment] = useState("")
-  const [editingPost, setEditingPost] = useState<Post | null>(null)
+export const BlogRedesigned = () => {
+  const [articles, setArticles] = useState<NewsArticle[]>([])
+  const [articleStates, setArticleStates] = useState<Record<string, ArticleState>>({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
-  const [activeCategory, setActiveCategory] = useState("All")
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
+  const [commentText, setCommentText] = useState("")
+  const [shareDialogOpen, setShareDialogOpen] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const [displayCount, setDisplayCount] = useState(10) // Show all 10 articles at once
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Get unique categories from posts
-  const categories = ["All", ...Array.from(new Set(posts.map((post) => post.category)))]
+  // Mouse tracking for parallax
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
-  // Filter posts based on search term and active category
-  const filteredPosts = posts.filter((post) => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         post.content.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = activeCategory === "All" || post.category === activeCategory
+  // Fetch news from API
+  useEffect(() => {
+    fetchNews()
+  }, [])
+
+  // Reset display count when search or category changes
+  useEffect(() => {
+    setDisplayCount(10)
+  }, [searchTerm, selectedCategory])
+
+  // Generate random comments for an article
+  const generateRandomComments = (count: number): Comment[] => {
+    const sampleUsers = [
+      "Tech Enthusiast", "Innovation Seeker", "Science Lover", "Future Thinker",
+      "Digital Nomad", "AI Researcher", "Code Master", "Data Scientist",
+      "Product Designer", "Startup Founder", "Tech Blogger", "Developer",
+      "Engineering Lead", "UX Designer", "Growth Hacker", "Tech Investor"
+    ]
+    
+    const sampleComments = [
+      "This is absolutely fascinating! Can't wait to see how this develops.",
+      "Great article! Very insightful and well-researched.",
+      "This could be a game-changer for the industry.",
+      "Interesting perspective on the future of technology.",
+      "Thanks for sharing this! Very informative.",
+      "This is exactly what we need in today's world.",
+      "Amazing innovation! The future is here.",
+      "I've been following this trend closely. Exciting times ahead!",
+      "This technology has so much potential.",
+      "Well written and thoroughly explained.",
+      "The implications of this are huge!",
+      "This is the kind of innovation we need more of.",
+      "Brilliant work by the team behind this.",
+      "Can't believe how fast technology is advancing.",
+      "This will definitely disrupt the market.",
+      "Love seeing progress like this!",
+      "The future of tech looks bright with innovations like this.",
+      "This could solve so many problems we're facing today.",
+      "Impressive! Looking forward to seeing this in action.",
+      "This is why I love following tech news!"
+    ]
+    
+    const comments: Comment[] = []
+    for (let i = 0; i < count; i++) {
+      const randomUser = sampleUsers[Math.floor(Math.random() * sampleUsers.length)]
+      const randomComment = sampleComments[Math.floor(Math.random() * sampleComments.length)]
+      const randomDaysAgo = Math.floor(Math.random() * 30) + 1
+      const timestamp = new Date(Date.now() - randomDaysAgo * 24 * 60 * 60 * 1000).toISOString()
+      
+      comments.push({
+        id: `comment-${Date.now()}-${i}`,
+        user: randomUser,
+        content: randomComment,
+        timestamp: timestamp,
+        likes: Math.floor(Math.random() * 50),
+      })
+    }
+    
+    return comments
+  }
+
+  const fetchNews = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      
+      console.log("Starting news fetch...")
+      
+      let allArticles: NewsArticle[] = []
+      let nextPage: string | null = null
+      let fetchCount = 0
+      const maxFetches = 3 // Fetch up to 3 pages to ensure we get 10+ articles
+      const targetArticles = 10 // Target number of unique articles
+      
+      // Fetch multiple pages to get at least 10 unique articles
+      while (fetchCount < maxFetches && allArticles.length < 30) {
+        const url: string = nextPage 
+          ? `https://newsdata.io/api/1/latest?apikey=pub_4d2953330db646e080671676a5fc1821&q=news&page=${nextPage}`
+          : "https://newsdata.io/api/1/latest?apikey=pub_4d2953330db646e080671676a5fc1821&q=news"
+        
+        console.log(`Fetching page ${fetchCount + 1}...`)
+        
+        const response: Response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        })
+        
+        console.log(`Response status for page ${fetchCount + 1}:`, response.status)
+        
+        if (!response.ok) {
+          const errorText = await response.text()
+          console.error("API Error:", errorText)
+          // If first page fails, throw error. Otherwise, use what we have
+          if (fetchCount === 0) {
+            throw new Error(`API returned ${response.status}: ${response.statusText}`)
+          }
+          break
+        }
+
+        const data: NewsResponse = await response.json()
+        console.log(`Page ${fetchCount + 1} data received:`, data)
+        
+        if (data.status === "success" && data.results && data.results.length > 0) {
+          allArticles = [...allArticles, ...data.results]
+          console.log(`Total articles so far: ${allArticles.length}`)
+          
+          fetchCount++
+          
+          // Check if there's a next page and we should continue
+          if (data.nextPage && fetchCount < maxFetches && allArticles.length < 30) {
+            nextPage = data.nextPage
+            // Add delay to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 1000))
+          } else {
+            console.log("Stopping fetch - reached limit or no more pages")
+            break
+          }
+        } else {
+          console.log("No results in response, stopping fetch")
+          break
+        }
+      }
+      
+      // Remove duplicates based on multiple criteria
+      const seenIds = new Set<string>()
+      const seenTitles = new Set<string>()
+      const uniqueArticles: NewsArticle[] = []
+      
+      allArticles.forEach(article => {
+        // Normalize title for comparison (lowercase, trim spaces)
+        const normalizedTitle = article.title.toLowerCase().trim()
+        
+        // Only add if we haven't seen this article_id or title before
+        if (!seenIds.has(article.article_id) && !seenTitles.has(normalizedTitle)) {
+          seenIds.add(article.article_id)
+          seenTitles.add(normalizedTitle)
+          uniqueArticles.push(article)
+        }
+      })
+      
+      console.log(`Total fetched: ${allArticles.length}, After deduplication: ${uniqueArticles.length}`)
+      
+      if (uniqueArticles.length === 0) {
+        throw new Error("No articles found in the API response")
+      }
+      
+      // Shuffle articles to add variety and limit to 10
+      const shuffledArticles = uniqueArticles
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 10) // Take only first 10 articles
+      
+      console.log(`Final articles to display: ${shuffledArticles.length}`)
+      
+      setArticles(shuffledArticles)
+      
+      // Initialize article states with random comments
+      const initialStates: Record<string, ArticleState> = {}
+      shuffledArticles.forEach((article: NewsArticle) => {
+        const randomCommentCount = Math.floor(Math.random() * 15)
+        initialStates[article.article_id] = {
+          likes: Math.floor(Math.random() * 500) + 50,
+          comments: generateRandomComments(randomCommentCount),
+          isLiked: false,
+          isBookmarked: false,
+          views: Math.floor(Math.random() * 5000) + 100,
+        }
+      })
+      setArticleStates(initialStates)
+      
+    } catch (err) {
+      console.error("Fetch error details:", err)
+      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred"
+      
+      // Show detailed error to user
+      setError(`Failed to load news: ${errorMessage}. The API might be temporarily unavailable. Please try again in a few moments.`)
+      
+      // Optional: Load sample data as fallback (uncomment if needed)
+      // loadSampleData()
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Fallback sample data (in case API is down)
+  const loadSampleData = () => {
+    const sampleArticles: NewsArticle[] = [
+      {
+        article_id: "sample-1",
+        title: "Latest Advances in AI Technology Transform Industries",
+        link: "https://example.com/ai-advances",
+        keywords: ["AI", "technology", "innovation"],
+        creator: ["Tech News"],
+        video_url: null,
+        description: "Artificial Intelligence continues to revolutionize various sectors with groundbreaking applications and improvements.",
+        content: "Full article content here...",
+        pubDate: new Date().toISOString(),
+        image_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
+        source_id: "Sample News",
+        source_priority: 1,
+        source_url: "https://example.com",
+        source_icon: null,
+        language: "en",
+        country: ["us"],
+        category: ["technology"],
+        ai_tag: "technology",
+        sentiment: "positive",
+        sentiment_stats: "{}",
+        ai_region: "global",
+        ai_org: "",
+        duplicate: false,
+      },
+    ]
+    
+    setArticles(sampleArticles)
+    const initialStates: Record<string, ArticleState> = {}
+    sampleArticles.forEach((article) => {
+      initialStates[article.article_id] = {
+        likes: 150,
+        comments: generateRandomComments(5),
+        isLiked: false,
+        isBookmarked: false,
+        views: 1200,
+      }
+    })
+    setArticleStates(initialStates)
+  }
+
+  // Handle like
+  const handleLike = (articleId: string) => {
+    setArticleStates((prev) => ({
+      ...prev,
+      [articleId]: {
+        ...prev[articleId],
+        isLiked: !prev[articleId].isLiked,
+        likes: prev[articleId].isLiked 
+          ? prev[articleId].likes - 1 
+          : prev[articleId].likes + 1,
+      },
+    }))
+  }
+
+  // Handle bookmark
+  const handleBookmark = (articleId: string) => {
+    setArticleStates((prev) => ({
+      ...prev,
+      [articleId]: {
+        ...prev[articleId],
+        isBookmarked: !prev[articleId].isBookmarked,
+      },
+    }))
+  }
+
+  // Handle comment
+  const handleAddComment = (articleId: string) => {
+    if (!commentText.trim()) return
+
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      user: "You",
+      content: commentText,
+      timestamp: new Date().toISOString(),
+      likes: 0,
+    }
+
+    setArticleStates((prev) => ({
+      ...prev,
+      [articleId]: {
+        ...prev[articleId],
+        comments: [...prev[articleId].comments, newComment],
+      },
+    }))
+
+    setCommentText("")
+  }
+
+  // Handle share
+  const handleShare = async (article: NewsArticle) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: article.title,
+          text: article.description,
+          url: article.link,
+        })
+      } catch (err) {
+        console.log("Share cancelled")
+      }
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(article.link)
+      setShareDialogOpen(true)
+      setTimeout(() => setShareDialogOpen(false), 2000)
+    }
+  }
+
+  // Format date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    const now = new Date()
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60))
+    
+    if (diffInHours < 1) return "Just now"
+    if (diffInHours < 24) return `${diffInHours}h ago`
+    if (diffInHours < 48) return "Yesterday"
+    return new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)
+  }
+
+  // Get unique categories
+  const categories = ["all", ...Array.from(new Set(articles.flatMap((a) => a.category || [])))]
+
+  // Filter articles
+  const filteredArticles = articles.filter((article) => {
+    const matchesSearch = 
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.description?.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCategory = 
+      selectedCategory === "all" || 
+      article.category?.includes(selectedCategory)
     return matchesSearch && matchesCategory
   })
 
-  // Check if user is admin or premium
-  const isAdmin = true // For demo purposes
-  const isPremiumUser = true // For demo purposes
-  const isLoggedIn = true // For demo purposes
+  // Paginated articles - show only displayCount articles
+  const displayedArticles = filteredArticles.slice(0, displayCount)
+  const hasMore = displayCount < filteredArticles.length
 
-  const handleLike = (postId: number) => {
-    if (!isLoggedIn) return
-
-    setLikedPosts((prev) => {
-      if (prev.includes(postId)) {
-        return prev.filter((id) => id !== postId)
-      } else {
-        return [...prev, postId]
-      }
-    })
+  // Load more articles (not needed since we only have 10, but keeping for future)
+  const loadMore = () => {
+    setDisplayCount(prev => prev + 10)
   }
 
-  const handleComment = (postId: number) => {
-    if (!isLoggedIn) return
-    setCommentingOnPost(commentingOnPost === postId ? null : postId)
-  }
-
-  const handleDeletePost = (postId: number) => {
-    if (confirm("Are you sure you want to delete this post?")) {
-    setPosts(posts.filter((post) => post.id !== postId))
-    }
-  }
-
-  const handleDeleteComment = (postId: number, commentId: number) => {
-    if (confirm("Are you sure you want to delete this comment?")) {
-    setPosts(
-        posts.map((post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              comments: post.comments.filter((comment) => comment.id !== commentId),
-            }
-          }
-          return post
-        })
-      )
-    }
-  }
-
-  const handleSavePost = (post: Post) => {
-    setSavedPosts((prev) => {
-      if (prev.includes(post.id)) {
-        return prev.filter((id) => id !== post.id)
-    } else {
-        return [...prev, post.id]
-      }
-    })
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    }).format(date)
+  // Mouse move handler
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    mouseX.set(x)
+    mouseY.set(y)
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-8 bg-background p-8 rounded-lg shadow-lg"
+      ref={containerRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative min-h-screen"
+      onMouseMove={handleMouseMove}
     >
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">Tech News & Innovations</h2>
-        <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-          <div className="relative w-full md:w-64">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      {/* Animated Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-96 h-96 rounded-full blur-3xl opacity-10 ${
+              i === 0 ? 'bg-blue-500' : i === 1 ? 'bg-purple-500' : 'bg-pink-500'
+            }`}
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -100, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20 + i * 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              left: `${i * 30}%`,
+              top: `${i * 20}%`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center space-y-4"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20"
+          >
+            <Sparkles className="w-5 h-5 text-primary" />
+            <span className="text-sm font-semibold text-primary">Latest Tech News</span>
+          </motion.div>
+
+          <h1 className="text-5xl md:text-7xl font-bold">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600 animate-gradient">
+              Innovations & Technology
+            </span>
+          </h1>
+          
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Stay updated with the latest breakthroughs in science, technology, and innovation from around the world
+          </p>
+        </motion.div>
+
+        {/* Search and Filter Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-col md:flex-row gap-4 items-center justify-between"
+        >
+          {/* Search Bar */}
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               placeholder="Search news..."
-              className="pl-10"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-12 h-12 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary"
             />
           </div>
-          {isAdmin && (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  onClick={() =>
-                    setEditingPost({
-                      id: 0,
-                      title: "",
-                      location: "",
-                      image: "",
-                      content: "",
-                      publisher: "",
-                      timestamp: new Date().toISOString(),
-                      likes: 0,
-                      comments: [],
-                      isPremium: false,
-                      category: "Technology",
-                      categoryColor: "from-blue-500 to-blue-600",
-                    })
-                  }
-                  className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
-                >
-                  Add New Post
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[600px]">
-                <DialogHeader>
-                  <DialogTitle>{editingPost?.id ? "Edit Post" : "Add New Post"}</DialogTitle>
-                </DialogHeader>
-                <form
-                  className="space-y-4 py-4"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    // Form submission logic would go here
-                  }}
-                >
-                  {/* Form fields would go here */}
-                </form>
-              </DialogContent>
-            </Dialog>
-          )}
-        </div>
-      </div>
 
-      <div className="flex overflow-x-auto pb-2 mb-4 gap-2">
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={activeCategory === category ? "default" : "outline"}
-            size="sm"
-            onClick={() => setActiveCategory(category)}
-            className={`whitespace-nowrap ${
-              activeCategory === category 
-                ? "bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90" 
-                : "hover:bg-primary/10"
-            }`}
-          >
-            {category}
-          </Button>
-        ))}
-      </div>
+          {/* Stats */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-green-500" />
+              <span className="text-sm font-medium">{articles.length} Articles</span>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={fetchNews}
+              disabled={loading}
+              className="gap-2"
+            >
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Refresh"}
+            </Button>
+          </div>
+        </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredPosts.map((post) => (
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide"
+        >
+          <Filter className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedCategory(category)}
+              className={`whitespace-nowrap capitalize ${
+                selectedCategory === category
+                  ? "bg-gradient-to-r from-primary to-purple-600"
+                  : ""
+              }`}
+            >
+              {category}
+            </Button>
+          ))}
+        </motion.div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20 space-y-4">
+            <Loader2 className="w-12 h-12 animate-spin text-primary" />
+            <p className="text-muted-foreground">Loading latest news...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
           <motion.div
-            key={post.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center justify-center py-20 space-y-4 max-w-md mx-auto"
+          >
+            <AlertCircle className="w-16 h-16 text-red-500" />
+            <h3 className="text-xl font-bold text-red-500">Failed to Load News</h3>
+            <p className="text-muted-foreground text-center">{error}</p>
+            <div className="flex gap-3">
+              <Button onClick={fetchNews} variant="outline" className="gap-2">
+                <span>Try Again</span>
+              </Button>
+              <Button 
+                onClick={() => window.location.reload()} 
+                variant="default"
+                className="bg-gradient-to-r from-primary to-purple-600"
+              >
+                Reload Page
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground text-center">
+              Check your internet connection or try again in a few moments
+            </p>
+          </motion.div>
+        )}
+
+        {/* Articles Grid */}
+        {!loading && !error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {displayedArticles.map((article, index) => {
+              const state = articleStates[article.article_id] || {
+                likes: 0,
+                comments: [],
+                isLiked: false,
+                isBookmarked: false,
+                views: 0,
+              }
+
+              return (
+                <motion.div
+                  key={article.article_id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onHoverStart={() => setHoveredCard(article.article_id)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  whileHover={{ y: -8 }}
+                  className="group"
+                >
+                  <Card className="overflow-hidden h-full flex flex-col border-2 border-primary/10 hover:border-primary/30 transition-all duration-300 bg-background/50 backdrop-blur-sm">
+                    {/* Image Section */}
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-purple-600/20">
+                      <Image
+                        src={article.image_url || `https://images.unsplash.com/photo-${[
+                          '1451187580459-43490279c0fa', // Tech background
+                          '1488590528505-98d2b5aba04b', // Technology
+                          '1518770660439-4636190af475', // Code
+                          '1526374965328-7f61d4dc18c5', // Data
+                          '1550751827-4bd374c3f58b', // Science
+                          '1485827404703-89b55fcc595e', // Innovation
+                          '1519389950473-47ba0277781c', // Digital
+                          '1504384308090-c894fdcc538d', // Computer
+                          '1531297484001-80022131f5a1', // Laptop
+                          '1563986768494-4dee2763ff3f' // Network
+                        ][index % 10]}?w=800`}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                          // Fallback to different placeholder images based on index
+                          const target = e.target as HTMLImageElement
+                          const fallbackImages = [
+                            'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800',
+                            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800',
+                            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+                            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800',
+                            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800',
+                            'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800',
+                            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800',
+                            'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800',
+                            'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800',
+                            'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800'
+                          ]
+                          target.src = fallbackImages[index % 10]
+                        }}
+                        unoptimized
+                      />
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      
+                      {/* Category Badge */}
+                      {article.category && article.category[0] && (
+                        <Badge className="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm">
+                          {article.category[0]}
+                        </Badge>
+                      )}
+                      
+                      {/* Bookmark Icon */}
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => handleBookmark(article.article_id)}
+                        className="absolute top-3 right-3 p-2 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-colors"
+                      >
+                        <Bookmark
+                          className={`w-4 h-4 ${state.isBookmarked ? 'fill-yellow-500 text-yellow-500' : 'text-white'}`}
+                        />
+                      </motion.button>
+
+                      {/* Views Counter */}
+                      <div className="absolute bottom-3 left-3 flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs">
+                        <Eye className="w-3 h-3" />
+                        <span>{state.views}</span>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <CardContent className="flex-grow p-4 space-y-3">
+                      {/* Source and Date */}
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span className="font-medium">{article.source_id}</span>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{formatDate(article.pubDate)}</span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-bold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {article.description || "No description available"}
+                      </p>
+
+                      {/* Keywords */}
+                      {article.keywords && article.keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {article.keywords.slice(0, 3).map((keyword, i) => (
+                            <span
+                              key={i}
+                              className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary"
+                            >
+                              #{keyword}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+
+                    {/* Footer Section */}
+                    <CardFooter className="border-t p-4 bg-muted/30">
+                      <div className="flex items-center justify-between w-full">
+                        {/* Engagement Buttons */}
+                        <div className="flex items-center gap-3">
+                          {/* Like */}
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleLike(article.article_id)}
+                            className="flex items-center gap-1 text-sm"
+                          >
+                            <Heart
+                              className={`w-4 h-4 ${
+                                state.isLiked ? 'fill-red-500 text-red-500' : 'text-muted-foreground'
+                              }`}
+                            />
+                            <span className={state.isLiked ? 'text-red-500' : 'text-muted-foreground'}>
+                              {state.likes}
+                            </span>
+                          </motion.button>
+
+                          {/* Comment */}
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setSelectedArticle(article)}
+                                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+                              >
+                                <MessageSquare className="w-4 h-4" />
+                                <span>{state.comments.length}</span>
+                              </motion.button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                              <DialogHeader>
+                                <DialogTitle className="text-xl">{article.title}</DialogTitle>
+                                <DialogDescription className="text-sm">
+                                  {article.description}
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              {/* Comments Section */}
+                              <div className="space-y-4 mt-4">
+                                <h4 className="font-semibold">Comments ({state.comments.length})</h4>
+                                
+                                {/* Comment Input */}
+                                <div className="flex gap-2">
+                                  <Textarea
+                                    placeholder="Add a comment..."
+                                    value={commentText}
+                                    onChange={(e) => setCommentText(e.target.value)}
+                                    className="flex-1"
+                                    rows={2}
+                                  />
+                                  <Button
+                                    onClick={() => handleAddComment(article.article_id)}
+                                    size="icon"
+                                    className="self-end"
+                                  >
+                                    <Send className="w-4 h-4" />
+                                  </Button>
+                                </div>
+
+                                {/* Comments List */}
+                                <div className="space-y-3">
+                                  {state.comments.map((comment) => (
+                                    <div
+                                      key={comment.id}
+                                      className="p-3 rounded-lg bg-muted/50 space-y-2"
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <span className="font-medium text-sm">{comment.user}</span>
+                                        <span className="text-xs text-muted-foreground">
+                                          {formatDate(comment.timestamp)}
+                                        </span>
+                                      </div>
+                                      <p className="text-sm">{comment.content}</p>
+                                    </div>
+                                  ))}
+                                  
+                                  {state.comments.length === 0 && (
+                                    <p className="text-center text-muted-foreground text-sm py-4">
+                                      No comments yet. Be the first to comment!
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+
+                          {/* Share */}
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleShare(article)}
+                            className="text-muted-foreground hover:text-primary"
+                          >
+                            <Share2 className="w-4 h-4" />
+                          </motion.button>
+                        </div>
+
+                        {/* Read More */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
+                          className="gap-1 text-primary hover:text-primary/80"
+                        >
+                          <a href={article.link} target="_blank" rel="noopener noreferrer">
+                            <span>Read</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        )}
+
+        {/* Load More Button */}
+        {!loading && !error && hasMore && (
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            className="flex justify-center mt-12"
           >
-            <Card className="overflow-hidden h-full flex flex-col border-t-4 border-t-primary hover:shadow-lg transition-all duration-300">
-              <div className="relative">
-                <Image
-                  src={post.image || "/placeholder.svg"}
-                  alt={post.title}
-                  width={600}
-                  height={300}
-                  className="w-full h-48 object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute top-4 right-4 z-20">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-black/50 text-white backdrop-blur-sm`}>
-                    {post.category}
-                  </span>
-                </div>
-                {post.isPremium && (
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/90 text-white">
-                      Premium
-                    </span>
-                  </div>
-                )}
-              </div>
-              <CardContent className="flex-grow p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold line-clamp-2">{post.title}</h3>
-                </div>
-                <div className="flex items-center text-sm text-muted-foreground mb-4">
-                  <span>{post.location}</span>
-                  <span className="mx-2">•</span>
-                  <span>{formatDate(post.timestamp)}</span>
-                </div>
-                <p className="text-muted-foreground line-clamp-3 mb-4">{post.content}</p>
-                <div className="flex items-center text-sm">
-                  <span className="font-medium">By {post.publisher}</span>
-                </div>
-              </CardContent>
-              <CardFooter className="border-t p-4 bg-muted/30">
-                <div className="flex justify-between items-center w-full">
-                    <div className="flex space-x-4">
-                    <button
-                      className={`flex items-center space-x-1 ${
-                        likedPosts.includes(post.id) ? "text-red-500" : "text-muted-foreground hover:text-primary"
-                      }`}
-                      onClick={() => handleLike(post.id)}
-                    >
-                      <Heart className="h-4 w-4" fill={likedPosts.includes(post.id) ? "currentColor" : "none"} />
-                      <span>{post.likes + (likedPosts.includes(post.id) ? 1 : 0)}</span>
-                    </button>
-                    <button
-                      className="flex items-center space-x-1 text-muted-foreground hover:text-primary"
-                      onClick={() => handleComment(post.id)}
-                    >
-                      <MessageSquare className="h-4 w-4" />
-                      <span>{post.comments.length}</span>
-                    </button>
-                  </div>
-                    <div className="flex space-x-2">
-                    <button
-                      className={`text-muted-foreground hover:text-primary ${
-                        savedPosts.includes(post.id) ? "text-primary" : ""
-                      }`}
-                      onClick={() => handleSavePost(post)}
-                    >
-                      <Bookmark
-                        className="h-4 w-4"
-                        fill={savedPosts.includes(post.id) ? "currentColor" : "none"}
-                      />
-                    </button>
-                    <button className="text-muted-foreground hover:text-primary">
-                      <Share2 className="h-4 w-4" />
-                    </button>
-                            {isAdmin && (
-                      <>
-                        <button
-                          className="text-muted-foreground hover:text-primary"
-                          onClick={() => setEditingPost(post)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </button>
-                        <button
-                          className="text-muted-foreground hover:text-red-500"
-                          onClick={() => handleDeletePost(post.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </>
-                            )}
-                          </div>
-                </div>
-              </CardFooter>
-            </Card>
+            <Button
+              onClick={loadMore}
+              size="lg"
+              className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 px-8 py-6 text-lg font-semibold group"
+            >
+              <span>Load More Articles</span>
+              <motion.span
+                className="ml-2"
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                ↓
+              </motion.span>
+            </Button>
           </motion.div>
-        ))}
+        )}
+
+        {/* Showing X of Y */}
+        {!loading && !error && filteredArticles.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mt-8 text-muted-foreground"
+          >
+            <p>
+              Showing <span className="font-bold text-primary">{displayedArticles.length}</span> of{" "}
+              <span className="font-bold text-primary">{filteredArticles.length}</span> articles
+            </p>
+          </motion.div>
+        )}
+
+        {/* No Results */}
+        {!loading && !error && filteredArticles.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20 space-y-4"
+          >
+            <Search className="w-16 h-16 mx-auto text-muted-foreground" />
+            <h3 className="text-2xl font-bold">No articles found</h3>
+            <p className="text-muted-foreground">
+              Try adjusting your search or filter criteria
+            </p>
+          </motion.div>
+        )}
       </div>
+
+      {/* Share Success Toast */}
+      <AnimatePresence>
+        {shareDialogOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-4 right-4 z-50"
+          >
+            <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-green-500 text-white shadow-lg">
+              <CheckCircle2 className="w-5 h-5" />
+              <span>Link copied to clipboard!</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
-

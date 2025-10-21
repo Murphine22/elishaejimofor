@@ -16,22 +16,15 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    unoptimized: true, // Disable image optimization for external sources
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.imgur.com',
+        hostname: '**',
       },
       {
-        protocol: 'https',
-        hostname: '**.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.pinimg.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.pinimg.com',
+        protocol: 'http',
+        hostname: '**',
       },
     ],
     formats: ['image/avif', 'image/webp'],
