@@ -427,7 +427,7 @@ export const About = ({ onNavigate }: AboutProps) => {
                   </motion.div>
 
                   <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">
-                    2+ Years of Innovation
+                    7+ Years of Innovation
                   </h4>
 
                   <p className="text-muted-foreground leading-relaxed">
