@@ -833,13 +833,13 @@ export const About = ({ onNavigate }: AboutProps) => {
       <Tabs defaultValue="experience" className="mt-10">
         <TabsList className="grid w-full grid-cols-3 bg-background border border-primary/20">
           <TabsTrigger value="experience" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/20 data-[state=active]:to-purple-600/20">
-            <Briefcase className="h-4 w-4" /> Work Experience
+            <Briefcase className="h-4 w-4" /> Experience
           </TabsTrigger>
           <TabsTrigger value="education" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/20 data-[state=active]:to-purple-600/20">
             <GraduationCap className="h-4 w-4" /> Education
           </TabsTrigger>
           <TabsTrigger value="training" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/20 data-[state=active]:to-purple-600/20">
-            <Award className="h-4 w-4" /> Training & Certifications
+            <Award className="h-4 w-4" /> Certifications
           </TabsTrigger>
         </TabsList>
         
