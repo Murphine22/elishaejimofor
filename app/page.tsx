@@ -15,7 +15,7 @@ import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { Chatbot } from "@/components/chatbot"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, Sparkles, Target, Zap, Code2, Palette, TrendingUp, Lightbulb, Rocket, Star } from "lucide-react"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { TypeAnimation } from "react-type-animation"
 import { DigitalClock } from "@/components/digital-clock"
@@ -182,47 +182,250 @@ export default function Home() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-                    <TypeAnimation
-                      sequence={[
-                        "Hi, I'm Elisha Ejimofor",
-                        1000,
-                        "A Frontend Developer",
-                        1000,
-                        "Web Developer",
-                        1000,
-                        "Graphics Designer",
-                        1000,
-                        "Digital Marketer",
-                        1000,
-                        "AI Enthusiast",
-                        1000,
-                        "Content Creator",
-                        1000,
-                        "Prompt Engineer",
-                        1000,
-                        "Digital skills Tutor",
-                        1000,
-                      ]}
-                      wrapper="span"
-                      speed={50}
-                      repeat={Number.POSITIVE_INFINITY}
+                  {/* Enhanced TypeAnimation Section */}
+                  <motion.div 
+                    className="relative mb-6 md:mb-8 p-6 md:p-8 rounded-2xl overflow-hidden group"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Animated gradient background */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-50"
+                      animate={{
+                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      style={{ backgroundSize: '200% 200%' }}
                     />
-                  </h1>
-                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-                    <h2 className="text-xl md:text-2xl font-bold mt-3 md:mt-4">My Vision</h2>
-                    <p className="text-base md:text-lg">
-                      To create innovative digital solutions that inspire, engage, and transform. I strive to blend
-                      cutting-edge technology with creative design to deliver exceptional user experiences and drive
-                      business growth.
-                    </p>
-                    <h2 className="text-xl md:text-2xl font-bold mt-3 md:mt-4">What I Do</h2>
-                    <p className="text-base md:text-lg">
-                      I specialize in creating responsive, user-friendly websites and applications using modern
-                      front-end technologies. My expertise includes React, Next.js, TypeScript, and UI/UX design
-                      principles that ensure your digital presence stands out in today's competitive landscape.
-                    </p>
-                  </div>
+                    
+                    {/* Floating particles effect */}
+                    <div className="absolute inset-0 overflow-hidden">
+                      {[...Array(6)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                          animate={{
+                            x: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
+                            y: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
+                            opacity: [0.2, 0.5, 0.2],
+                            scale: [1, 1.5, 1],
+                          }}
+                          transition={{
+                            duration: 3 + Math.random() * 2,
+                            repeat: Infinity,
+                            delay: i * 0.2,
+                          }}
+                          style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="relative z-10">
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="flex items-center gap-2 mb-3"
+                      >
+                        <Sparkles className="h-5 w-5 text-yellow-500 animate-pulse" />
+                        <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Welcome to my portfolio</span>
+                      </motion.div>
+                      
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 relative">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient">
+                          <TypeAnimation
+                            sequence={[
+                              "Hi, I'm Elisha 👋",
+                              1000,
+                              "Frontend Developer 💻",
+                              1000,
+                              "Web Developer 🌐",
+                              1000,
+                              "Graphics Designer 🎨",
+                              1000,
+                              "Digital Marketer 📱",
+                              1000,
+                              "AI Enthusiast 🤖",
+                              1000,
+                              "Content Creator 📝",
+                              1000,
+                              "Prompt Engineer 🚀",
+                              1000,
+                              "Digital Skills Tutor 📚",
+                              1000,
+                            ]}
+                            wrapper="span"
+                            speed={50}
+                            repeat={Number.POSITIVE_INFINITY}
+                          />
+                        </span>
+                      </h1>
+                      
+                      <motion.p 
+                        className="text-base md:text-lg text-muted-foreground mt-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        Crafting digital experiences that make a difference
+                      </motion.p>
+                    </div>
+                  </motion.div>
+
+                  {/* Enhanced My Vision Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="mb-6 md:mb-8"
+                  >
+                    <motion.div 
+                      className="relative group"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
+                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-border/50 overflow-hidden">
+                        {/* Animated corner accent */}
+                        <motion.div
+                          className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-bl-full"
+                          animate={{
+                            scale: [1, 1.1, 1],
+                            opacity: [0.3, 0.5, 0.3],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                          }}
+                        />
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3 mb-4">
+                            <motion.div
+                              className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg"
+                              whileHover={{ rotate: 360, scale: 1.1 }}
+                              transition={{ duration: 0.6 }}
+                            >
+                              <Target className="h-6 w-6 text-white" />
+                            </motion.div>
+                            <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                              My Vision
+                            </h2>
+                          </div>
+                          
+                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
+                            To create innovative digital solutions that inspire, engage, and transform. I strive to blend
+                            cutting-edge technology with creative design to deliver exceptional user experiences and drive
+                            business growth.
+                          </p>
+                          
+                          {/* Vision pillars */}
+                          <div className="grid grid-cols-3 gap-3 mt-4">
+                            {[
+                              { icon: Lightbulb, label: "Innovate", color: "from-yellow-500 to-orange-500" },
+                              { icon: Rocket, label: "Transform", color: "from-blue-500 to-cyan-500" },
+                              { icon: Star, label: "Excel", color: "from-purple-500 to-pink-500" },
+                            ].map((pillar, idx) => (
+                              <motion.div
+                                key={idx}
+                                className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-background to-muted/30 border border-border/50 hover:border-primary/50 transition-all"
+                                whileHover={{ y: -5, scale: 1.05 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 + idx * 0.1 }}
+                              >
+                                <div className={`p-2 rounded-lg bg-gradient-to-br ${pillar.color}`}>
+                                  <pillar.icon className="h-4 w-4 text-white" />
+                                </div>
+                                <span className="text-xs font-semibold">{pillar.label}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+
+                  {/* Enhanced What I Do Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                    className="mb-6 md:mb-8"
+                  >
+                    <motion.div 
+                      className="relative group"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
+                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-border/50 overflow-hidden">
+                        {/* Animated background pattern */}
+                        <div className="absolute inset-0 opacity-5">
+                          <div className="absolute inset-0" style={{
+                            backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
+                            backgroundSize: '32px 32px'
+                          }} />
+                        </div>
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3 mb-4">
+                            <motion.div
+                              className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl shadow-lg"
+                              whileHover={{ rotate: 360, scale: 1.1 }}
+                              transition={{ duration: 0.6 }}
+                            >
+                              <Zap className="h-6 w-6 text-white" />
+                            </motion.div>
+                            <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-600">
+                              What I Do
+                            </h2>
+                          </div>
+                          
+                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
+                            I specialize in creating responsive, user-friendly websites and applications using modern
+                            front-end technologies. My expertise includes React, Next.js, TypeScript, and UI/UX design
+                            principles that ensure your digital presence stands out in today's competitive landscape.
+                          </p>
+                          
+                          {/* Skill badges */}
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {[
+                              { name: "React", icon: Code2, color: "from-blue-400 to-cyan-400" },
+                              { name: "Next.js", icon: Rocket, color: "from-gray-700 to-gray-900" },
+                              { name: "TypeScript", icon: Code2, color: "from-blue-600 to-blue-800" },
+                              { name: "UI/UX", icon: Palette, color: "from-purple-500 to-pink-500" },
+                              { name: "Design", icon: Sparkles, color: "from-yellow-500 to-orange-500" },
+                              { name: "Growth", icon: TrendingUp, color: "from-green-500 to-emerald-500" },
+                            ].map((skill, idx) => (
+                              <motion.div
+                                key={idx}
+                                className="group/badge relative"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.6 + idx * 0.05 }}
+                                whileHover={{ scale: 1.1, y: -2 }}
+                              >
+                                <div className={`flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer`}>
+                                  <skill.icon className="h-3.5 w-3.5" />
+                                  <span>{skill.name}</span>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+
+                  {/* CTA Buttons */}
                   <div className="hidden sm:block">
                     <AnimatedButton
                       onClick={() => handleNavigation("projects")}

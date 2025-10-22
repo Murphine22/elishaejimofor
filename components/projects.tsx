@@ -17,7 +17,7 @@ const projects = [
   {
     title: "Ush-App Finance app",
     description: "A full-stack Financial Overview App with React and Node.js",
-    image: "https://i.imgur.com/zwu5LOp.jpeg",
+    image: "https://i.imgur.com/TND5b3C.jpeg",
     tags: ["React", "Node.js", "Superbase","Stackblitz"],
     link: "https://ush-app.vercel.app",
     github: "https://github.com/Murphine22/Ush-App",
@@ -27,7 +27,7 @@ const projects = [
   {
     title: "Task Master(To-Do App)",
     description: "A responsive To-Do App showcasing creative work",
-    image: "https://i.pinimg.com/736x/62/eb/a5/62eba5d391173b208ec2e0beb1476dfe.jpg",
+    image: "https://i.imgur.com/HWandg8.jpeg",
     tags: [ "GreenSock Animation Platform(GSAP)", "Local Storage API", "JavaScript", "HTML 5", "Tailwind CSS", "Animation CSS" , ],
     link: "https://spy-day-to-do-app.vercel.app",
     github: "https://github.com/Murphine22/spyday",
@@ -57,7 +57,7 @@ const projects = [
   {
     title: "Snapcode (QR Scanner App)",
     description: "Advance QR Scanner that supports Code Generation for text and files ",
-    image: "https://i.pinimg.com/474x/4b/eb/a0/4beba0ddc14a71bd5197c4ee9ca05927.jpg",
+    image: "https://i.imgur.com/gjLQscP.jpeg",
     tags: ["TypeScript","Shadecn Ui", "React", "Vite","Tailwind CSS",],
     link: "https://snapcode-genius.vercel.app",
     github: "https://github.com/Murphine22/snapcode-genius",
@@ -67,7 +67,7 @@ const projects = [
   {
     "title": "Interactive Portfolio Website",
     "description": "A dynamic and visually stunning portfolio website built with React, showcasing expertise in web development, UI/UX design, and digital solutions. Designed with seamless animations, an interactive interface, and a modern aesthetic, this portfolio highlights projects, skills, and achievements while providing a smooth user experience. Features include dark mode, responsive layouts, a project showcase, and contact forms for seamless communication.",
-    "image": "https://i.pinimg.com/474x/34/ce/09/34ce096bc9ce52f3a4e7d47100f143e8.jpg",
+    "image": "https://i.imgur.com/IZ9y09E.jpeg",
     "tags": ["React", "Node.js", "Supabase", "Tailwind CSS", "FormSprea"],
     "link": "https://startling-licorice-9807b3.netlify.app",
     "github": "https://github.com/Murphine22/Elisha-Dev-Vault",
@@ -77,7 +77,7 @@ const projects = [
   {
     "title": "Scientific Calculator",
     "description": "A powerful and user-friendly scientific calculator designed for complex mathematical computations. Featuring advanced functions such as trigonometry, logarithms, exponentiation, and equation solving, it provides a seamless experience for students, engineers, and professionals.",
-    "image": "https://i.pinimg.com/474x/96/af/d9/96afd9b62e569b65d5a7f43ee13e424e.jpg",
+    "image": "https://i.imgur.com/fiMphTa.jpeg",
     "tags": ["Vite", "TypeScript", "React", "shadcn-ui", "Tailwind CSS","Mathematics", "Scientific Computing"],
     "link": "https://mindful-scicalc.vercel.app",
     "github": "https://github.com/Murphine22/mindful-calc",
@@ -87,7 +87,7 @@ const projects = [
   {
     title: "Daily Gist News Blog",
     description: "Interactive news website for visualizing complex news post, API Integration, Bootstrap 5,",
-    image: "https://i.pinimg.com/736x/b9/4a/cf/b94acfae367733e224bbcd2cdb4f2001.jpg",
+    image: "https://i.imgur.com/Z6jhZDM.jpeg",
     tags: ["HTML 5", "CSS","JavaScript", "Bootstrap 5", "API Integration" ],
     link: "https://daily-gist-4m69.vercel.app",
     github: "https://github.com/Murphine22/Daily-Gist",
@@ -97,7 +97,7 @@ const projects = [
   {
     "title": "Fin-Ex App",
     "description": "A smart and intuitive finance tracking app that helps users manage expenses, monitor income, and visualize financial trends. Featuring interactive charts, real-time budget insights, and seamless data storage, Fin-Ex empowers users to take full control of their financial well-being with ease.",
-    "image": "https://i.pinimg.com/474x/98/21/c0/9821c0e854413145390d4dcd4d59d0b0.jpg",
+    "image": "https://i.imgur.com/hOEJGVd.jpeg",
     "tags": ["Chart.js for data visualization", "JavaScript (ES6+)", "Local Storage API", "CSS3 with modern features", "HTML5", "FontAwesome icons"],
     "link": "https://fin-ex.vercel.app/",
     "github": "https://github.com/Murphine22/FinEx",
@@ -107,7 +107,7 @@ const projects = [
   {
     title: "Consciousness AI Chatbot",
     description: "An intelligent chatbot using natural language processing",
-    image: "https://i.pinimg.com/736x/2d/ef/ac/2defac27a10d7b5c73f14bc45b67227f.jpg",
+    image: "https://i.imgur.com/qL3YYEc.jpeg",
     tags: ["Character AI",],
     link: "https://character.ai/chat/YpiOlZJ_M9XC-LGQtvNnaH-opABWiVo2vXFdXiG5Q4M",
     category: "AI/ML",

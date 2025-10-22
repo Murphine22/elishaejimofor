@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
+import { useState, useEffect, useRef, useMemo } from "react"
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, useInView } from "framer-motion"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,7 +25,10 @@ import {
   Send,
   ThumbsUp,
   AlertCircle,
-  CheckCircle2
+  CheckCircle2,
+  Zap,
+  Star,
+  Flame
 } from "lucide-react"
 import Image from "next/image"
 import { additionalBlogPosts } from "@/data/additional-blog-posts"
@@ -92,12 +95,17 @@ export const BlogRedesigned = () => {
   const [commentText, setCommentText] = useState("")
   const [shareDialogOpen, setShareDialogOpen] = useState(false)
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
-  const [displayCount, setDisplayCount] = useState(10) // Show all 10 articles at once
+  const [displayCount, setDisplayCount] = useState(12) // Show 12 articles initially
+  const [imageLoadStates, setImageLoadStates] = useState<Record<string, boolean>>({})
   const containerRef = useRef<HTMLDivElement>(null)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
+  const isLoadMoreInView = useInView(loadMoreRef, { once: false, margin: "200px" })
 
-  // Mouse tracking for parallax
+  // Mouse tracking for parallax with spring animation
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+  const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 200 })
+  const smoothMouseY = useSpring(mouseY, { damping: 50, stiffness: 200 })
 
   // Fetch news from API
   useEffect(() => {
@@ -106,8 +114,34 @@ export const BlogRedesigned = () => {
 
   // Reset display count when search or category changes
   useEffect(() => {
-    setDisplayCount(10)
+    setDisplayCount(12)
   }, [searchTerm, selectedCategory])
+
+  // Auto-load more when scrolling near bottom
+  // Note: We don't include filteredArticles in dependencies to avoid initialization issues
+  // The effect will re-run when articles, searchTerm, or selectedCategory change (which affect filteredArticles)
+  useEffect(() => {
+    if (isLoadMoreInView && !loading) {
+      setDisplayCount(prev => {
+        const currentFiltered = articles.filter((article) => {
+          const matchesSearch = 
+            article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            article.description?.toLowerCase().includes(searchTerm.toLowerCase())
+          const matchesCategory = 
+            selectedCategory === "all" || 
+            article.category?.includes(selectedCategory)
+          return matchesSearch && matchesCategory
+        })
+        const hasMoreArticles = prev < currentFiltered.length
+        return hasMoreArticles ? Math.min(prev + 6, currentFiltered.length) : prev
+      })
+    }
+  }, [isLoadMoreInView, loading, articles, searchTerm, selectedCategory])
+
+  // Handle image load state
+  const handleImageLoad = (articleId: string) => {
+    setImageLoadStates(prev => ({ ...prev, [articleId]: true }))
+  }
 
   // Generate random comments for an article
   const generateRandomComments = (count: number): Comment[] => {
@@ -247,10 +281,10 @@ export const BlogRedesigned = () => {
         throw new Error("No articles found in the API response")
       }
       
-      // Shuffle articles to add variety and limit to 10
+      // Shuffle articles to add variety
       const shuffledArticles = uniqueArticles
         .sort(() => Math.random() - 0.5)
-        .slice(0, 10) // Take only first 10 articles
+        .slice(0, 15) // Take first 15 articles from API
       
       // Combine with additional static blog posts
       const allArticles = [...shuffledArticles, ...additionalBlogPosts]
@@ -444,13 +478,16 @@ export const BlogRedesigned = () => {
     return matchesSearch && matchesCategory
   })
 
-  // Paginated articles - show only displayCount articles
-  const displayedArticles = filteredArticles.slice(0, displayCount)
+  // Paginated articles - show only displayCount articles with memoization
+  const displayedArticles = useMemo(() => 
+    filteredArticles.slice(0, displayCount),
+    [filteredArticles, displayCount]
+  )
   const hasMore = displayCount < filteredArticles.length
 
-  // Load more articles (not needed since we only have 10, but keeping for future)
+  // Load more articles
   const loadMore = () => {
-    setDisplayCount(prev => prev + 10)
+    setDisplayCount(prev => Math.min(prev + 6, filteredArticles.length))
   }
 
   // Mouse move handler
@@ -588,11 +625,53 @@ export const BlogRedesigned = () => {
           ))}
         </motion.div>
 
-        {/* Loading State */}
+        {/* Loading State with Skeleton */}
         {loading && (
-          <div className="flex flex-col items-center justify-center py-20 space-y-4">
-            <Loader2 className="w-12 h-12 animate-spin text-primary" />
-            <p className="text-muted-foreground">Loading latest news...</p>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group"
+                >
+                  <Card className="overflow-hidden h-full flex flex-col border-2 border-primary/10 bg-background/50 backdrop-blur-sm">
+                    {/* Skeleton Image */}
+                    <div className="relative h-48 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 animate-pulse">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Loader2 className="w-8 h-8 animate-spin text-primary/50" />
+                      </div>
+                    </div>
+                    {/* Skeleton Content */}
+                    <CardContent className="flex-grow p-4 space-y-3">
+                      <div className="h-4 bg-muted/50 rounded animate-pulse w-3/4" />
+                      <div className="h-6 bg-muted/70 rounded animate-pulse" />
+                      <div className="space-y-2">
+                        <div className="h-3 bg-muted/50 rounded animate-pulse" />
+                        <div className="h-3 bg-muted/50 rounded animate-pulse w-5/6" />
+                      </div>
+                    </CardContent>
+                    <CardFooter className="border-t p-4 bg-muted/30">
+                      <div className="flex items-center justify-between w-full">
+                        <div className="flex gap-3">
+                          <div className="h-8 w-12 bg-muted/50 rounded animate-pulse" />
+                          <div className="h-8 w-12 bg-muted/50 rounded animate-pulse" />
+                        </div>
+                        <div className="h-8 w-16 bg-muted/50 rounded animate-pulse" />
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+            <div className="flex flex-col items-center justify-center py-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+                <p className="text-muted-foreground font-medium">Loading amazing content...</p>
+              </div>
+            </div>
           </div>
         )}
 
@@ -644,17 +723,30 @@ export const BlogRedesigned = () => {
               return (
                 <motion.div
                   key={article.article_id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    delay: index * 0.05,
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 20
+                  }}
                   onHoverStart={() => setHoveredCard(article.article_id)}
                   onHoverEnd={() => setHoveredCard(null)}
-                  whileHover={{ y: -8 }}
+                  whileHover={{ 
+                    y: -12,
+                    scale: 1.02,
+                    transition: { type: "spring", stiffness: 400, damping: 25 }
+                  }}
                   className="group"
                 >
-                  <Card className="overflow-hidden h-full flex flex-col border-2 border-primary/10 hover:border-primary/30 transition-all duration-300 bg-background/50 backdrop-blur-sm">
+                  <Card className="overflow-hidden h-full flex flex-col border-2 border-primary/10 hover:border-primary/40 transition-all duration-500 bg-gradient-to-br from-background/80 via-background/60 to-background/80 backdrop-blur-xl hover:shadow-2xl hover:shadow-primary/20 relative group-hover:ring-2 group-hover:ring-primary/20">
                     {/* Image Section */}
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-purple-600/20">
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20">
+                      {/* Shimmer effect while loading */}
+                      {!imageLoadStates[article.article_id] && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                      )}
                       <Image
                         src={article.image_url || `https://images.unsplash.com/photo-${[
                           '1451187580459-43490279c0fa', // Tech background
@@ -670,7 +762,9 @@ export const BlogRedesigned = () => {
                         ][index % 10]}?w=800`}
                         alt={article.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                        className="object-cover transition-all duration-700 group-hover:scale-115 group-hover:rotate-1 group-hover:brightness-110"
+                        onLoad={() => handleImageLoad(article.article_id)}
                         onError={(e) => {
                           // Fallback to different placeholder images based on index
                           const target = e.target as HTMLImageElement
@@ -687,18 +781,44 @@ export const BlogRedesigned = () => {
                             'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800'
                           ]
                           target.src = fallbackImages[index % 10]
+                          handleImageLoad(article.article_id)
                         }}
-                        unoptimized
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      {/* Dynamic Gradient Overlay */}
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                        animate={{
+                          opacity: hoveredCard === article.article_id ? 0.9 : 0.7
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
                       
-                      {/* Category Badge */}
+                      {/* Trending indicator for popular articles */}
+                      {state.views > 3000 && (
+                        <motion.div
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ type: "spring", delay: 0.2 }}
+                          className="absolute top-3 right-14 p-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-500 shadow-lg"
+                        >
+                          <Flame className="w-3 h-3 text-white" />
+                        </motion.div>
+                      )}
+                      
+                      {/* Category Badge with glassmorphism */}
                       {article.category && article.category[0] && (
-                        <Badge className="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm">
-                          {article.category[0]}
-                        </Badge>
+                        <motion.div
+                          initial={{ x: -20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.1 }}
+                        >
+                          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-primary/90 to-purple-600/90 backdrop-blur-md border border-white/20 shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                            <Zap className="w-3 h-3 mr-1" />
+                            {article.category[0]}
+                          </Badge>
+                        </motion.div>
                       )}
                       
                       {/* Bookmark Icon */}
@@ -731,10 +851,23 @@ export const BlogRedesigned = () => {
                         </div>
                       </div>
 
-                      {/* Title */}
-                      <h3 className="font-bold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+                      {/* Title with gradient on hover */}
+                      <motion.h3 
+                        className="font-bold text-lg line-clamp-2 transition-all duration-300"
+                        animate={{
+                          backgroundImage: hoveredCard === article.article_id 
+                            ? 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)) 50%, currentColor 50%)'
+                            : 'none',
+                          backgroundSize: hoveredCard === article.article_id ? '200% 100%' : '100% 100%',
+                          backgroundPosition: hoveredCard === article.article_id ? 'left' : 'right',
+                        }}
+                        style={{
+                          WebkitBackgroundClip: hoveredCard === article.article_id ? 'text' : 'unset',
+                          WebkitTextFillColor: hoveredCard === article.article_id ? 'transparent' : 'unset',
+                        }}
+                      >
                         {article.title}
-                      </h3>
+                      </motion.h3>
 
                       {/* Description */}
                       <p className="text-sm text-muted-foreground line-clamp-3">
@@ -756,24 +889,32 @@ export const BlogRedesigned = () => {
                       )}
                     </CardContent>
 
-                    {/* Footer Section */}
-                    <CardFooter className="border-t p-4 bg-muted/30">
+                    {/* Footer Section with glassmorphism */}
+                    <CardFooter className="border-t border-primary/10 p-4 bg-gradient-to-r from-muted/40 via-muted/30 to-muted/40 backdrop-blur-sm">
                       <div className="flex items-center justify-between w-full">
                         {/* Engagement Buttons */}
                         <div className="flex items-center gap-3">
-                          {/* Like */}
+                          {/* Like with pulse animation */}
                           <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.85 }}
                             onClick={() => handleLike(article.article_id)}
-                            className="flex items-center gap-1 text-sm"
+                            className="flex items-center gap-1 text-sm group/like"
                           >
-                            <Heart
-                              className={`w-4 h-4 ${
-                                state.isLiked ? 'fill-red-500 text-red-500' : 'text-muted-foreground'
-                              }`}
-                            />
-                            <span className={state.isLiked ? 'text-red-500' : 'text-muted-foreground'}>
+                            <motion.div
+                              animate={state.isLiked ? {
+                                scale: [1, 1.3, 1],
+                                rotate: [0, 10, -10, 0]
+                              } : {}}
+                              transition={{ duration: 0.4 }}
+                            >
+                              <Heart
+                                className={`w-4 h-4 transition-all ${
+                                  state.isLiked ? 'fill-red-500 text-red-500' : 'text-muted-foreground group-hover/like:text-red-400'
+                                }`}
+                              />
+                            </motion.div>
+                            <span className={`font-medium ${state.isLiked ? 'text-red-500' : 'text-muted-foreground'}`}>
                               {state.likes}
                             </span>
                           </motion.button>
@@ -880,27 +1021,44 @@ export const BlogRedesigned = () => {
           </motion.div>
         )}
 
-        {/* Load More Button */}
+        {/* Load More Section with Intersection Observer */}
         {!loading && !error && hasMore && (
           <motion.div
+            ref={loadMoreRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex justify-center mt-12"
+            className="flex flex-col items-center justify-center mt-12 space-y-4"
           >
             <Button
               onClick={loadMore}
               size="lg"
-              className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 px-8 py-6 text-lg font-semibold group"
+              className="relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 px-10 py-6 text-lg font-bold group shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <span>Load More Articles</span>
-              <motion.span
-                className="ml-2"
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                ↓
-              </motion.span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                animate={{
+                  x: ['-100%', '100%']
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+              <span className="relative flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
+                Load More Articles
+                <motion.span
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  ↓
+                </motion.span>
+              </span>
             </Button>
+            <p className="text-sm text-muted-foreground">
+              Scroll down to auto-load more content
+            </p>
           </motion.div>
         )}
 
@@ -938,18 +1096,52 @@ export const BlogRedesigned = () => {
       <AnimatePresence>
         {shareDialogOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.8 }}
             className="fixed bottom-4 right-4 z-50"
           >
-            <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-green-500 text-white shadow-lg">
+            <div className="flex items-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-2xl backdrop-blur-sm border border-white/20">
               <CheckCircle2 className="w-5 h-5" />
-              <span>Link copied to clipboard!</span>
+              <span className="font-semibold">Link copied to clipboard!</span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Custom CSS for shimmer animation */}
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+        @keyframes gradient {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </motion.div>
   )
 }
