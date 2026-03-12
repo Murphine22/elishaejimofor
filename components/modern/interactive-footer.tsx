@@ -99,7 +99,7 @@ export const InteractiveFooter = ({ onNavigate }: InteractiveFooterProps) => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/Murphine22", label: "GitHub", color: "hover:text-gray-400" },
-    { icon: Linkedin, href: "https://linkedin.com/in/elisha-ejimofor", label: "LinkedIn", color: "hover:text-blue-400" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/murphine22", label: "LinkedIn", color: "hover:text-blue-400" },
     { icon: Twitter, href: "https://twitter.com/elisha_dev", label: "Twitter", color: "hover:text-sky-400" },
     { icon: Instagram, href: "https://instagram.com/elisha_dev", label: "Instagram", color: "hover:text-pink-400" },
     { icon: Youtube, href: "https://youtube.com/@elisha_dev", label: "YouTube", color: "hover:text-red-400" }

@@ -74,7 +74,7 @@ export const InteractiveHero = ({ onNavigate }: InteractiveHeroProps) => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/Murphine22", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/elisha-ejimofor", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/murphine22", label: "LinkedIn" },
     { icon: Twitter, href: "https://twitter.com/elisha_dev", label: "Twitter" },
     { icon: Mail, href: "mailto:elisha@example.com", label: "Email" }
   ]

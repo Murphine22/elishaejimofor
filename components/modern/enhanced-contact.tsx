@@ -95,7 +95,7 @@ export const EnhancedContact = ({ onNavigate }: EnhancedContactProps) => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/Murphine22", label: "GitHub", followers: "1.2k" },
-    { icon: Linkedin, href: "https://linkedin.com/in/elisha-ejimofor", label: "LinkedIn", followers: "500+" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/murphine22", label: "LinkedIn", followers: "500+" },
     { icon: Twitter, href: "https://twitter.com/elisha_dev", label: "Twitter", followers: "2.5k" },
   ]
 
