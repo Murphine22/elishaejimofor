@@ -203,28 +203,42 @@ export default function Home() {
                     />
                     
                     {/* Floating particles effect */}
-                    <div className="absolute inset-0 overflow-hidden">
-                      {[...Array(6)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-                          animate={{
-                            x: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
-                            y: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
-                            opacity: [0.2, 0.5, 0.2],
-                            scale: [1, 1.5, 1],
-                          }}
-                          transition={{
-                            duration: 3 + Math.random() * 2,
-                            repeat: Infinity,
-                            delay: i * 0.2,
-                          }}
-                          style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                          }}
-                        />
-                      ))}
+                    <div className="absolute inset-0 overflow-hidden" suppressHydrationWarning>
+                      {[...Array(6)].map((_, i) => {
+                        // Use deterministic integer values to avoid floating point precision issues
+                        const positions = [
+                          { x: 10, y: 15 }, // i=0
+                          { x: 85, y: 25 }, // i=1
+                          { x: 30, y: 70 }, // i=2
+                          { x: 75, y: 85 }, // i=3
+                          { x: 15, y: 55 }, // i=4
+                          { x: 60, y: 35 }, // i=5
+                        ]
+                        const pos = positions[i]
+                        const duration = 3 + (i % 2) // 3 or 4 seconds
+                        
+                        return (
+                          <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                            animate={{
+                              x: [pos.x, (pos.x + 30) % 100, pos.x],
+                              y: [pos.y, (pos.y + 20) % 100, pos.y],
+                              opacity: [0.2, 0.5, 0.2],
+                              scale: [1, 1.5, 1],
+                            }}
+                            transition={{
+                              duration: duration,
+                              repeat: Infinity,
+                              delay: i * 0.2,
+                            }}
+                            style={{
+                              left: `${pos.x}%`,
+                              top: `${pos.y}%`,
+                            }}
+                          />
+                        )
+                      })}
                     </div>
 
                     <div className="relative z-10">

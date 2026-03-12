@@ -64,7 +64,7 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
   ]
 
   const stats = [
-    { icon: Award, value: "8+", label: "Years Experience", gradient: "from-blue-500 to-cyan-500" },
+    { icon: Award, value: "10+", label: "Years Experience", gradient: "from-blue-500 to-cyan-500" },
     { icon: Users, value: "20+", label: "Students Trained", gradient: "from-purple-500 to-pink-500" },
     { icon: Target, value: "40+", label: "Projects Completed", gradient: "from-orange-500 to-red-500" },
     { icon: TrendingUp, value: "60%", label: "Client Growth", gradient: "from-green-500 to-emerald-500" },
@@ -112,31 +112,45 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />
-        {/* Floating orbs */}
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-64 h-64 rounded-full blur-3xl opacity-20 bg-gradient-to-br ${
-              i % 3 === 0 ? 'from-blue-500 to-cyan-500' : 
-              i % 3 === 1 ? 'from-purple-500 to-pink-500' : 
-              'from-orange-500 to-red-500'
-            }`}
-            animate={{
-              x: [Math.random() * 100, Math.random() * -100, Math.random() * 100],
-              y: [Math.random() * 100, Math.random() * -100, Math.random() * 100],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
+        {/* Floating Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+          {[...Array(12)].map((_, i) => {
+            // Use deterministic integer positions to avoid floating point precision issues
+            const positions = [
+              { x: 10, y: 15 }, { x: 85, y: 20 }, { x: 25, y: 75 },
+              { x: 70, y: 85 }, { x: 15, y: 50 }, { x: 80, y: 35 },
+              { x: 30, y: 25 }, { x: 65, y: 70 }, { x: 20, y: 60 },
+              { x: 75, y: 45 }, { x: 35, y: 80 }, { x: 90, y: 55 }
+            ]
+            const pos = positions[i]
+            
+            return (
+              <motion.div
+                key={i}
+                className={`absolute w-2 h-2 rounded-full opacity-30 bg-gradient-to-r ${
+                  i % 3 === 0 ? 'from-blue-500 to-cyan-500' : 
+                  i % 3 === 1 ? 'from-purple-500 to-pink-500' : 
+                  'from-orange-500 to-red-500'
+                }`}
+                animate={{
+                  x: [0, pos.x - 50, 0],
+                  y: [0, pos.y - 50, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 10 + i * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  left: `${pos.x}%`,
+                  top: `${pos.y}%`,
+                }}
+              />
+            )
+          })}
+        </div>
+
       </div>
 
       <div className="container mx-auto px-4 py-12">
@@ -251,7 +265,7 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
                 size="lg"
                 className="bg-gradient-to-r from-primary to-purple-600 hover:opacity-90 group"
                 onClick={() => {
-                  window.open("https://www.dropbox.com/scl/fi/vnfp18qd73ezquk5fad9y/Elisha-s-Frontend-CV-Updated.pdf?rlkey=s7x2z9j6bvv4ag9mbxotq1mk3&st=sao2augz&dl=0")
+                  window.open("https://www.dropbox.com/scl/fi/splfbsk5ieu9zbtg7aury/My-Frontend-Dev-Resume-2026.pdf?rlkey=k0hkafy3hf0056lz3w8qol68y&st=9l5zskn0&dl=0")
                 }}
               >
                 <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />

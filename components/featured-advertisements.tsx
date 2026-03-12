@@ -262,27 +262,43 @@ export const FeaturedAdvertisements = () => {
                   </motion.div>
 
                   {/* Floating particles effect */}
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(20)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-white/20 rounded-full"
-                        initial={{ 
-                          x: Math.random() * 100 + "%", 
-                          y: Math.random() * 100 + "%",
-                          scale: Math.random() * 0.5 + 0.5
-                        }}
-                        animate={{
-                          y: [null, Math.random() * -100 - 50 + "%"],
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{
-                          duration: Math.random() * 3 + 2,
-                          repeat: Infinity,
-                          delay: Math.random() * 2,
-                        }}
-                      />
-                    ))}
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+                    {[...Array(20)].map((_, i) => {
+                      // Use deterministic integer positions to avoid floating point precision issues
+                      const positions = [
+                        { x: 5, y: 10 }, { x: 90, y: 15 }, { x: 20, y: 80 }, { x: 75, y: 90 },
+                        { x: 10, y: 60 }, { x: 85, y: 30 }, { x: 35, y: 20 }, { x: 60, y: 75 },
+                        { x: 15, y: 40 }, { x: 80, y: 55 }, { x: 25, y: 65 }, { x: 70, y: 25 },
+                        { x: 40, y: 85 }, { x: 65, y: 45 }, { x: 30, y: 35 }, { x: 55, y: 70 },
+                        { x: 45, y: 15 }, { x: 95, y: 50 }, { x: 50, y: 95 }, { x: 5, y: 75 }
+                      ]
+                      const pos = positions[i]
+                      const scale = 0.5 + (i % 5) * 0.1 // 0.5-0.9
+                      const duration = 2 + (i % 3) // 2-4 seconds
+                      const delay = (i % 6) * 0.3 // 0-1.5 seconds
+                      
+                      return (
+                        <motion.div
+                          key={i}
+                          className="absolute w-2 h-2 bg-white/20 rounded-full"
+                          initial={{ 
+                            x: pos.x, 
+                            y: pos.y,
+                            scale: scale
+                          }}
+                          animate={{
+                            y: pos.y - 50,
+                            opacity: [0, 1, 0],
+                          }}
+                          transition={{
+                            duration: duration,
+                            repeat: Infinity,
+                            delay: delay,
+                            repeatType: "reverse",
+                          }}
+                        />
+                      )
+                    })}
                   </div>
 
                   {/* Content */}
