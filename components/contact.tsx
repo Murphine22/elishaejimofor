@@ -40,26 +40,40 @@ const techImages = [
 // Floating particles component
 const FloatingParticles = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-primary/20 rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          transition={{
-            duration: Math.random() * 10 + 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+      {[...Array(20)].map((_, i) => {
+        // Use deterministic integer positions to avoid floating point precision issues
+        const positions = [
+          { x: 5, y: 10 }, { x: 90, y: 15 }, { x: 20, y: 80 }, { x: 75, y: 90 },
+          { x: 10, y: 60 }, { x: 85, y: 30 }, { x: 35, y: 20 }, { x: 60, y: 75 },
+          { x: 15, y: 40 }, { x: 80, y: 55 }, { x: 25, y: 65 }, { x: 70, y: 25 },
+          { x: 40, y: 85 }, { x: 65, y: 45 }, { x: 30, y: 35 }, { x: 55, y: 70 },
+          { x: 45, y: 15 }, { x: 95, y: 50 }, { x: 50, y: 95 }, { x: 5, y: 75 }
+        ]
+        const pos = positions[i]
+        const duration = 20 + (i % 5) // 20-24 seconds
+        
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/20 rounded-full"
+            initial={{
+              x: pos.x,
+              y: pos.y,
+            }}
+            animate={{
+              x: pos.x + 30,
+              y: pos.y + 20,
+            }}
+            transition={{
+              duration: duration,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "reverse",
+            }}
+          />
+        )
+      })}
     </div>
   )
 }

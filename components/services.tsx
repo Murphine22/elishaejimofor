@@ -54,7 +54,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Simple landing page or brochure website (up to 5 pages)",
-        priceNGN: 200000,
+        priceNGN: 250000,
         duration: "1-2 weeks",
         features: [
           "Responsive design",
@@ -67,7 +67,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Multi-page website with custom features (up to 10 pages)",
-        priceNGN: 400000,
+        priceNGN: 500000,
         duration: "2-3 weeks",
         features: [
           "All Basic features",
@@ -81,7 +81,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Full-featured web application or e-commerce site",
-        priceNGN: 1000000,
+        priceNGN: 1200000,
         duration: "4-6 weeks",
         features: [
           "All Standard features",
@@ -112,7 +112,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Simple UI design for existing products or websites",
-        priceNGN: 500000,
+        priceNGN: 200000,
         duration: "3-5 days",
         features: [
           "UI audit and recommendations",
@@ -124,7 +124,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive UI/UX design for new or existing products",
-        priceNGN: 250000,
+        priceNGN: 400000,
         duration: "1-2 weeks",
         features: [
           "User research",
@@ -138,7 +138,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "End-to-end UX/UI design process with extensive research",
-        priceNGN: 300000,
+        priceNGN: 750000,
         duration: "2-4 weeks",
         features: [
           "In-depth user research",
@@ -171,7 +171,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Essential content for small websites or projects",
-        priceNGN: 50000,
+        priceNGN: 150000,
         duration: "3-5 days",
         features: [
           "Up to 5 pages of website copy",
@@ -183,7 +183,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive content package for growing businesses",
-        priceNGN: 100000,
+        priceNGN: 300000,
         duration: "1-2 weeks",
         features: [
           "Up to 10 pages of website copy",
@@ -197,7 +197,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Full-scale content strategy and creation",
-        priceNGN: 250000,
+        priceNGN: 600000,
         duration: "2-3 weeks",
         features: [
           "Complete website copy",
@@ -230,7 +230,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Essential prompt engineering for specific use cases",
-        priceNGN: 25000,
+        priceNGN: 75000,
         duration: "2-3 days",
         features: [
           "Prompt analysis and optimization",
@@ -242,7 +242,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive prompt engineering for business applications",
-        priceNGN: 50000,
+        priceNGN: 150000,
         duration: "1-2 weeks",
         features: [
           "Custom prompt design",
@@ -531,7 +531,7 @@ const services: Service[] = [
       {
         name: "Basic",
         description: "Introduction to digital skills (4 sessions)",
-        priceNGN: 40000,
+        priceNGN: 50000,
         duration: "4 sessions (1 hour each)",
         features: [
           "4 one-hour sessions",
@@ -544,7 +544,7 @@ const services: Service[] = [
       {
         name: "Standard",
         description: "Comprehensive skill development (8 sessions)",
-        priceNGN: 70000,
+        priceNGN: 85000,
         duration: "8 sessions (1.5 hours each)",
         popular: true,
         features: [
@@ -560,7 +560,7 @@ const services: Service[] = [
       {
         name: "Premium",
         description: "Intensive mentorship program (12 sessions)",
-        priceNGN: 120000,
+        priceNGN: 150000,
         duration: "12 sessions (2 hours each)",
         features: [
           "12 sessions (2 hours each)",

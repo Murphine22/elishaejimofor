@@ -82,6 +82,16 @@ export const About = ({ onNavigate }: AboutProps) => {
       description: "Developed dynamic web applications with modern frameworks"
     },
     { 
+      year: 2025, 
+      event: "Senior Front-End Developer",
+      company: "Zimcrest Technologies",
+      period: "March 2025 - September 2025",
+      icon: Zap,
+      gradient: "from-cyan-500 to-blue-500",
+      description: "Building scalable SPAs with Next.js and modern tech stack",
+      featured: true
+    },
+    { 
       year: 2024, 
       event: "Launched Personal Brand as Digital Specialist",
       company: "Murphine Technologies",
@@ -93,12 +103,12 @@ export const About = ({ onNavigate }: AboutProps) => {
     },
     { 
       year: 2025, 
-      event: "Front-End Developer",
-      company: "Zimcrest Technologies",
-      period: "2025",
-      icon: Zap,
-      gradient: "from-cyan-500 to-blue-500",
-      description: "Building scalable SPAs with Next.js and modern tech stack",
+      event: "Operations Manager",
+      company: "Koinder Global Ltd",
+      period: "November 2025 - Present",
+      icon: Briefcase,
+      gradient: "from-emerald-500 to-teal-600",
+      description: "Leading operations and digital transformation across multiple platforms",
       featured: true
     },
   ])
@@ -108,9 +118,27 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const workExperience = [
     {
+      title: "Operations Manager",
+      company: "Koinder Global Ltd",
+      period: "November 2025 - Present",
+      color: "from-emerald-500 to-teal-600",
+      lightColor: "from-emerald-500/20 to-teal-600/20",
+      location: "Abuja, Nigeria",
+      responsibilities: [
+        "Lead daily operational activities across three digital platforms (Koinder, Taste Naija, Made Naija), improving cross-platform efficiency by ~40%",
+        "Implemented KPI-driven performance tracking system for staff accountability, boosting team productivity by 35%",
+        "Successfully coordinated and managed the launch of Taste Naija platform (December 18, 2025), achieving 50% user growth in first month",
+        "Oversee digital marketing strategy and social media management, increasing brand engagement by 45% across all platforms",
+        "Streamlined vendor relationships and service provider coordination, reducing operational costs by 25%",
+        "Develop and execute skills acquisition training programs in Tech, AI, and Digital Skills, with 60% participant completion rate",
+        "Create compelling marketing content and graphics that drive 30% improvement in client acquisition",
+        "Manage client relationships and consumer engagement, maintaining 90%+ satisfaction rate"
+      ]
+    },
+    {
       title: "Web Developer",
       company: "Murphine Technologies",
-      period: "2024 - Present" ,
+      period: "2024 - Present",
       color: "from-purple-500 to-purple-600",
       lightColor: "from-purple-500/20 to-purple-600/20",
       responsibilities: [
@@ -128,7 +156,7 @@ export const About = ({ onNavigate }: AboutProps) => {
     {
       title: "Senior Front-End Developer",
       company: "Zimcrest Technologies",
-      period: "2025",
+      period: "March 2025 - September 2025",
       color: "from-blue-500 to-blue-600",
       lightColor: "from-blue-500/20 to-blue-600/20",
       responsibilities: [
@@ -221,6 +249,32 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const education = [
     {
+      degree: "Backend Development Training",
+      institution: "TS Academy",
+      period: "February 2026 - August 2026 (Ongoing)",
+      color: "from-blue-600 to-indigo-600",
+      lightColor: "from-blue-600/20 to-indigo-600/20",
+      achievements: [
+        "Currently enrolled in comprehensive backend development program",
+        "Covering server-side programming, database management, API development",
+        "Certificate to be issued upon completion in August 2026",
+        "Modern backend architectures and best practices"
+      ]
+    },
+    {
+      degree: "Generative AI Mastermind",
+      institution: "Outskill",
+      period: "September 2025",
+      color: "from-indigo-500 to-indigo-600",
+      lightColor: "from-indigo-500/20 to-indigo-600/20",
+      achievements: [
+        "Completed advanced global program in Generative AI applications",
+        "Certificate of Completion awarded",
+        "Specialized in strategic and technical applications of Generative AI in business, design, and digital innovation",
+        "Online Training Course"
+      ]
+    },
+    {
       degree: "BSc in Geography & Meteorology",
       institution: "Nnamdi Azikiwe University, Awka",
       period: "2010 - 2014",
@@ -239,12 +293,20 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const training = [
     {
+      title: "Backend Development Training",
+      provider: "TS Academy",
+      year: "February 2026 - August 2026 (Ongoing)",
+      color: "from-blue-600 to-indigo-600",
+      lightColor: "from-blue-600/20 to-indigo-600/20",
+      description: "Comprehensive backend development program covering server-side programming, database management, API development, and modern backend architectures. Certificate to be issued upon completion in August 2026."
+    },
+    {
       title: "Generative AI Mastermind",
       provider: "Outskill",
-      year: "2025",
+      year: "September 2025",
       color: "from-indigo-500 to-indigo-600",
       lightColor: "from-indigo-500/20 to-orange-600/20",
-      description: "Completed an advanced global program focused on the strategic and technical applications of Generative AI in business, design, and digital innovation."
+      description: "Completed advanced global program focused on strategic and technical applications of Generative AI in business, design, and digital innovation. Certificate of Completion awarded."
     },
     {
       title: "Advanced React and Next.js",
@@ -327,28 +389,42 @@ export const About = ({ onNavigate }: AboutProps) => {
         />
 
         {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-gradient-to-br from-primary to-purple-600 rounded-full opacity-30"
-              initial={{
-                x: Math.random() * 100 + "%",
-                y: Math.random() * 100 + "%",
-              }}
-              animate={{
-                x: [null, Math.random() * 100 + "%"],
-                y: [null, Math.random() * 100 + "%"],
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+          {[...Array(20)].map((_, i) => {
+            // Use deterministic integer positions to avoid floating point precision issues
+            const positions = [
+              { x: 5, y: 10 }, { x: 90, y: 15 }, { x: 20, y: 80 }, { x: 75, y: 90 },
+              { x: 10, y: 60 }, { x: 85, y: 30 }, { x: 35, y: 20 }, { x: 60, y: 75 },
+              { x: 15, y: 40 }, { x: 80, y: 55 }, { x: 25, y: 65 }, { x: 70, y: 25 },
+              { x: 40, y: 85 }, { x: 65, y: 45 }, { x: 30, y: 35 }, { x: 55, y: 70 },
+              { x: 45, y: 15 }, { x: 95, y: 50 }, { x: 50, y: 95 }, { x: 5, y: 75 }
+            ]
+            const pos = positions[i]
+            const duration = 10 + (i % 5) // 10-14 seconds
+            
+            return (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-gradient-to-br from-primary to-purple-600 rounded-full opacity-30"
+                initial={{
+                  x: pos.x,
+                  y: pos.y,
+                }}
+                animate={{
+                  x: pos.x + 30,
+                  y: pos.y + 20,
+                  scale: [1, 1.5, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  repeatType: "reverse",
+                }}
+              />
+            )
+          })}
         </div>
 
         <div className="relative z-10 bg-gradient-to-br from-background/95 via-background/90 to-background/95 backdrop-blur-xl p-8 md:p-12 border-2 border-primary/20">
@@ -397,7 +473,13 @@ export const About = ({ onNavigate }: AboutProps) => {
           </motion.div>
 
           {/* Interactive Story Cards */}
-          <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.">
+          <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.
+
+Today, as Operations Manager at Koinder Global Ltd, I'm orchestrating digital transformation across three dynamic platforms — Koinder, Taste Naija, and Made Naija. Leading the successful launch of Taste Naija in December 2025, I've driven 50% user growth and implemented KPI-driven systems that boost team productivity by 35%. My role sits at the powerful intersection of operations leadership, digital strategy, and innovation — where I'm building not just platforms, but entire digital ecosystems.
+
+From managing vendor relationships and coordinating skills training programs to overseeing digital marketing that increases engagement by 45%, I'm crafting experiences that transform how businesses connect with their audiences. Whether I'm developing scalable web applications, mentoring tech talent, or steering operational excellence, I bring clarity, strategy, and measurable impact to every initiative.
+
+My journey has evolved from hands-on development to strategic leadership, but the core mission remains the same: building technology that feels alive — adaptive, intuitive, and impactful. At the intersection of operations, development, and digital innovation, I'm shaping the next wave of smart, sustainable, and inclusive digital solutions.">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {/* Card 1: Experience */}
               <motion.div
@@ -806,7 +888,7 @@ export const About = ({ onNavigate }: AboutProps) => {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16"
           >
             {[
-              { icon: Briefcase, label: "Years Experience", value: "8+" },
+              { icon: Briefcase, label: "Years Experience", value: "10+" },
               { icon: Rocket, label: "Career Milestones", value: "9" },
               { icon: TrendingUp, label: "Industries", value: "5+" },
               { icon: Star, label: "Current Roles", value: "2" },

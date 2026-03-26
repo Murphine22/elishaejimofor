@@ -25,6 +25,26 @@ const projects = [
     color: "from-blue-500 to-cyan-500"
   },
   {
+    title: "MurphNet Search Engine",
+    description: "A powerful AI-powered search engine that delivers intelligent, context-aware search results with advanced filtering and real-time indexing capabilities.",
+    image: "https://i.imgur.com/wG8qA8t.png",
+    tags: ["Next.js", "AI Integration", "Search Algorithms", "TypeScript", "Tailwind CSS"],
+    link: "https://murphnet.space.z.ai",
+    github: "https://github.com/Murphine22/murphnet",
+    category: "AI/ML",
+    color: "from-purple-600 to-indigo-600"
+  },
+  {
+    title: "Koinder CRM App",
+    description: "A comprehensive CRM application for managing tasks, tracking KPIs, and facilitating team communication with real-time analytics and performance monitoring.",
+    image: "https://i.imgur.com/WNJc94c.png",
+    tags: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Chart.js", "JWT Auth", "REST API"],
+    link: "https://koinder-crm.base44.app",
+    github: "#",
+    category: "App",
+    color: "from-green-500 to-emerald-600"
+  },
+  {
     title: "Task Master(To-Do App)",
     description: "A responsive To-Do App showcasing creative work",
     image: "https://i.imgur.com/HWandg8.jpeg",

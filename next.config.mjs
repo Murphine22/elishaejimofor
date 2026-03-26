@@ -9,9 +9,6 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -41,7 +38,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
-  swcMinify: true,
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {
     // Production optimizations
@@ -93,6 +89,10 @@ const nextConfig = {
       };
     }
     return config;
+  },
+  // Turbopack configuration
+  turbopack: {
+    root: process.cwd(), // Set explicit root directory to avoid workspace inference warnings
   },
 }
 
