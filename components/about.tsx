@@ -111,6 +111,16 @@ export const About = ({ onNavigate }: AboutProps) => {
       description: "Leading operations and digital transformation across multiple platforms",
       featured: true
     },
+    { 
+      year: 2026, 
+      event: "Backend Development Specialist",
+      company: "TS Academy Certification",
+      period: "May 2026",
+      icon: Award,
+      gradient: "from-blue-600 to-indigo-600",
+      description: "Graduated from intensive training in advanced backend development, mastering NestJS, REST/GraphQL APIs, secure authentication, database design, caching, and microservices.",
+      featured: true
+    },
   ])
   
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -249,16 +259,17 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const education = [
     {
-      degree: "Backend Development Training",
+      degree: "Backend Development Certification",
       institution: "TS Academy",
-      period: "February 2026 - August 2026 (Ongoing)",
+      period: "February 2026 - May 2026 (Completed)",
       color: "from-blue-600 to-indigo-600",
       lightColor: "from-blue-600/20 to-indigo-600/20",
       achievements: [
-        "Currently enrolled in comprehensive backend development program",
-        "Covering server-side programming, database management, API development",
-        "Certificate to be issued upon completion in August 2026",
-        "Modern backend architectures and best practices"
+        "Successfully completed intensive, advanced backend development certification program",
+        "Mastered server-side architectures, RESTful API design, and NestJS framework",
+        "Specialized in database modeling and integration (MongoDB, PostgreSQL, Prisma, SQL)",
+        "Implemented secure JWT authentication, role-based access control, and Redis caching",
+        "Gained hands-on experience in cloud architectures and Docker containerization"
       ]
     },
     {
@@ -293,12 +304,12 @@ export const About = ({ onNavigate }: AboutProps) => {
 
   const training = [
     {
-      title: "Backend Development Training",
+      title: "Backend Development Certification",
       provider: "TS Academy",
-      year: "February 2026 - August 2026 (Ongoing)",
+      year: "2026 (Completed)",
       color: "from-blue-600 to-indigo-600",
       lightColor: "from-blue-600/20 to-indigo-600/20",
-      description: "Comprehensive backend development program covering server-side programming, database management, API development, and modern backend architectures. Certificate to be issued upon completion in August 2026."
+      description: "Advanced backend development program covering server-side architectures, API design, NestJS framework, database management, authentication security, and containerization. Certified in May 2026."
     },
     {
       title: "Generative AI Mastermind",

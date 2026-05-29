@@ -22,7 +22,8 @@ import {
   Lightbulb,
   Brain,
   Globe,
-  MessageCircle
+  MessageCircle,
+  Database
 } from "lucide-react"
 import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
@@ -58,6 +59,7 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
 
   const skills = [
     { icon: Code2, label: "Frontend Dev", color: "from-blue-500 to-cyan-500", count: "20+" },
+    { icon: Database, label: "Backend Dev", color: "from-purple-600 to-indigo-600", count: "15+" },
     { icon: Palette, label: "UI/UX Design", color: "from-purple-500 to-pink-500", count: "30+" },
     { icon: Brain, label: "AI Generalist", color: "from-orange-500 to-red-500", count: "15+" },
     { icon: Rocket, label: "Digital Marketing", color: "from-green-500 to-emerald-500", count: "15+" },

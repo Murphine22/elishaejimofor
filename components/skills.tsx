@@ -67,15 +67,16 @@ const technicalSkills = [
     color: "from-purple-500 to-purple-600",
     lightColor: "from-purple-500/20 to-purple-600/20",
     accentColor: "purple",
-    description: "Creating robust server-side applications and APIs to power web applications",
-    proficiency: 65,
+    badge: "TS Academy Certified",
+    description: "Creating robust server-side applications, secure APIs, and MVC architectures to power web platforms",
+    proficiency: 92,
     technologies: [
-      { name: "Node.js", level: 60 },
-      { name: "Express.js", level: 55 },
-      { name: "Python", level: 60 },
-      { name: "PHP", level: 60 },
-      { name: "MySQL", level: 65 },
-      { name: "APIs Integration", level: 80 },
+      { name: "Node.js & Express.js", level: 92 },
+      { name: "NestJS Framework", level: 85 },
+      { name: "TypeScript Backend APIs", level: 90 },
+      { name: "RESTful & GraphQL APIs", level: 92 },
+      { name: "Authentication (JWT & OAuth)", level: 94 },
+      { name: "Docker & Microservices", level: 80 },
     ]
   },
   {
@@ -84,14 +85,15 @@ const technicalSkills = [
     color: "from-emerald-500 to-emerald-600",
     lightColor: "from-emerald-500/20 to-emerald-600/20",
     accentColor: "emerald",
-    description: "Designing and optimizing database structures for efficient data storage and retrieval",
-    proficiency: 60,
+    badge: "TS Academy Certified",
+    description: "Designing, caching, and optimizing relational and non-relational database structures",
+    proficiency: 88,
     technologies: [
-      { name: "MongoDB", level: 55 },
-      { name: "Superbase", level: 75 },
-      { name: "MySQL", level: 55 },
-      { name: "PostgreSQL", level: 50 },
-      { name: "Firebase", level: 70 },
+      { name: "MongoDB & Mongoose", level: 90 },
+      { name: "PostgreSQL & SQL", level: 88 },
+      { name: "Redis Caching", level: 82 },
+      { name: "Prisma & Sequelize ORM", level: 85 },
+      { name: "Supabase & Firebase", level: 90 },
     ]
   },
   {
@@ -267,13 +269,24 @@ export const Skills = () => {
                       <motion.div
                         className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
                       />
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${skill.color} text-white`}>
-                          <skill.icon className="w-5 h-5" />
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg bg-gradient-to-br ${skill.color} text-white`}>
+                            <skill.icon className="w-5 h-5" />
+                          </div>
+                          <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                            {skill.title}
+                          </h3>
                         </div>
-                        <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-                          {skill.title}
-                        </h3>
+                        {skill.badge && (
+                          <motion.span 
+                            animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 0px rgba(139, 92, 246, 0)", "0 0 8px rgba(139, 92, 246, 0.5)", "0 0 0px rgba(139, 92, 246, 0)"] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md border border-white/10 shrink-0"
+                          >
+                            {skill.badge}
+                          </motion.span>
+                        )}
                       </div>
                       <p className="text-muted-foreground mb-4">{skill.description}</p>
                       <div className="space-y-2 mb-4">
@@ -339,13 +352,24 @@ export const Skills = () => {
                       <motion.div
                         className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
                       />
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${skill.color} text-white`}>
-                          <skill.icon className="w-5 h-5" />
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg bg-gradient-to-br ${skill.color} text-white`}>
+                            <skill.icon className="w-5 h-5" />
+                          </div>
+                          <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                            {skill.title}
+                          </h3>
                         </div>
-                        <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-                          {skill.title}
-                        </h3>
+                        {skill.badge && (
+                          <motion.span 
+                            animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 0px rgba(139, 92, 246, 0)", "0 0 8px rgba(139, 92, 246, 0.5)", "0 0 0px rgba(139, 92, 246, 0)"] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md border border-white/10 shrink-0"
+                          >
+                            {skill.badge}
+                          </motion.span>
+                        )}
                       </div>
                       <p className="text-muted-foreground mb-4">{skill.description}</p>
                       <div className="space-y-2 mb-4">

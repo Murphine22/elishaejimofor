@@ -19,8 +19,8 @@ const chatbotResponses = {
     "Greetings! I'm here to assist you with any questions about Elisha's work.",
   ],
   skills: [
-    "Elisha is skilled in front-end development (React, Next.js, TypeScript), UI/UX design, content creation, and AI prompt engineering. Elisha has over 5 years of experience in web development and has worked with various frameworks and technologies. Which specific skill would you like to know more about?",
-    "Elisha's core skills include:\n\n• Front-end: React, Next.js, TypeScript, Tailwind CSS\n• UI/UX: Figma, Adobe XD, responsive design\n• Content Creation: Blog writing, technical documentation\n• AI: Prompt engineering, LLM integration\n\nNeed more specific information on any of these areas?",
+    "Elisha is a certified Full-Stack Developer skilled in advanced Back-End development (Node.js, NestJS, TypeScript APIs), Front-End development (React, Next.js, TypeScript), Database Management (MongoDB, PostgreSQL, Prisma, Redis), UI/UX design, and AI prompt engineering. Elisha completed his Backend Development training at TS Academy in May 2026. Which specific area would you like to explore?",
+    "Elisha's core skills include:\n\n• Back-End: Node.js, Express, NestJS Framework, TypeScript, RESTful/GraphQL APIs\n• Databases & Caching: MongoDB, PostgreSQL, Redis, Supabase, Prisma ORM\n• Front-End: React, Next.js, TypeScript, Tailwind CSS, Framer Motion\n• AI & Prompt Engineering: LLM Integration, Prompt design, AI chatbots\n• UI/UX & Creative: Figma design systems, visual branding\n\nNeed more specific information on any of these areas?",
   ],
   contact: [
     "You can contact Elisha via email at elisha.ejimofor@example.com or through the contact form on this website. Elisha typically responds within 24-48 hours.",
@@ -35,8 +35,8 @@ const chatbotResponses = {
     "Services include custom website development, graphics design, content writing, and AI consultation. Each service is available in Basic, Standard, and Premium packages to suit different needs and budgets. Need more information on any of these?",
   ],
   about: [
-    "Elisha is a skilled web developer and digital creative based in Nigeria. With a passion for creating beautiful, functional digital experiences, Elisha combines technical expertise with creative vision. Elisha has worked with clients across Africa and internationally, delivering high-quality solutions that meet business objectives.",
-    "Elisha is a full-stack developer with a focus on front-end technologies. With a background in computer science and years of industry experience, Elisha specializes in creating responsive, user-friendly web applications. Elisha is passionate about using technology to solve real-world problems, particularly in the African context.",
+    "Elisha Ejimofor is a skilled Full-Stack Developer, Operations Manager, and digital creative based in Nigeria. He is the founder of Murphine Technologies and recently certified in Advanced Backend Development from TS Academy (May 2026). Elisha combines extensive front-end experience with robust backend architecture skills to create complete, high-performance web applications.",
+    "Elisha is a Full-Stack developer specializing in modern JavaScript/TypeScript ecosystems. With over 5 years of industry experience and operations leadership at Koinder Global Ltd, he builds scalable digital solutions, designs clean database schemas, and designs intelligent, human-centered UI/UX systems.",
   ],
   blog: [
     "The blog section features the latest tech news and innovations from across Africa. It covers topics like startup funding, technological advancements, educational initiatives, and more. The blog is regularly updated with new content, and you can filter posts by category or search for specific topics.",
