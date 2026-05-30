@@ -52,8 +52,11 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
 
   const profileImages = [
     "https://i.imgur.com/pkfYrx1.jpeg",
+    "https://i.imgur.com/lXNmtGy.jpeg",
     "https://i.imgur.com/L8HmeD3.jpeg",
+    "https://i.imgur.com/2Kr3x86.jpeg",
     "https://i.imgur.com/6M86mxE.jpeg",
+    "https://i.imgur.com/HuXFvQ7.jpeg",
     "https://i.imgur.com/8Blt9Eo.jpeg"
   ]
 

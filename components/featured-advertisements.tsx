@@ -186,12 +186,21 @@ export const FeaturedAdvertisements = () => {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="space-y-1"
+          className="space-y-2"
         >
-          <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500">
+          <motion.div
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-4 py-2 rounded-full border-2 border-primary/30"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 uppercase tracking-wider">
+              Premium
+            </span>
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500">
             Featured Services
           </h2>
-          <p className="text-muted-foreground">Discover our premium offerings</p>
+          <p className="text-lg text-white font-semibold">Discover our premium offerings</p>
         </motion.div>
 
         <motion.div

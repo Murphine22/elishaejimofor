@@ -459,7 +459,7 @@ export default function Home() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 rounded-3xl blur-2xl" />
                   <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl p-8 rounded-3xl border-2 border-primary/20">
                     <motion.div
-                      className="flex items-center gap-3 mb-6"
+                      className="flex items-center gap-3 mb-4"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
@@ -474,7 +474,7 @@ export default function Home() {
                       >
                         <Star className="h-6 w-6 text-white" />
                       </motion.div>
-                      <h2 className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                      <h2 className="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
                         Featured Projects
                       </h2>
                     </motion.div>
