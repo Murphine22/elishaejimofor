@@ -259,6 +259,7 @@ export const Projects = () => {
   const [featuredProject, setFeaturedProject] = useState(projects.find(p => p.featured) || projects[0]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
 
   // Filter projects based on selected category and search
   useEffect(() => {
@@ -678,13 +679,71 @@ export const Projects = () => {
                     <CardFooter className="p-5 pt-0">
                       <Button 
                         className="w-full bg-transparent hover:bg-primary hover:text-white border border-primary/20 hover:border-primary group-hover:translate-y-[-2px] transition-all duration-300"
-                        onClick={() => setFeaturedProject(project)}
+                        onClick={() => setExpandedProject(expandedProject === project.title ? null : project.title)}
                       >
-                        <Layers className="mr-2 h-4 w-4" />
-                        View Details
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        {expandedProject === project.title ? (
+                          <>
+                            <Layers className="mr-2 h-4 w-4" />
+                            Hide Details
+                            <ArrowRight className="ml-2 h-4 w-4 rotate-90 transition-transform duration-300" />
+                          </>
+                        ) : (
+                          <>
+                            <Layers className="mr-2 h-4 w-4" />
+                            View Details
+                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </>
+                        )}
                       </Button>
                     </CardFooter>
+                    <AnimatePresence>
+                      {expandedProject === project.title && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="px-5 pb-5 border-t border-primary/10 pt-4"
+                        >
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-semibold text-sm mb-2 text-primary">Full Description</h4>
+                              <p className="text-sm text-muted-foreground">{project.description}</p>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-sm mb-2 text-primary">Technologies Used</h4>
+                              <div className="flex flex-wrap gap-2">
+                                {project.tags.map((tag) => (
+                                  <Badge key={tag} variant="secondary" className="text-xs">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-sm mb-2 text-primary">Category</h4>
+                              <Badge className="bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20">
+                                {project.category}
+                              </Badge>
+                            </div>
+                            <div className="flex gap-2 pt-2">
+                              <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90" asChild>
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="h-3 w-3 mr-1" /> Live Demo
+                                </a>
+                              </Button>
+                              {project.github && project.github !== "#" && (
+                                <Button size="sm" variant="outline" className="flex-1" asChild>
+                                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                    <Github className="h-3 w-3 mr-1" /> Source Code
+                                  </a>
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </Card>
                 </TiltCard>
               </motion.div>

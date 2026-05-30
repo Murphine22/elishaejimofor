@@ -102,65 +102,67 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 relative overflow-hidden">
-      {/* Animated background grid - PATTERN INTERRUPTION */}
-      <div className="fixed inset-0 -z-10">
-        <motion.div 
-          className="absolute inset-0"
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(120, 119, 198, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(120, 119, 198, 0.03) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        {/* Floating geometric shapes - EMOTIONAL TRIGGER */}
-        {[...Array(20)].map((_, i) => {
-          const shapes = ['circle', 'triangle', 'hexagon']
-          const shape = shapes[i % 3]
-          const size = Math.random() * 100 + 50
+    <div className={`min-h-screen flex flex-col relative overflow-hidden ${activePage === "home" ? "bg-gradient-to-br from-slate-400 via-purple-400/40 to-slate-400" : "bg-gradient-to-br from-slate-100 via-purple-100/30 to-slate-100"}`}>
+      {/* Animated background grid - PATTERN INTERRUPTION - Only on home page */}
+      {activePage === "home" && (
+        <div className="fixed inset-0 -z-10">
+          <motion.div 
+            className="absolute inset-0"
+            animate={{
+              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear"
+            }}
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(120, 119, 198, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 119, 198, 0.03) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+          />
           
-          return (
-            <motion.div
-              key={i}
-              className={`absolute ${shape === 'circle' ? 'rounded-full' : shape === 'triangle' ? 'clip-triangle' : 'clip-hexagon'}`}
-              style={{
-                width: size,
-                height: size,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: `linear-gradient(135deg, ${i % 2 === 0 ? 'rgba(120, 119, 198, 0.1)' : 'rgba(236, 72, 153, 0.1)'}, ${i % 2 === 0 ? 'rgba(236, 72, 153, 0.05)' : 'rgba(120, 119, 198, 0.05)'})`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                rotate: [0, 360, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.3, 0.1],
-              }}
-              transition={{
-                duration: 10 + Math.random() * 10,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-                ease: "easeInOut"
-              }}
-            />
-          )
-        })}
-      </div>
+          {/* Floating geometric shapes - EMOTIONAL TRIGGER */}
+          {[...Array(20)].map((_, i) => {
+            const shapes = ['circle', 'triangle', 'hexagon']
+            const shape = shapes[i % 3]
+            const size = Math.random() * 100 + 50
+            
+            return (
+              <motion.div
+                key={i}
+                className={`absolute ${shape === 'circle' ? 'rounded-full' : shape === 'triangle' ? 'clip-triangle' : 'clip-hexagon'}`}
+                style={{
+                  width: size,
+                  height: size,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  background: `linear-gradient(135deg, ${i % 2 === 0 ? 'rgba(120, 119, 198, 0.1)' : 'rgba(236, 72, 153, 0.1)'}, ${i % 2 === 0 ? 'rgba(236, 72, 153, 0.05)' : 'rgba(120, 119, 198, 0.05)'})`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  rotate: [0, 360, 0],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.1, 0.3, 0.1],
+                }}
+                transition={{
+                  duration: 10 + Math.random() * 10,
+                  repeat: Number.POSITIVE_INFINITY,
+                  delay: Math.random() * 5,
+                  ease: "easeInOut"
+                }}
+              />
+            )
+          })}
+        </div>
+      )}
 
       <ScrollProgress />
 
-      <header className="sticky top-0 z-40 w-full border-b bg-slate-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/60 overflow-hidden">
+      <header className="sticky top-0 z-40 w-full border-b bg-slate-300/90 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-300/80 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-purple-500/5 to-cyan-500/5 -z-10" />
         <div className="container flex h-16 items-center justify-between px-4 lg:px-8">
           <motion.div
@@ -217,13 +219,13 @@ export default function Home() {
                     }}
                     transition={{
                       duration: 1.5,
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       ease: "linear"
                     }}
                   />
                   <motion.div
                     animate={{ rotate: [0, 360, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                     className="relative z-10"
                   >
                     <Zap className="mr-2 h-4 w-4 md:h-5 md:w-5" />
@@ -231,7 +233,7 @@ export default function Home() {
                   <span className="mr-2 relative z-10">Get in Touch</span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                     className="relative z-10"
                   >
                     <FaArrowRight className="h-3 w-3 md:h-4 md:w-4" />
@@ -279,13 +281,13 @@ export default function Home() {
                           "0 0 20px rgba(120, 119, 198, 0.5)",
                         ],
                       }}
-                      transition={{ duration: 3, repeat: Infinity }}
+                      transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 rounded-full blur-xl" />
                       <div className="relative bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full border-2 border-primary/30 backdrop-blur-sm">
                         <motion.div
                           animate={{ rotate: [0, 360, 0] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                         >
                           <Sparkles className="h-5 w-5 text-yellow-400" />
                         </motion.div>
@@ -310,7 +312,7 @@ export default function Home() {
                       }}
                       transition={{
                         duration: 3,
-                        repeat: Infinity,
+                        repeat: Number.POSITIVE_INFINITY,
                         ease: "linear"
                       }}
                       style={{ backgroundSize: '200% auto' }}
@@ -325,7 +327,7 @@ export default function Home() {
                       }}
                       transition={{
                         duration: 3,
-                        repeat: Infinity,
+                        repeat: Number.POSITIVE_INFINITY,
                         ease: "linear",
                         delay: 0.5
                       }}
@@ -391,7 +393,7 @@ export default function Home() {
                         <div className={`flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${tech.color} text-white font-bold text-sm shadow-lg hover:shadow-2xl transition-all cursor-pointer`}>
                           <motion.div
                             animate={{ rotate: [0, 360, 0] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: idx * 0.2 }}
+                            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear", delay: idx * 0.2 }}
                           >
                             <tech.icon className="h-4 w-4" />
                           </motion.div>
@@ -424,21 +426,21 @@ export default function Home() {
                         }}
                         transition={{
                           duration: 2,
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear"
                         }}
                       />
                       <div className="relative z-10 flex items-center justify-center gap-2">
                         <motion.div
                           animate={{ rotate: [0, 360, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                         >
                           <Rocket className="h-5 w-5" />
                         </motion.div>
                         <span>Explore My Work</span>
                         <motion.div
                           animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                          transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                         >
                           <ArrowRight className="h-5 w-5" />
                         </motion.div>
@@ -456,7 +458,7 @@ export default function Home() {
                       <div className="relative z-10 flex items-center justify-center gap-2">
                         <motion.div
                           animate={{ rotate: [0, -360, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                         >
                           <Sparkles className="h-5 w-5" />
                         </motion.div>
@@ -488,7 +490,7 @@ export default function Home() {
                       }}
                       transition={{
                         duration: 4,
-                        repeat: Infinity,
+                        repeat: Number.POSITIVE_INFINITY,
                         ease: "easeInOut"
                       }}
                     />
@@ -527,7 +529,7 @@ export default function Home() {
                           rotate: [0, 360, 0],
                           scale: [1, 1.1, 1],
                         }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                       >
                         <Star className="h-6 w-6 text-white" />
                       </motion.div>
@@ -566,7 +568,7 @@ export default function Home() {
                           rotate: [0, -360, 0],
                           scale: [1, 1.1, 1],
                         }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                       >
                         <Sparkles className="h-6 w-6 text-white" />
                       </motion.div>
@@ -620,7 +622,7 @@ export default function Home() {
       </div>
 
       {/* Mobile bottom navigation bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur border-t py-2 px-4 flex justify-between items-center sm:hidden z-30">
+      <div className="fixed bottom-0 left-0 right-0 bg-slate-300/95 backdrop-blur border-t py-2 px-4 flex justify-between items-center sm:hidden z-30">
         <ThemeToggle />
         <button
           onClick={() => handleNavigation("contact")}
