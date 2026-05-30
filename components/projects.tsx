@@ -19,7 +19,7 @@ const projects = [
     description: "This comprehensive Learning Management System (LMS) features advanced gamification, AI-driven personalization, and robust discussion forums. It offers a dynamic and engaging educational experience with features like achievement tracking, intelligent course recommendations, and real-time analytics.",
     image: "https://i.imgur.com/RnLOsAO.png",
     tags: ["Node.js", "Express.js", "JWT", "REST API", "MongoDB", "Express", "MongoDB", "Socket.io", "Stripe", "Cloudinary"],
-    link: "#",
+    link: "https://github.com/Murphine22/LMS-Capstone-Project",
     github: "https://github.com/Murphine22/LMS-Capstone-Project",
     category: "Full-Stack, AI/ML, Backend",
     color: "from-green-600 to-emerald-600"
@@ -29,7 +29,7 @@ const projects = [
     description: "A sophisticated backend system for digital banking, seamlessly integrated with the NIBSS Phoenix API. It provides full-scale banking operations, including secure customer onboarding with BVN/NIN verification, comprehensive account management, and both intra-bank and inter-bank fund transfers.",
     image: "https://i.imgur.com/06VNADC.png",
     tags: ["NestJS", "GraphQL", "TypeScript", "PostgreSQL", "Redis", "Subscriptions"],
-    link: "#",
+    link: "https://github.com/Murphine22/Digital-Banking-System-Assignment-TSA-Backend-",
     github: "https://github.com/Murphine22/Digital-Banking-System-Assignment-TSA-Backend-",
     category: "Backend, Fintech",
     color: "from-blue-600 to-indigo-600"
@@ -39,7 +39,7 @@ const projects = [
     description: "This robust RESTful API provides comprehensive management for school library operations, including full CRUD functionality for authors, books, students, and attendants. It features automated borrowing and returning logic, secure JWT authentication, and efficient data handling with pagination and search capabilities.",
     image: "https://i.imgur.com/OKXgP26.png",
     tags: ["Node.js", "OAuth 2.0", "JWT", "Redis", "Docker", "Microservices", "Security"],
-    link: "#",
+    link: "https://github.com/Murphine22/school-library-management-api",
     github: "https://github.com/Murphine22/school-library-management-api",
     category: "Backend",
     color: "from-purple-600 to-violet-600"
@@ -69,7 +69,7 @@ const projects = [
     description: "Lizean Cleaning App is a sleek and modern application designed to streamline the booking and management of cleaning services. It offers a user-friendly interface for scheduling, service selection, and managing appointments, ensuring a seamless experience for both clients and service providers.",
     image: "https://i.imgur.com/fLBCNsW.png",
     tags: ["Next.js", "NestJS", "MongoDB", "JWT", "PostgreSQL", "Socket.io", "Tailwind CSS", "TypeScript", "Real-time"],
-    link: "#",
+    link: "https://github.com/Murphine22/Lizean-Cleaning-App",
     github: "https://github.com/Murphine22/Lizean-Cleaning-App",
     category: "Full-Stack",
     color: "from-cyan-500 to-blue-600"
