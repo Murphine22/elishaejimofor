@@ -678,7 +678,7 @@ export const Projects = () => {
                     </CardContent>
                     <CardFooter className="p-5 pt-0">
                       <Button 
-                        className="w-full bg-transparent hover:bg-primary hover:text-white border border-primary/20 hover:border-primary group-hover:translate-y-[-2px] transition-all duration-300"
+                        className="w-full bg-slate-800 hover:bg-slate-900 text-white border border-slate-600 hover:border-slate-500 group-hover:translate-y-[-2px] transition-all duration-300"
                         onClick={() => setExpandedProject(expandedProject === project.title ? null : project.title)}
                       >
                         {expandedProject === project.title ? (

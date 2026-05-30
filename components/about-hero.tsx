@@ -217,23 +217,30 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="space-y-4 text-lg text-muted-foreground"
+              className="space-y-4"
             >
-              <EditableContent section="about" field="vision" type="text" multiline defaultValue="My vision is to create innovative digital solutions that make a positive impact on people's lives.">
-                <p className="leading-relaxed">
-                  Hey there — I'm <span className="font-bold text-foreground">Elisha Ejimofor</span>, the creative mind behind{" "}
-                  <span className="font-bold text-primary">Murphine Technologies</span>. I'm a Frontend Developer, Digital Creator, 
-                  and AI Prompt Engineer with a relentless drive to turn bold ideas into beautiful, functional realities.
-                </p>
-              </EditableContent>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border-2 border-primary/30 shadow-2xl"
+              >
+                <EditableContent section="about" field="vision" type="text" multiline defaultValue="My vision is to create innovative digital solutions that make a positive impact on people's lives.">
+                  <p className="leading-relaxed text-xl text-white font-medium">
+                    Hey there — I'm <span className="font-bold text-cyan-400">Elisha Ejimofor</span>, the creative mind behind{" "}
+                    <span className="font-bold text-purple-400">Murphine Technologies</span>. I'm a <span className="font-bold text-pink-400">Full-Stack Developer</span>, <span className="font-bold text-yellow-400">Digital Creator</span>, 
+                    and <span className="font-bold text-green-400">AI Prompt Engineer</span> with a relentless drive to turn bold ideas into beautiful, functional realities.
+                  </p>
+                </EditableContent>
 
-              <EditableContent section="about" field="mission" type="text" multiline defaultValue="My mission is to build intelligent, human-centered digital experiences.">
-                <p className="leading-relaxed">
-                  My mission? To build <span className="font-bold text-foreground">intelligent, human-centered digital experiences</span> that 
-                  empower businesses and inspire people across the globe. Every pixel matters. Every interaction counts. 
-                  Every line of code is a story waiting to be told.
-                </p>
-              </EditableContent>
+                <EditableContent section="about" field="mission" type="text" multiline defaultValue="My mission is to build intelligent, human-centered digital experiences.">
+                  <p className="leading-relaxed text-lg text-gray-300 font-semibold mt-4">
+                    My mission? To build <span className="font-bold text-white">intelligent, human-centered digital experiences</span> that 
+                    empower businesses and inspire people across the globe. <span className="font-bold text-cyan-400">Every pixel matters</span>. <span className="font-bold text-purple-400">Every interaction counts</span>. 
+                    <span className="font-bold text-pink-400">Every line of code is a story waiting to be told</span>.
+                  </p>
+                </EditableContent>
+              </motion.div>
             </motion.div>
 
             {/* Passions */}

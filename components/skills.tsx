@@ -48,6 +48,7 @@ const technicalSkills = [
     color: "from-blue-500 to-blue-600",
     lightColor: "from-blue-500/20 to-blue-600/20",
     accentColor: "blue",
+    badge: "Certified",
     description: "Building responsive and interactive user interfaces with modern frameworks and libraries",
     proficiency: 85,
     technologies: [
@@ -102,6 +103,7 @@ const technicalSkills = [
     color: "from-red-500 to-red-600",
     lightColor: "from-red-500/20 to-red-600/20",
     accentColor: "red",
+    badge: "Certified",
     description: "Optimizing websites for speed, accessibility, and search engine visibility",
     proficiency: 80,
     technologies: [
@@ -118,6 +120,7 @@ const technicalSkills = [
     color: "from-violet-500 to-violet-600",
     lightColor: "from-violet-500/20 to-violet-600/20",
     accentColor: "violet",
+    badge: "Outskill Certified",
     description: "Leveraging AI models and tools to create intelligent applications and automate workflows",
     proficiency: 88,
     technologies: [
@@ -139,6 +142,7 @@ const creativeSkills = [
     color: "from-pink-500 to-pink-600",
     lightColor: "from-pink-500/20 to-pink-600/20",
     accentColor: "pink",
+    badge: "Certified",
     description: "Crafting stunning visual identities and immersive brand experiences that captivate audiences and drive engagement across all digital touchpoints",
     proficiency: 85,
     technologies: [
@@ -158,6 +162,7 @@ const creativeSkills = [
     color: "from-green-500 to-green-600",
     lightColor: "from-green-500/20 to-green-600/20",
     accentColor: "green",
+    badge: "Certified",
     description: "Producing compelling, conversion-focused content that resonates with audiences, tells powerful stories, and drives measurable business results",
     proficiency: 92,
     technologies: [
@@ -177,6 +182,7 @@ const creativeSkills = [
     color: "from-amber-500 to-amber-600",
     lightColor: "from-amber-500/20 to-amber-600/20",
     accentColor: "amber",
+    badge: "Outskill Certified",
     description: "Mastering the art and science of AI communication to unlock unprecedented creative possibilities and automate complex workflows with precision",
     proficiency: 95,
     technologies: [
@@ -195,6 +201,7 @@ const creativeSkills = [
     color: "from-cyan-500 to-cyan-600",
     lightColor: "from-cyan-500/20 to-cyan-600/20",
     accentColor: "cyan",
+    badge: "Certified",
     description: "Transforming complex challenges into elegant solutions through creative thinking, strategic planning, and human-centered design methodologies",
     proficiency: 94,
     technologies: [

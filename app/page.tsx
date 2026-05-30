@@ -257,7 +257,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="min-h-[calc(100vh-4rem)]"
             >
-              {/* Hero Section - ULTRA MODERN & CAPTIVATING */}
+              {/* Hero Section - MODERN CARD STYLE */}
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 py-8 lg:py-16">
                 <motion.div
                   className="w-full lg:w-1/2"
@@ -265,206 +265,147 @@ export default function Home() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
                 >
-                  {/* Glowing badge - EMOTIONAL TRIGGER */}
+                  {/* Modern Card Container */}
                   <motion.div
-                    initial={{ opacity: 0, y: -20, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                    className="inline-flex items-center gap-3 mb-8"
+                    className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border-2 border-primary/30 backdrop-blur-xl"
                   >
+                    {/* Glowing badge */}
                     <motion.div
-                      className="relative"
-                      animate={{
-                        boxShadow: [
-                          "0 0 20px rgba(120, 119, 198, 0.5)",
-                          "0 0 40px rgba(236, 72, 153, 0.5)",
-                          "0 0 20px rgba(120, 119, 198, 0.5)",
-                        ],
-                      }}
-                      transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                      className="inline-flex items-center gap-2 mb-6 bg-gradient-to-r from-primary/20 to-purple-600/20 px-4 py-2 rounded-full border border-primary/30"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 rounded-full blur-xl" />
-                      <div className="relative bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full border-2 border-primary/30 backdrop-blur-sm">
-                        <motion.div
-                          animate={{ rotate: [0, 360, 0] }}
-                          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                        >
-                          <Sparkles className="h-5 w-5 text-yellow-400" />
-                        </motion.div>
-                        <span className="text-sm font-black bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 uppercase tracking-widest ml-2">
-                          ✨ Welcome to the Future ✨
-                        </span>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Main Headline - EMOTIONAL TRIGGER */}
-                  <motion.h1 
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-                  >
-                    <motion.span 
-                      className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
-                      animate={{
-                        backgroundPosition: ['0%', '50%', '100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "linear"
-                      }}
-                      style={{ backgroundSize: '200% auto' }}
-                    >
-                      I Build
-                    </motion.span>
-                    <br />
-                    <motion.span 
-                      className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
-                      animate={{
-                        backgroundPosition: ['0%', '50%', '100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "linear",
-                        delay: 0.5
-                      }}
-                      style={{ backgroundSize: '200% auto' }}
-                    >
-                      <TypeAnimation
-                        sequence={[
-                          "Digital Dreams",
-                          1000,
-                          "Innovative Solutions",
-                          1000,
-                          "Captivating Experiences",
-                          1000,
-                          "Future Technology",
-                          1000,
-                          "Mind-Blowing Apps",
-                          1000,
-                        ]}
-                        wrapper="span"
-                        speed={50}
-                        repeat={Number.POSITIVE_INFINITY}
-                      />
-                    </motion.span>
-                  </motion.h1>
-
-                  {/* Subheadline - EMOTIONAL TRIGGER */}
-                  <motion.p 
-                    className="text-lg md:text-xl text-muted-foreground mb-8 font-medium leading-relaxed"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
-                  >
-                    <span className="text-primary font-black">Full-Stack Developer</span> • <span className="text-purple-600 font-black">AI Generalist</span> • <span className="text-pink-600 font-black">Digital Innovator</span>
-                    <br />
-                    <span className="text-base md:text-lg mt-2 block">
-                      Transforming <span className="text-cyan-600 font-bold">ideas</span> into <span className="text-blue-600 font-bold">reality</span> with cutting-edge <span className="text-purple-600 font-bold">technology</span> and <span className="text-pink-600 font-bold">creative excellence</span>
-                    </span>
-                  </motion.p>
-
-                  {/* Tech Stack Pills - EMOTIONAL TRIGGER */}
-                  <motion.div 
-                    className="flex flex-wrap gap-3 mb-10"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
-                  >
-                    {[
-                      { icon: Cpu, label: "Full-Stack", color: "from-blue-500 to-cyan-500" },
-                      { icon: Brain, label: "AI/ML", color: "from-purple-500 to-pink-500" },
-                      { icon: Database, label: "Backend", color: "from-green-500 to-emerald-500" },
-                      { icon: Globe, label: "Web", color: "from-orange-500 to-red-500" },
-                      { icon: Shield, label: "Security", color: "from-indigo-500 to-purple-500" },
-                    ].map((tech, idx) => (
                       <motion.div
-                        key={idx}
-                        className="group relative"
-                        whileHover={{ scale: 1.1, y: -4 }}
-                        whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.9 + idx * 0.1, type: "spring", stiffness: 200 }}
+                        animate={{ rotate: [0, 360, 0] }}
+                        transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                       >
-                        <div className={`flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${tech.color} text-white font-bold text-sm shadow-lg hover:shadow-2xl transition-all cursor-pointer`}>
-                          <motion.div
-                            animate={{ rotate: [0, 360, 0] }}
-                            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear", delay: idx * 0.2 }}
-                          >
-                            <tech.icon className="h-4 w-4" />
-                          </motion.div>
-                          <span>{tech.label}</span>
-                        </div>
-                        <motion.div 
-                          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        />
+                        <Sparkles className="h-4 w-4 text-yellow-400" />
                       </motion.div>
-                    ))}
-                  </motion.div>
+                      <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 uppercase tracking-wider">
+                        ✨ Welcome to the Future ✨
+                      </span>
+                    </motion.div>
 
-                  {/* CTA Buttons - EMOTIONAL TRIGGER */}
-                  <motion.div 
-                    className="flex flex-col sm:flex-row gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, type: "spring", stiffness: 100 }}
-                  >
-                    <motion.button
-                      onClick={() => handleNavigation("projects")}
-                      className="relative group bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 text-white font-black py-4 px-8 rounded-2xl shadow-2xl transform transition-all duration-500 overflow-hidden"
-                      whileHover={{ scale: 1.05, rotate: 1 }}
-                      whileTap={{ scale: 0.95 }}
+                    {/* Main Headline */}
+                    <motion.h1 
+                      className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 leading-tight text-white"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
                     >
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                      <span className="block mb-2">I Build</span>
+                      <motion.span 
+                        className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
                         animate={{
-                          x: ['-100%', '100%'],
+                          backgroundPosition: ['0%', '50%', '100%'],
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 3,
                           repeat: Number.POSITIVE_INFINITY,
                           ease: "linear"
                         }}
-                      />
-                      <div className="relative z-10 flex items-center justify-center gap-2">
-                        <motion.div
-                          animate={{ rotate: [0, 360, 0] }}
-                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                        >
-                          <Rocket className="h-5 w-5" />
-                        </motion.div>
-                        <span>Explore My Work</span>
-                        <motion.div
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                        >
-                          <ArrowRight className="h-5 w-5" />
-                        </motion.div>
-                      </div>
-                    </motion.button>
-                    <motion.button
-                      onClick={() => handleNavigation("contact")}
-                      className="relative group bg-transparent border-2 border-primary/30 hover:border-primary text-foreground font-black py-4 px-8 rounded-2xl transform transition-all duration-500 overflow-hidden"
-                      whileHover={{ scale: 1.05, rotate: -1 }}
-                      whileTap={{ scale: 0.95 }}
+                        style={{ backgroundSize: '200% auto' }}
+                      >
+                        <TypeAnimation
+                          sequence={[
+                            "Digital Dreams",
+                            1000,
+                            "Innovative Solutions",
+                            1000,
+                            "Captivating Experiences",
+                            1000,
+                            "Future Technology",
+                            1000,
+                            "Mind-Blowing Apps",
+                            1000,
+                          ]}
+                          wrapper="span"
+                          speed={50}
+                          repeat={Number.POSITIVE_INFINITY}
+                        />
+                      </motion.span>
+                    </motion.h1>
+
+                    {/* Subheadline */}
+                    <motion.div 
+                      className="mb-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
                     >
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity"
-                      />
-                      <div className="relative z-10 flex items-center justify-center gap-2">
+                      <p className="text-lg text-gray-300 font-semibold mb-3">
+                        <span className="text-cyan-400">Full-Stack Developer</span> • <span className="text-purple-400">AI Generalist</span> • <span className="text-pink-400">Digital Innovator</span>
+                      </p>
+                      <p className="text-base text-gray-400 leading-relaxed">
+                        Transforming <span className="text-white font-bold">ideas</span> into <span className="text-white font-bold">reality</span> with cutting-edge <span className="text-white font-bold">technology</span> and <span className="text-white font-bold">creative excellence</span>
+                      </p>
+                    </motion.div>
+
+                    {/* Tech Stack Pills */}
+                    <motion.div 
+                      className="flex flex-wrap gap-2 mb-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
+                    >
+                      {[
+                        { icon: Cpu, label: "Full-Stack", color: "from-blue-500 to-cyan-500" },
+                        { icon: Brain, label: "AI/ML", color: "from-purple-500 to-pink-500" },
+                        { icon: Database, label: "Backend", color: "from-green-500 to-emerald-500" },
+                        { icon: Globe, label: "Web", color: "from-orange-500 to-red-500" },
+                        { icon: Shield, label: "Security", color: "from-indigo-500 to-purple-500" },
+                      ].map((tech, idx) => (
                         <motion.div
-                          animate={{ rotate: [0, -360, 0] }}
-                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                          key={idx}
+                          className="group relative"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.7 + idx * 0.05, type: "spring", stiffness: 200 }}
                         >
-                          <Sparkles className="h-5 w-5" />
+                          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r ${tech.color} text-white font-semibold text-xs shadow-md`}>
+                            <tech.icon className="h-3 w-3" />
+                            <span>{tech.label}</span>
+                          </div>
                         </motion.div>
-                        <span>Let's Talk</span>
-                      </div>
-                    </motion.button>
+                      ))}
+                    </motion.div>
+
+                    {/* CTA Buttons */}
+                    <motion.div 
+                      className="flex flex-col sm:flex-row gap-3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
+                    >
+                      <motion.button
+                        onClick={() => handleNavigation("projects")}
+                        className="flex-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          <Rocket className="h-4 w-4" />
+                          <span>Explore My Work</span>
+                        </div>
+                      </motion.button>
+                      <motion.button
+                        onClick={() => handleNavigation("contact")}
+                        className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-xl border border-slate-600 hover:border-slate-500 transform transition-all duration-300 hover:scale-105"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          <Sparkles className="h-4 w-4" />
+                          <span>Let's Talk</span>
+                        </div>
+                      </motion.button>
+                    </motion.div>
                   </motion.div>
                 </motion.div>
 

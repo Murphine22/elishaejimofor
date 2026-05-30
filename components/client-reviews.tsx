@@ -319,13 +319,13 @@ export const ClientReviews = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.1 + index * 0.1 }}
                 whileHover={{ y: -5, scale: 1.05 }}
-                className="bg-gradient-to-br from-primary/5 to-purple-600/5 rounded-2xl p-4 text-center border border-primary/10 hover:border-primary/30 transition-all"
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 text-center border-2 border-primary/40 hover:border-primary/60 transition-all shadow-lg"
               >
-                <stat.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
-                <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+                <stat.icon className="w-10 h-10 mx-auto mb-3 text-primary" />
+                <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
                   {stat.value}
                 </div>
-                <div className="text-xs text-muted-foreground font-medium">{stat.label}</div>
+                <div className="text-sm text-white font-semibold">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
