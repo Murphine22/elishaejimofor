@@ -193,6 +193,16 @@ const projects = [
     category: "Full-Stack",
     color: "from-cyan-500 to-blue-600"
   },
+  {
+    title: "Real-Time Chat Application",
+    description: "A scalable real-time chat application with private messaging, group chats, file sharing, typing indicators, read receipts, and end-to-end encryption for secure communications.",
+    image: "https://i.imgur.com/wG8qA8t.png",
+    tags: ["React", "Node.js", "Socket.io", "MongoDB", "Redis", "JWT", "WebRTC", "Encryption"],
+    link: "#",
+    github: "https://github.com/Murphine22/realtime-chat",
+    category: "Full-Stack",
+    color: "from-violet-500 to-purple-600"
+  },
 ]
 
 // 3D Card Tilt Component
