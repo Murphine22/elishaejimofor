@@ -182,24 +182,25 @@ export default function Home() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Enhanced TypeAnimation Section */}
+                  {/* Enhanced TypeAnimation Section - EMOTIONAL TRIGGER */}
                   <motion.div 
-                    className="relative mb-6 md:mb-8 p-6 md:p-8 rounded-2xl overflow-hidden group"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    className="relative mb-6 md:mb-8 p-6 md:p-8 rounded-3xl overflow-hidden group"
+                    whileHover={{ scale: 1.03, rotate: 0.5 }}
+                    transition={{ duration: 0.4, type: "spring" }}
                   >
-                    {/* Animated gradient background */}
+                    {/* Animated gradient background - PATTERN INTERRUPTION */}
                     <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-50"
+                      className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/30 to-pink-600/20 opacity-60"
                       animate={{
                         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                        scale: [1, 1.1, 1],
                       }}
                       transition={{
-                        duration: 5,
+                        duration: 4,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "easeInOut"
                       }}
-                      style={{ backgroundSize: '200% 200%' }}
+                      style={{ backgroundSize: '300% 300%' }}
                     />
                     
                     {/* Floating particles effect */}
@@ -243,30 +244,58 @@ export default function Home() {
 
                     <div className="relative z-10">
                       <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                        initial={{ opacity: 0, y: -10, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                         className="flex items-center gap-2 mb-3"
                       >
-                        <Sparkles className="h-5 w-5 text-yellow-500 animate-pulse" />
-                        <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Welcome to my portfolio</span>
+                        <motion.div
+                          animate={{ rotate: [0, 360, 0] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        >
+                          <Sparkles className="h-5 w-5 text-yellow-500" />
+                        </motion.div>
+                        <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 uppercase tracking-widest">✨ WELCOME TO MY DIGITAL UNIVERSE ✨</span>
                       </motion.div>
                       
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 relative">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient">
+                      <motion.h1 
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-2 relative leading-tight"
+                        initial={{ width: "auto" }}
+                        animate={{ width: ["auto", "100%", "auto"] }}
+                        transition={{
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <motion.span 
+                          className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 inline-block"
+                          animate={{
+                            backgroundPosition: ['0%', '50%', '100%'],
+                            x: [0, 20, 0],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                          style={{ backgroundSize: '200% auto' }}
+                        >
                           <TypeAnimation
                             sequence={[
                               "Hi, I'm Elisha 👋",
                               1000,
-                              "Frontend Developer 💻",
+                              "I Build Dreams Into Reality 💫",
                               1000,
-                              "Web Developer 🌐",
+                              "Full-Stack Developer </>",
+                              1000,
+                              "Web Manager 🌐",
                               1000,
                               "Graphics Designer 🎨",
                               1000,
                               "Digital Marketer 📱",
                               1000,
-                              "AI Enthusiast 🤖",
+                              "AI Generalist  🤖",
                               1000,
                               "Content Creator 📝",
                               1000,
@@ -274,48 +303,51 @@ export default function Home() {
                               1000,
                               "Digital Skills Tutor 📚",
                               1000,
+                              "Let's Create Something Amazing! ⚡",
+                              1000,
                             ]}
                             wrapper="span"
                             speed={50}
                             repeat={Number.POSITIVE_INFINITY}
                           />
-                        </span>
-                      </h1>
+                        </motion.span>
+                      </motion.h1>
                       
                       <motion.p 
-                        className="text-base md:text-lg text-muted-foreground mt-3"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
+                        className="text-base md:text-lg text-muted-foreground mt-3 font-medium"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
                       >
-                        Crafting digital experiences that make a difference
+                        <span className="text-primary font-bold">Transforming ideas</span> into <span className="text-purple-600 font-bold">captivating digital experiences</span> that <span className="text-pink-600 font-bold">inspire, engage, and convert</span>
                       </motion.p>
                     </div>
                   </motion.div>
 
-                  {/* Enhanced My Vision Section */}
+                  {/* Enhanced My Vision Section - EMOTIONAL TRIGGER */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
+                    transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
                     className="mb-6 md:mb-8"
                   >
                     <motion.div 
                       className="relative group"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
+                      whileHover={{ scale: 1.02, rotateY: 2 }}
+                      transition={{ duration: 0.3, type: "spring" }}
                     >
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
-                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-border/50 overflow-hidden">
-                        {/* Animated corner accent */}
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl blur opacity-40 group-hover:opacity-70 transition duration-500 animate-pulse" />
+                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl border-2 border-primary/30 overflow-hidden">
+                        {/* Animated corner accent - PATTERN INTERRUPTION */}
                         <motion.div
-                          className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-bl-full"
+                          className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-bl-full"
                           animate={{
-                            scale: [1, 1.1, 1],
-                            opacity: [0.3, 0.5, 0.3],
+                            scale: [1, 1.3, 1],
+                            rotate: [0, 45, 0],
+                            opacity: [0.4, 0.7, 0.4],
                           }}
                           transition={{
-                            duration: 3,
+                            duration: 4,
                             repeat: Infinity,
                           }}
                         />
@@ -324,41 +356,46 @@ export default function Home() {
                           <div className="flex items-center gap-3 mb-4">
                             <motion.div
                               className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg"
-                              whileHover={{ rotate: 360, scale: 1.1 }}
-                              transition={{ duration: 0.6 }}
+                              whileHover={{ rotate: 360, scale: 1.2 }}
+                              whileTap={{ scale: 0.9 }}
+                              transition={{ duration: 0.6, type: "spring" }}
                             >
                               <Target className="h-6 w-6 text-white" />
                             </motion.div>
-                            <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                            <h2 className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
                               My Vision
                             </h2>
                           </div>
                           
-                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
-                            To create innovative digital solutions that inspire, engage, and transform. I strive to blend
-                            cutting-edge technology with creative design to deliver exceptional user experiences and drive
-                            business growth.
+                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 font-medium">
+                            To create <span className="text-primary font-bold">innovative digital solutions</span> that <span className="text-purple-600 font-bold">inspire, engage, and transform</span>. I strive to blend cutting-edge technology with creative design to deliver <span className="text-pink-600 font-bold">exceptional user experiences</span> and drive business growth.
                           </p>
                           
-                          {/* Vision pillars */}
+                          {/* Vision pillars - EMOTIONAL TRIGGERS */}
                           <div className="grid grid-cols-3 gap-3 mt-4">
                             {[
-                              { icon: Lightbulb, label: "Innovate", color: "from-yellow-500 to-orange-500" },
-                              { icon: Rocket, label: "Transform", color: "from-blue-500 to-cyan-500" },
-                              { icon: Star, label: "Excel", color: "from-purple-500 to-pink-500" },
+                              { icon: Lightbulb, label: "Innovate", color: "from-yellow-500 to-orange-500", desc: "Think Different" },
+                              { icon: Rocket, label: "Transform", color: "from-blue-500 to-cyan-500", desc: "Scale Fast" },
+                              { icon: Star, label: "Excel", color: "from-purple-500 to-pink-500", desc: "Be Best" },
                             ].map((pillar, idx) => (
                               <motion.div
                                 key={idx}
-                                className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-background to-muted/30 border border-border/50 hover:border-primary/50 transition-all"
-                                whileHover={{ y: -5, scale: 1.05 }}
+                                className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-background to-muted/30 border-2 border-primary/20 hover:border-primary/60 transition-all cursor-pointer"
+                                whileHover={{ y: -8, scale: 1.1, rotate: 2 }}
+                                whileTap={{ scale: 0.95 }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 + idx * 0.1 }}
+                                transition={{ delay: 0.5 + idx * 0.1, type: "spring", stiffness: 200 }}
                               >
-                                <div className={`p-2 rounded-lg bg-gradient-to-br ${pillar.color}`}>
+                                <motion.div 
+                                  className={`p-2 rounded-lg bg-gradient-to-br ${pillar.color}`}
+                                  whileHover={{ rotate: 360 }}
+                                  transition={{ duration: 0.6 }}
+                                >
                                   <pillar.icon className="h-4 w-4 text-white" />
-                                </div>
-                                <span className="text-xs font-semibold">{pillar.label}</span>
+                                </motion.div>
+                                <span className="text-xs font-bold text-primary">{pillar.label}</span>
+                                <span className="text-[10px] text-muted-foreground">{pillar.desc}</span>
                               </motion.div>
                             ))}
                           </div>
@@ -367,70 +404,97 @@ export default function Home() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Enhanced What I Do Section */}
+                  {/* Enhanced What I Do Section - EMOTIONAL TRIGGER */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.5 }}
+                    transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
                     className="mb-6 md:mb-8"
                   >
                     <motion.div 
                       className="relative group"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
+                      whileHover={{ scale: 1.02, rotateY: -2 }}
+                      transition={{ duration: 0.3, type: "spring" }}
                     >
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
-                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-border/50 overflow-hidden">
-                        {/* Animated background pattern */}
-                        <div className="absolute inset-0 opacity-5">
-                          <div className="absolute inset-0" style={{
-                            backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
-                            backgroundSize: '32px 32px'
-                          }} />
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-3xl blur opacity-40 group-hover:opacity-70 transition duration-500 animate-pulse" />
+                      <div className="relative bg-background/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl border-2 border-primary/30 overflow-hidden">
+                        {/* Animated background pattern - PATTERN INTERRUPTION */}
+                        <div className="absolute inset-0 opacity-10">
+                          <motion.div 
+                            className="absolute inset-0"
+                            animate={{
+                              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+                            }}
+                            transition={{
+                              duration: 20,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                            style={{
+                              backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
+                              backgroundSize: '32px 32px'
+                            }}
+                          />
                         </div>
                         
                         <div className="relative z-10">
                           <div className="flex items-center gap-3 mb-4">
                             <motion.div
                               className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl shadow-lg"
-                              whileHover={{ rotate: 360, scale: 1.1 }}
-                              transition={{ duration: 0.6 }}
+                              whileHover={{ rotate: 360, scale: 1.2 }}
+                              whileTap={{ scale: 0.9 }}
+                              transition={{ duration: 0.6, type: "spring" }}
                             >
                               <Zap className="h-6 w-6 text-white" />
                             </motion.div>
-                            <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-600">
+                            <h2 className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600">
                               What I Do
                             </h2>
                           </div>
                           
-                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
-                            I specialize in creating responsive, user-friendly websites and applications using modern
-                            front-end technologies. My expertise includes React, Next.js, TypeScript, and UI/UX design
-                            principles that ensure your digital presence stands out in today's competitive landscape.
+                          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 font-medium">
+                            I specialize in creating <span className="text-cyan-600 font-bold">responsive, user-friendly websites</span> and applications using modern <span className="text-blue-600 font-bold">full-stack technologies</span>. My expertise includes <span className="text-blue-600 font-bold">React, Next.js, TypeScript</span>, <span className="text-purple-600 font-bold">Node.js, NestJS</span>, <span className="text-green-600 font-bold">PostgreSQL, MongoDB</span>, and <span className="text-pink-600 font-bold">UI/UX design</span> principles that ensure your digital presence <span className="text-pink-600 font-bold">stands out</span> in today's competitive landscape.
                           </p>
                           
-                          {/* Skill badges */}
+                          {/* Skill badges - EMOTIONAL TRIGGERS */}
                           <div className="flex flex-wrap gap-2 mt-4">
                             {[
-                              { name: "React", icon: Code2, color: "from-blue-400 to-cyan-400" },
-                              { name: "Next.js", icon: Rocket, color: "from-gray-700 to-gray-900" },
-                              { name: "TypeScript", icon: Code2, color: "from-blue-600 to-blue-800" },
-                              { name: "UI/UX", icon: Palette, color: "from-purple-500 to-pink-500" },
-                              { name: "Design", icon: Sparkles, color: "from-yellow-500 to-orange-500" },
-                              { name: "Growth", icon: TrendingUp, color: "from-green-500 to-emerald-500" },
+                              { name: "React", icon: Code2, color: "from-blue-400 to-cyan-400", desc: "Build Fast" },
+                              { name: "Next.js", icon: Rocket, color: "from-gray-700 to-gray-900", desc: "Scale Easy" },
+                              { name: "TypeScript", icon: Code2, color: "from-blue-600 to-blue-800", desc: "Code Safe" },
+                              { name: "Node.js", icon: Code2, color: "from-green-600 to-green-800", desc: "Backend" },
+                              { name: "NestJS", icon: Code2, color: "from-red-600 to-red-800", desc: "API Framework" },
+                              { name: "PostgreSQL", icon: Code2, color: "from-blue-700 to-indigo-800", desc: "Database" },
+                              { name: "MongoDB", icon: Code2, color: "from-green-700 to-emerald-800", desc: "NoSQL" },
+                              { name: "UI/UX", icon: Palette, color: "from-purple-500 to-pink-500", desc: "Design Wow" },
+                              { name: "Design", icon: Sparkles, color: "from-yellow-500 to-orange-500", desc: "Create Magic" },
+                              { name: "Growth", icon: TrendingUp, color: "from-green-500 to-emerald-500", desc: "Grow Fast" },
                             ].map((skill, idx) => (
                               <motion.div
                                 key={idx}
                                 className="group/badge relative"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.6 + idx * 0.05 }}
-                                whileHover={{ scale: 1.1, y: -2 }}
+                                transition={{ delay: 0.6 + idx * 0.05, type: "spring", stiffness: 200 }}
+                                whileHover={{ scale: 1.15, y: -4, rotate: 3 }}
+                                whileTap={{ scale: 0.95 }}
                               >
-                                <div className={`flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r ${skill.color} text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer`}>
-                                  <skill.icon className="h-3.5 w-3.5" />
+                                <div className={`flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r ${skill.color} text-white text-sm font-bold shadow-lg hover:shadow-2xl transition-all cursor-pointer`}>
+                                  <motion.div
+                                    whileHover={{ rotate: 360 }}
+                                    transition={{ duration: 0.6 }}
+                                  >
+                                    <skill.icon className="h-4 w-4" />
+                                  </motion.div>
                                   <span>{skill.name}</span>
                                 </div>
+                                <motion.div 
+                                  className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-[10px] text-muted-foreground font-medium opacity-0 group-hover/badge:opacity-100 transition-opacity whitespace-nowrap"
+                                  initial={{ y: 5 }}
+                                  animate={{ y: 0 }}
+                                >
+                                  {skill.desc}
+                                </motion.div>
                               </motion.div>
                             ))}
                           </div>
@@ -439,22 +503,29 @@ export default function Home() {
                     </motion.div>
                   </motion.div>
 
-                  {/* CTA Buttons */}
+                  {/* CTA Buttons - EMOTIONAL TRIGGER */}
                   <div className="hidden sm:block">
-                    <AnimatedButton
-                      onClick={() => handleNavigation("projects")}
-                      icon={<ChevronDown className="h-4 w-4" />}
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      Explore My Work
-                    </AnimatedButton>
+                      <AnimatedButton
+                        onClick={() => handleNavigation("projects")}
+                        icon={<ChevronDown className="h-4 w-4" />}
+                      >
+                        Explore My Work
+                      </AnimatedButton>
+                    </motion.div>
                   </div>
-                  <button
+                  <motion.button
                     onClick={() => handleNavigation("projects")}
                     className="w-full sm:hidden bg-gradient-to-r from-primary to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg flex items-center justify-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Explore My Work
                     <ChevronDown className="h-4 w-4" />
-                  </button>
+                  </motion.button>
                 </motion.div>
                 <motion.div
                   className="w-full md:w-1/2 mt-6 md:mt-0"

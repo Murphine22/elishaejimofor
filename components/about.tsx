@@ -31,7 +31,7 @@ export const About = ({ onNavigate }: AboutProps) => {
       year: 2019, 
       event: "Affiliate Marketer",
       company: "Timoyex Int'l",
-      period: "2019-2024",
+      period: "2019-2026",
       icon: TrendingUp,
       gradient: "from-green-500 to-emerald-500",
       description: "Drove digital marketing campaigns and affiliate partnerships"
@@ -113,6 +113,16 @@ export const About = ({ onNavigate }: AboutProps) => {
     },
     { 
       year: 2026, 
+      event: "Student Moderator – Backend Development Course",
+      company: "TS Academy",
+      period: "February 2026 – June 2026",
+      icon: Award,
+      gradient: "from-blue-600 to-indigo-600",
+      description: "Coordinated student support and moderation for the Backend Development program, improving communication efficiency by 35%, delivered first-line technical support reducing learning interruptions by 40%, and developed weekly operational reports improving transparency by 45%.",
+      featured: true
+    },
+    { 
+      year: 2026, 
       event: "Backend Development Specialist",
       company: "TS Academy Certification",
       period: "May 2026",
@@ -127,6 +137,22 @@ export const About = ({ onNavigate }: AboutProps) => {
   const [selectedMilestone, setSelectedMilestone] = useState<number | null>(null)
 
   const workExperience = [
+    {
+      title: "Student Moderator – Backend Development Course",
+      company: "TS Academy",
+      period: "February 2026 – June 2026",
+      color: "from-blue-600 to-indigo-600",
+      lightColor: "from-blue-600/20 to-indigo-600/20",
+      location: "Remote",
+      responsibilities: [
+        "Coordinated student support and moderation activities for the Backend Development program, improving communication efficiency and class coordination by an estimated 35%",
+        "Delivered first-line technical support to students, resolving coding, platform, and workflow-related issues and reducing learning interruptions by approximately 40%",
+        "Developed and presented weekly operational reports covering class progress, participation trends, and student concerns, improving reporting transparency and intervention effectiveness by 45%",
+        "Facilitated communication between students and instructors, accelerating issue escalation and response timelines by an estimated 35%",
+        "Monitored student engagement and recurring technical challenges, contributing to targeted support strategies that improved participation and learning continuity by 30%",
+        "Supported a responsive and structured learning environment that enhanced overall student experience and contributed to measurable program efficiency improvements of approximately 35%"
+      ]
+    },
     {
       title: "Operations Manager",
       company: "Koinder Global Ltd",
@@ -439,17 +465,17 @@ export const About = ({ onNavigate }: AboutProps) => {
         </div>
 
         <div className="relative z-10 bg-gradient-to-br from-background/95 via-background/90 to-background/95 backdrop-blur-xl p-8 md:p-12 border-2 border-primary/20">
-          {/* Header with Icon */}
+          {/* Header with Icon - EMOTIONAL TRIGGER */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, type: "spring" }}
             className="text-center mb-12"
           >
             <motion.div
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full mb-6 border border-primary/30"
-              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/20 via-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full mb-6 border-2 border-primary/30"
+              whileHover={{ scale: 1.05, rotate: 1 }}
               animate={{
                 boxShadow: [
                   "0 0 20px rgba(120, 119, 198, 0.3)",
@@ -459,31 +485,52 @@ export const About = ({ onNavigate }: AboutProps) => {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Sparkles className="w-5 h-5 text-primary" />
-              <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+              <motion.div
+                animate={{ rotate: [0, 360, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-5 h-5 text-primary" />
+              </motion.div>
+              <span className="text-sm font-black bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600 uppercase tracking-widest">
                 THE FULL STORY
               </span>
-              <Sparkles className="w-5 h-5 text-pink-600" />
+              <motion.div
+                animate={{ rotate: [0, -360, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-5 h-5 text-pink-600" />
+              </motion.div>
             </motion.div>
 
             <motion.h3
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+              transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
+              className="text-4xl md:text-6xl font-black mb-6 leading-tight"
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600 animate-gradient">
+              <motion.span 
+                className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-600 to-pink-600"
+                animate={{
+                  backgroundPosition: ['0%', '50%', '100%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{ backgroundSize: '200% auto' }}
+              >
                 Crafting Digital Experiences
-              </span>
+              </motion.span>
               <br />
-              <span className="text-2xl md:text-4xl text-muted-foreground font-normal">
-                That Transform & Inspire
+              <span className="text-2xl md:text-4xl text-muted-foreground font-bold">
+                That <span className="text-primary">Transform</span> & <span className="text-purple-600">Inspire</span>
               </span>
             </motion.h3>
           </motion.div>
 
-          {/* Interactive Story Cards */}
+          {/* Interactive Story Cards - EMOTIONAL TRIGGERS */}
           <EditableContent section="about" field="journey" type="text" multiline defaultValue="With over 3 years of experience in web development and digital solutions, I've had the privilege of working on diverse projects that have shaped my expertise in creating user-centric applications.
 
 Today, as Operations Manager at Koinder Global Ltd, I'm orchestrating digital transformation across three dynamic platforms — Koinder, Taste Naija, and Made Naija. Leading the successful launch of Taste Naija in December 2025, I've driven 50% user growth and implemented KPI-driven systems that boost team productivity by 35%. My role sits at the powerful intersection of operations leadership, digital strategy, and innovation — where I'm building not just platforms, but entire digital ecosystems.
@@ -492,20 +539,22 @@ From managing vendor relationships and coordinating skills training programs to 
 
 My journey has evolved from hands-on development to strategic leadership, but the core mission remains the same: building technology that feels alive — adaptive, intuitive, and impactful. At the intersection of operations, development, and digital innovation, I'm shaping the next wave of smart, sustainable, and inclusive digital solutions.">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* Card 1: Experience */}
+              {/* Card 1: Experience - EMOTIONAL TRIGGER */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-blue-500/10 p-6 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all cursor-pointer"
+                transition={{ delay: 0.3, duration: 0.6, type: "spring" }}
+                whileHover={{ scale: 1.03, y: -8, rotate: 1 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-blue-500/10 p-6 border-2 border-blue-500/20 hover:border-blue-500/50 transition-all cursor-pointer"
               >
-                {/* Glow Effect */}
+                {/* Glow Effect - PATTERN INTERRUPTION */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                   animate={{
-                    scale: [1, 1.2, 1],
+                    scale: [1, 1.3, 1],
+                    rotate: [0, 5, 0],
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                 />
@@ -513,18 +562,19 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="relative z-10">
                   <motion.div
                     className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.6, type: "spring" }}
                   >
                     <Code2 className="w-7 h-7 text-white" />
                   </motion.div>
 
-                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">
-                    7+ Years of Innovation
+                  <h4 className="text-2xl font-black mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500">
+                    10+ Years of Innovation
                   </h4>
 
-                  <p className="text-muted-foreground leading-relaxed">
-                    With over 2 years of hands-on experience in web development and 5+ years in digital solutions, marketing, and business growth, I've had the privilege of designing and developing high-performing web applications that merge creativity with technology.
+                  <p className="text-muted-foreground leading-relaxed font-medium">
+                    With over 3 years of hands-on experience in web development and 5+ years in digital solutions, marketing, and business growth, I've had the privilege of designing and developing <span className="text-primary font-bold">high-performing web applications</span> that merge creativity with technology.
                   </p>
                 </div>
 
@@ -532,20 +582,22 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full" />
               </motion.div>
 
-              {/* Card 2: Intersection */}
+              {/* Card 2: Intersection - EMOTIONAL TRIGGER */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-purple-500/10 p-6 border-2 border-purple-500/20 hover:border-purple-500/40 transition-all cursor-pointer"
+                transition={{ delay: 0.4, duration: 0.6, type: "spring" }}
+                whileHover={{ scale: 1.03, y: -8, rotate: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-purple-500/10 p-6 border-2 border-purple-500/20 hover:border-purple-500/50 transition-all cursor-pointer"
               >
-                {/* Glow Effect */}
+                {/* Glow Effect - PATTERN INTERRUPTION */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                   animate={{
-                    scale: [1, 1.2, 1],
+                    scale: [1, 1.3, 1],
+                    rotate: [0, -5, 0],
                   }}
                   transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                 />
@@ -553,18 +605,19 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="relative z-10">
                   <motion.div
                     className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.6, type: "spring" }}
                   >
                     <Palette className="w-7 h-7 text-white" />
                   </motion.div>
 
-                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                  <h4 className="text-2xl font-black mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
                     Design × Code × Strategy
                   </h4>
 
-                  <p className="text-muted-foreground leading-relaxed">
-                    I work at the intersection of design, code, and strategy — crafting interactive, scalable, and visually captivating platforms using tools like React.js, Next.js, Supabase, and Tailwind CSS. Whether it's developing seamless user interfaces, mentoring tech talents, or creating AI-driven digital experiences, I bring clarity, emotion, and innovation to every project I touch.
+                  <p className="text-muted-foreground leading-relaxed font-medium">
+                    I work at the intersection of design, code, and strategy — crafting <span className="text-purple-600 font-bold">interactive, scalable</span>, and <span className="text-pink-600 font-bold">visually captivating platforms</span> using tools like React.js, Next.js, Supabase, MongoDB, MySQL, PostgreSQL, Node.js,  and Tailwind CSS. Whether it's developing seamless user interfaces, mentoring tech talents, or creating AI-driven digital experiences, I bring clarity, emotion, and innovation to every project I touch.
                   </p>
                 </div>
 
@@ -572,20 +625,22 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-pink-500/20 to-transparent rounded-tr-full" />
               </motion.div>
 
-              {/* Card 3: Philosophy */}
+              {/* Card 3: Philosophy - EMOTIONAL TRIGGER */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500/10 via-red-500/10 to-orange-500/10 p-6 border-2 border-orange-500/20 hover:border-orange-500/40 transition-all cursor-pointer"
+                transition={{ delay: 0.5, duration: 0.6, type: "spring" }}
+                whileHover={{ scale: 1.03, y: -8, rotate: 1 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500/10 via-red-500/10 to-orange-500/10 p-6 border-2 border-orange-500/20 hover:border-orange-500/50 transition-all cursor-pointer"
               >
-                {/* Glow Effect */}
+                {/* Glow Effect - PATTERN INTERRUPTION */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                   animate={{
-                    scale: [1, 1.2, 1],
+                    scale: [1, 1.3, 1],
+                    rotate: [0, 5, 0],
                   }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                 />
@@ -593,18 +648,19 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="relative z-10">
                   <motion.div
                     className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4 shadow-lg"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.6, type: "spring" }}
                   >
                     <Brain className="w-7 h-7 text-white" />
                   </motion.div>
 
-                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-500">
+                  <h4 className="text-2xl font-black mb-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-500">
                     Technology That Feels Alive
                   </h4>
 
-                  <p className="text-muted-foreground leading-relaxed">
-                    At Murphine Technologies, I believe technology should feel alive — adaptive, intuitive, and impactful. I'm passionate about leveraging AI and modern development frameworks to shape the next wave of smart, sustainable, and inclusive digital solutions.
+                  <p className="text-muted-foreground leading-relaxed font-medium">
+                    At Murphine Technologies, I believe technology should feel alive — <span className="text-orange-600 font-bold">adaptive, intuitive, and impactful</span>. I'm passionate about leveraging AI and modern development frameworks to shape the next wave of <span className="text-red-600 font-bold">smart, sustainable, and inclusive digital solutions</span>.
                   </p>
                 </div>
 
@@ -612,20 +668,22 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-transparent rounded-bl-full" />
               </motion.div>
 
-              {/* Card 4: Mission Statement */}
+              {/* Card 4: Mission Statement - EMOTIONAL TRIGGER */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-green-500/10 p-6 border-2 border-green-500/20 hover:border-green-500/40 transition-all cursor-pointer"
+                transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
+                whileHover={{ scale: 1.03, y: -8, rotate: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-green-500/10 p-6 border-2 border-green-500/20 hover:border-green-500/50 transition-all cursor-pointer"
               >
-                {/* Glow Effect */}
+                {/* Glow Effect - PATTERN INTERRUPTION */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                   animate={{
-                    scale: [1, 1.2, 1],
+                    scale: [1, 1.3, 1],
+                    rotate: [0, -5, 0],
                   }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
                 />
@@ -633,23 +691,28 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 <div className="relative z-10">
                   <motion.div
                     className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4 shadow-lg"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.6, type: "spring" }}
                   >
                     <Rocket className="w-7 h-7 text-white" />
                   </motion.div>
 
-                  <h4 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
+                  <h4 className="text-2xl font-black mb-3 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
                     Building The Future
                   </h4>
 
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Every pixel matters. Every interaction counts. Every line of code is a story waiting to be told.
+                  <p className="text-muted-foreground leading-relaxed mb-4 font-medium">
+                    Every pixel matters. Every interaction counts. Every line of code is a <span className="text-green-600 font-bold">story waiting to be told</span>.
                   </p>
 
-                  <p className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
+                  <motion.p 
+                    className="font-black text-lg bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring" }}
+                  >
                     Let's build the future — one idea, one experience, and one transformation at a time.
-                  </p>
+                  </motion.p>
                 </div>
 
                 {/* Decorative Corner */}
@@ -658,64 +721,96 @@ My journey has evolved from hands-on development to strategic leadership, but th
             </div>
           </EditableContent>
 
-          {/* Tech Stack Showcase */}
+          {/* Tech Stack Showcase - EMOTIONAL TRIGGER */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-primary/5 via-purple-600/5 to-pink-600/5 border border-primary/20"
+            transition={{ delay: 0.7, duration: 0.6, type: "spring" }}
+            className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-primary/5 via-purple-600/5 to-pink-600/5 border-2 border-primary/20"
           >
-            <h4 className="text-center text-xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+            <motion.h4 
+              className="text-center text-xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring" }}
+            >
               Powered By Modern Technologies
-            </h4>
+            </motion.h4>
 
             <div className="flex flex-wrap justify-center gap-4">
               {[
-                { name: "React.js", color: "from-cyan-500 to-blue-500" },
-                { name: "Next.js", color: "from-gray-700 to-gray-900" },
-                { name: "Tailwind CSS", color: "from-cyan-400 to-blue-600" },
-                { name: "Supabase", color: "from-green-500 to-emerald-600" },
-                { name: "TypeScript", color: "from-blue-600 to-blue-800" },
-                { name: "Framer Motion", color: "from-pink-500 to-rose-600" },
-                { name: "AI Integration", color: "from-purple-500 to-indigo-600" },
+                { name: "React.js", color: "from-purple-500 to-indigo-600", desc: "Build Fast" },
+                { name: "Next.js", color: "from-gray-700 to-gray-900", desc: "Scale Easy" },
+                { name: "Tailwind CSS", color: "from-cyan-400 to-blue-600", desc: "Style Quick" },
+                { name: "Supabase", color: "from-green-500 to-emerald-600", desc: "Database" },
+                { name: "TypeScript", color: "from-blue-600 to-blue-800", desc: "Type Safe" },
+                { name: "Framer Motion", color: "from-pink-500 to-rose-600", desc: "Animate" },
+                { name: "AI Integration", color: "from-purple-500 to-indigo-600", desc: "Smart" },
+                { name: "MongoDB", color: "from-green-500 to-emerald-600", desc: "Build Fast" },
+                { name: "MySQL", color: "from-gray-700 to-gray-900", desc: "Scale Easy" },
+                { name: "Node.js", color: "from-cyan-400 to-blue-600", desc: "Style Quick" },
+                { name: "Express.js", color: "from-pink-500 to-rose-600", desc: "Build Fast" },
+                { name: "PostgreSQL", color: "from-gray-700 to-gray-900", desc: "Scale Easy" },
+                { name: "Bootstrap 5", color: "from-purple-500 to-indigo-600", desc: "Style Quick" },
+                { name: "Firebase", color: "from-green-500 to-emerald-600", desc: "Style Quick" }
               ].map((tech, index) => (
                 <motion.div
                   key={tech.name}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  className={`px-5 py-2.5 rounded-full bg-gradient-to-r ${tech.color} text-white font-semibold text-sm shadow-lg cursor-pointer`}
+                  transition={{ delay: 0.8 + index * 0.1, duration: 0.4, type: "spring", stiffness: 200 }}
+                  whileHover={{ scale: 1.15, y: -6, rotate: 3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative cursor-pointer"
                 >
-                  {tech.name}
+                  <div className={`px-5 py-2.5 rounded-full bg-gradient-to-r ${tech.color} text-white font-black text-sm shadow-lg hover:shadow-2xl transition-all`}>
+                    {tech.name}
+                  </div>
+                  <motion.div 
+                    className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-[10px] text-muted-foreground font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+                    initial={{ y: 5 }}
+                    animate={{ y: 0 }}
+                  >
+                    {tech.desc}
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Call to Action */}
+          {/* Call to Action - EMOTIONAL TRIGGER */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.9, duration: 0.6 }}
+            transition={{ delay: 0.9, duration: 0.6, type: "spring" }}
             className="mt-12 text-center"
           >
             <motion.div
               className="inline-block"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring" }}
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 text-white font-bold px-8 py-6 text-lg rounded-full shadow-2xl group"
+                className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 text-white font-black px-10 py-7 text-lg rounded-full shadow-2xl group border-2 border-white/20"
                 onClick={() => onNavigate("projects")}
               >
-                <Zap className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                <motion.div
+                  animate={{ rotate: [0, 360, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  <Zap className="w-5 h-5 mr-2" />
+                </motion.div>
                 Explore My Work
-                <ExternalLink className="w-5 h-5 ml-2 group-hover:rotate-45 transition-transform" />
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ExternalLink className="w-5 h-5 ml-2 group-hover:rotate-45 transition-transform" />
+                </motion.div>
               </Button>
             </motion.div>
           </motion.div>
@@ -901,8 +996,8 @@ My journey has evolved from hands-on development to strategic leadership, but th
             {[
               { icon: Briefcase, label: "Years Experience", value: "10+" },
               { icon: Rocket, label: "Career Milestones", value: "9" },
-              { icon: TrendingUp, label: "Industries", value: "5+" },
-              { icon: Star, label: "Current Roles", value: "2" },
+              { icon: TrendingUp, label: "Industries", value: "6+" },
+              { icon: Star, label: "Current Roles", value: "3" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -943,24 +1038,30 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <Card className="overflow-hidden border-t-4 border-t-blue-500 hover:shadow-lg transition-all duration-300">
+                <Card className="overflow-hidden border-t-4 border-t-blue-500 hover:shadow-2xl transition-all duration-300 rounded-2xl">
                   <div className={`absolute inset-0 opacity-5 bg-gradient-to-br ${job.lightColor} -z-10`}></div>
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full bg-gradient-to-br ${job.color} text-white mr-3`}>
+                        <motion.div 
+                          className={`p-2 rounded-full bg-gradient-to-br ${job.color} text-white mr-3`}
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ duration: 0.6, type: "spring" }}
+                        >
                           <Briefcase className="h-4 w-4" />
-                        </div>
-                        <h3 className="text-xl font-bold">{job.title}</h3>
+                        </motion.div>
+                        <h3 className="text-xl font-black">{job.title}</h3>
                       </div>
-                      <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">{job.period}</span>
+                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full font-bold border border-primary/20">{job.period}</span>
                     </div>
-                    <h4 className="text-lg text-muted-foreground mb-4 ml-10">{job.company}</h4>
+                    <h4 className="text-lg text-muted-foreground mb-4 ml-10 font-semibold">{job.company}</h4>
                     <ul className="list-disc list-inside space-y-2 ml-10">
                       {job.responsibilities.map((responsibility, idx) => (
-                        <li key={idx} className="text-muted-foreground">{responsibility}</li>
+                        <li key={idx} className="text-muted-foreground font-medium">{responsibility}</li>
                       ))}
                     </ul>
                   </CardContent>
@@ -977,24 +1078,30 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <Card className="overflow-hidden border-t-4 border-t-cyan-500 hover:shadow-lg transition-all duration-300">
+                <Card className="overflow-hidden border-t-4 border-t-cyan-500 hover:shadow-2xl transition-all duration-300 rounded-2xl">
                   <div className={`absolute inset-0 opacity-5 bg-gradient-to-br ${edu.lightColor} -z-10`}></div>
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full bg-gradient-to-br ${edu.color} text-white mr-3`}>
+                        <motion.div 
+                          className={`p-2 rounded-full bg-gradient-to-br ${edu.color} text-white mr-3`}
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ duration: 0.6, type: "spring" }}
+                        >
                           <GraduationCap className="h-4 w-4" />
-                        </div>
-                        <h3 className="text-xl font-bold">{edu.degree}</h3>
+                        </motion.div>
+                        <h3 className="text-xl font-black">{edu.degree}</h3>
                       </div>
-                      <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">{edu.period}</span>
+                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full font-bold border border-primary/20">{edu.period}</span>
                     </div>
-                    <h4 className="text-lg text-muted-foreground mb-4 ml-10">{edu.institution}</h4>
+                    <h4 className="text-lg text-muted-foreground mb-4 ml-10 font-semibold">{edu.institution}</h4>
                     <ul className="list-disc list-inside space-y-2 ml-10">
                       {edu.achievements.map((achievement, idx) => (
-                        <li key={idx} className="text-muted-foreground">{achievement}</li>
+                        <li key={idx} className="text-muted-foreground font-medium">{achievement}</li>
                       ))}
                     </ul>
                   </CardContent>
@@ -1011,22 +1118,28 @@ My journey has evolved from hands-on development to strategic leadership, but th
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <Card className="overflow-hidden border-t-4 border-t-indigo-500 hover:shadow-lg transition-all duration-300">
+                <Card className="overflow-hidden border-t-4 border-t-indigo-500 hover:shadow-2xl transition-all duration-300 rounded-2xl">
                   <div className={`absolute inset-0 opacity-5 bg-gradient-to-br ${course.lightColor} -z-10`}></div>
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full bg-gradient-to-br ${course.color} text-white mr-3`}>
+                        <motion.div 
+                          className={`p-2 rounded-full bg-gradient-to-br ${course.color} text-white mr-3`}
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ duration: 0.6, type: "spring" }}
+                        >
                           <Award className="h-4 w-4" />
-                        </div>
-                        <h3 className="text-xl font-bold">{course.title}</h3>
+                        </motion.div>
+                        <h3 className="text-xl font-black">{course.title}</h3>
                       </div>
-                      <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">{course.year}</span>
+                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full font-bold border border-primary/20">{course.year}</span>
                     </div>
-                    <h4 className="text-lg text-muted-foreground mb-4 ml-10">{course.provider}</h4>
-                    <p className="text-muted-foreground ml-10">{course.description}</p>
+                    <h4 className="text-lg text-muted-foreground mb-4 ml-10 font-semibold">{course.provider}</h4>
+                    <p className="text-muted-foreground ml-10 font-medium">{course.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>

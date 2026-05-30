@@ -11,7 +11,7 @@ import { ExternalLink, Github, Star, ArrowRight, Filter, X, Search, Sparkles, Za
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 // Project categories
-const categories = ["All", "Web", "Mobile", "AI/ML", "Blockchain", "UI/UX"];
+const categories = ["All", "Web", "Mobile", "AI/ML", "Blockchain", "UI/UX", "Backend", "Full-Stack"];
 
 const projects = [
   {
@@ -132,6 +132,66 @@ const projects = [
     link: "https://character.ai/chat/YpiOlZJ_M9XC-LGQtvNnaH-opABWiVo2vXFdXiG5Q4M",
     category: "AI/ML",
     color: "from-purple-500 to-pink-500"
+  },
+  {
+    title: "RESTful API Service",
+    description: "A robust RESTful API built with Node.js and Express, featuring JWT authentication, rate limiting, and comprehensive error handling for scalable backend services.",
+    image: "https://i.imgur.com/8Blt9Eo.jpeg",
+    tags: ["Node.js", "Express.js", "JWT", "REST API", "MongoDB", "Redis"],
+    link: "#",
+    github: "https://github.com/Murphine22/restful-api-service",
+    category: "Backend",
+    color: "from-green-600 to-emerald-600"
+  },
+  {
+    title: "GraphQL API Gateway",
+    description: "A modern GraphQL API gateway built with NestJS, providing efficient data fetching, schema stitching, and real-time subscriptions for complex data architectures.",
+    image: "https://i.imgur.com/L8HmeD3.jpeg",
+    tags: ["NestJS", "GraphQL", "TypeScript", "PostgreSQL", "Redis", "Subscriptions"],
+    link: "#",
+    github: "https://github.com/Murphine22/graphql-api-gateway",
+    category: "Backend",
+    color: "from-blue-600 to-indigo-600"
+  },
+  {
+    title: "Microservices Authentication System",
+    description: "A distributed authentication microservice architecture using OAuth 2.0, with session management, multi-factor authentication, and secure token handling across multiple services.",
+    image: "https://i.imgur.com/6M86mxE.jpeg",
+    tags: ["Node.js", "OAuth 2.0", "JWT", "Redis", "Docker", "Microservices", "Security"],
+    link: "#",
+    github: "https://github.com/Murphine22/auth-microservice",
+    category: "Backend",
+    color: "from-purple-600 to-violet-600"
+  },
+  {
+    title: "E-Commerce Platform",
+    description: "A complete full-stack e-commerce solution with product management, shopping cart, payment integration, order processing, and admin dashboard with real-time analytics.",
+    image: "https://i.imgur.com/cTIFMyY.jpeg",
+    tags: ["Next.js", "Node.js", "Express.js", "MongoDB", "Stripe", "Redis", "Tailwind CSS"],
+    link: "#",
+    github: "https://github.com/Murphine22/ecommerce-platform",
+    category: "Full-Stack",
+    color: "from-orange-500 to-red-500"
+  },
+  {
+    title: "Social Media Dashboard",
+    description: "A comprehensive social media management dashboard with post scheduling, analytics, multi-platform integration, and AI-powered content suggestions for digital marketing.",
+    image: "https://i.imgur.com/QwVIarl.jpeg",
+    tags: ["React", "Node.js", "NestJS", "PostgreSQL", "Redis", "Chart.js", "AI Integration"],
+    link: "#",
+    github: "https://github.com/Murphine22/social-dashboard",
+    category: "Full-Stack",
+    color: "from-pink-500 to-rose-500"
+  },
+  {
+    title: "Project Management System",
+    description: "A full-stack project management tool with Kanban boards, task tracking, team collaboration features, real-time updates, and comprehensive reporting with Gantt charts.",
+    image: "https://i.imgur.com/TND5b3C.jpeg",
+    tags: ["Next.js", "NestJS", "PostgreSQL", "Socket.io", "Tailwind CSS", "TypeScript", "Real-time"],
+    link: "#",
+    github: "https://github.com/Murphine22/project-management",
+    category: "Full-Stack",
+    color: "from-cyan-500 to-blue-600"
   },
 ]
 
