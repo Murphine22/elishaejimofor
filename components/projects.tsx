@@ -15,6 +15,76 @@ const categories = ["All", "Web", "Mobile", "AI/ML", "Blockchain", "UI/UX", "Bac
 
 const projects = [
   {
+    title: "TS Academy LMS v2.0",
+    description: "This comprehensive Learning Management System (LMS) features advanced gamification, AI-driven personalization, and robust discussion forums. It offers a dynamic and engaging educational experience with features like achievement tracking, intelligent course recommendations, and real-time analytics.",
+    image: "https://i.imgur.com/RnLOsAO.png",
+    tags: ["Node.js", "Express.js", "JWT", "REST API", "MongoDB", "Express", "MongoDB", "Socket.io", "Stripe", "Cloudinary"],
+    link: "#",
+    github: "https://github.com/Murphine22/LMS-Capstone-Project",
+    category: "Full-Stack, AI/ML, Backend",
+    color: "from-green-600 to-emerald-600"
+  },
+  {
+    title: "Digital Banking System (NIBSS Phoenix)",
+    description: "A sophisticated backend system for digital banking, seamlessly integrated with the NIBSS Phoenix API. It provides full-scale banking operations, including secure customer onboarding with BVN/NIN verification, comprehensive account management, and both intra-bank and inter-bank fund transfers.",
+    image: "https://i.imgur.com/06VNADC.png",
+    tags: ["NestJS", "GraphQL", "TypeScript", "PostgreSQL", "Redis", "Subscriptions"],
+    link: "#",
+    github: "https://github.com/Murphine22/Digital-Banking-System-Assignment-TSA-Backend-",
+    category: "Backend, Fintech",
+    color: "from-blue-600 to-indigo-600"
+  },
+  {
+    title: " School Library Management API",
+    description: "This robust RESTful API provides comprehensive management for school library operations, including full CRUD functionality for authors, books, students, and attendants. It features automated borrowing and returning logic, secure JWT authentication, and efficient data handling with pagination and search capabilities.",
+    image: "https://i.imgur.com/OKXgP26.png",
+    tags: ["Node.js", "OAuth 2.0", "JWT", "Redis", "Docker", "Microservices", "Security"],
+    link: "#",
+    github: "https://github.com/Murphine22/school-library-management-api",
+    category: "Backend",
+    color: "from-purple-600 to-violet-600"
+  },
+  {
+    title: "Eli-Pay",
+    description: "A complete full-stack e-commerce solution with product management, shopping cart, payment integration, order processing, and admin dashboard with real-time analytics.",
+    image: "https://i.imgur.com/AaRVlT3.png",
+    tags: ["Node.js", "MongoDB", "NIBSS API", "Next.js", "React", "JWT", "Express.js", "Stripe", "Redis", "Tailwind CSS"],
+    link: "https://elipay-app.vercel.app/",
+    github: "https://github.com/Murphine22/Eli-Pay",
+    category: "Full-Stack, Fintech",
+    color: "from-orange-500 to-red-500"
+  },
+  {
+    title: "Dexter Forensics",
+    description: "A professional and authoritative website for Dexter Forensics, a Nigerianbased firm specializing in forensic consulting and private investigation. The site details their expertise in digital and physical forensics, security products, and professional training masterclasses, presented with a clean and modern design.",
+    image: "https://i.imgur.com/NVV4qt7.png",
+    tags: ["React", "TypeScript", "Node.js", "NestJS", "PostgreSQL", "Redis", "Chart.js", "AI Integration"],
+    link: "https://dexter-forensics.vercel.app",
+    github: "https://github.com/Murphine22/dexter-forensics",
+    category: "Full-Stack",
+    color: "from-pink-500 to-rose-500"
+  },
+  {
+    title: "Lizean Cleaning App",
+    description: "Lizean Cleaning App is a sleek and modern application designed to streamline the booking and management of cleaning services. It offers a user-friendly interface for scheduling, service selection, and managing appointments, ensuring a seamless experience for both clients and service providers.",
+    image: "https://i.imgur.com/fLBCNsW.png",
+    tags: ["Next.js", "NestJS", "MongoDB", "JWT", "PostgreSQL", "Socket.io", "Tailwind CSS", "TypeScript", "Real-time"],
+    link: "#",
+    github: "https://github.com/Murphine22/Lizean-Cleaning-App",
+    category: "Full-Stack",
+    color: "from-cyan-500 to-blue-600"
+  },
+  {
+    title: "Cosmos Explorer",
+    description: "A scalable real-time chat application with private messaging, group chats, file sharing, typing indicators, read receipts, and end-to-end encryption for secure communications.",
+    image: "https://i.imgur.com/bxOxNG8.png",
+    tags: ["React 18", "Fetch API", "CSS3", "Google Fonts", "React", "Node.js", "Socket.io", "MongoDB", "Redis", "JWT", "WebRTC", "Encryption"],
+    link: "https://cosmos-explorer-sage.vercel.app",
+    github: "https://github.com/Murphine22/Cosmos-Explorer",
+    category: "Full-Stack, Web, AI/ML",
+    color: "from-violet-500 to-purple-600"
+  },
+  {
     title: "Ush-App Finance app",
     description: "A full-stack Financial Overview App with React and Node.js",
     image: "https://i.imgur.com/TND5b3C.jpeg",
@@ -41,7 +111,7 @@ const projects = [
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Chart.js", "JWT Auth", "REST API"],
     link: "https://koinder-crm.base44.app",
     github: "#",
-    category: "App",
+    category: "Full-Stack, App",
     color: "from-green-500 to-emerald-600"
   },
   {
@@ -133,76 +203,7 @@ const projects = [
     category: "AI/ML",
     color: "from-purple-500 to-pink-500"
   },
-  {
-    title: "RESTful API Service",
-    description: "A robust RESTful API built with Node.js and Express, featuring JWT authentication, rate limiting, and comprehensive error handling for scalable backend services.",
-    image: "https://i.imgur.com/8Blt9Eo.jpeg",
-    tags: ["Node.js", "Express.js", "JWT", "REST API", "MongoDB", "Redis"],
-    link: "#",
-    github: "https://github.com/Murphine22/restful-api-service",
-    category: "Backend",
-    color: "from-green-600 to-emerald-600"
-  },
-  {
-    title: "GraphQL API Gateway",
-    description: "A modern GraphQL API gateway built with NestJS, providing efficient data fetching, schema stitching, and real-time subscriptions for complex data architectures.",
-    image: "https://i.imgur.com/L8HmeD3.jpeg",
-    tags: ["NestJS", "GraphQL", "TypeScript", "PostgreSQL", "Redis", "Subscriptions"],
-    link: "#",
-    github: "https://github.com/Murphine22/graphql-api-gateway",
-    category: "Backend",
-    color: "from-blue-600 to-indigo-600"
-  },
-  {
-    title: "Microservices Authentication System",
-    description: "A distributed authentication microservice architecture using OAuth 2.0, with session management, multi-factor authentication, and secure token handling across multiple services.",
-    image: "https://i.imgur.com/6M86mxE.jpeg",
-    tags: ["Node.js", "OAuth 2.0", "JWT", "Redis", "Docker", "Microservices", "Security"],
-    link: "#",
-    github: "https://github.com/Murphine22/auth-microservice",
-    category: "Backend",
-    color: "from-purple-600 to-violet-600"
-  },
-  {
-    title: "E-Commerce Platform",
-    description: "A complete full-stack e-commerce solution with product management, shopping cart, payment integration, order processing, and admin dashboard with real-time analytics.",
-    image: "https://i.imgur.com/cTIFMyY.jpeg",
-    tags: ["Next.js", "Node.js", "Express.js", "MongoDB", "Stripe", "Redis", "Tailwind CSS"],
-    link: "#",
-    github: "https://github.com/Murphine22/ecommerce-platform",
-    category: "Full-Stack",
-    color: "from-orange-500 to-red-500"
-  },
-  {
-    title: "Social Media Dashboard",
-    description: "A comprehensive social media management dashboard with post scheduling, analytics, multi-platform integration, and AI-powered content suggestions for digital marketing.",
-    image: "https://i.imgur.com/QwVIarl.jpeg",
-    tags: ["React", "Node.js", "NestJS", "PostgreSQL", "Redis", "Chart.js", "AI Integration"],
-    link: "#",
-    github: "https://github.com/Murphine22/social-dashboard",
-    category: "Full-Stack",
-    color: "from-pink-500 to-rose-500"
-  },
-  {
-    title: "Project Management System",
-    description: "A full-stack project management tool with Kanban boards, task tracking, team collaboration features, real-time updates, and comprehensive reporting with Gantt charts.",
-    image: "https://i.imgur.com/TND5b3C.jpeg",
-    tags: ["Next.js", "NestJS", "PostgreSQL", "Socket.io", "Tailwind CSS", "TypeScript", "Real-time"],
-    link: "#",
-    github: "https://github.com/Murphine22/project-management",
-    category: "Full-Stack",
-    color: "from-cyan-500 to-blue-600"
-  },
-  {
-    title: "Real-Time Chat Application",
-    description: "A scalable real-time chat application with private messaging, group chats, file sharing, typing indicators, read receipts, and end-to-end encryption for secure communications.",
-    image: "https://i.imgur.com/wG8qA8t.png",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB", "Redis", "JWT", "WebRTC", "Encryption"],
-    link: "#",
-    github: "https://github.com/Murphine22/realtime-chat",
-    category: "Full-Stack",
-    color: "from-violet-500 to-purple-600"
-  },
+  
 ]
 
 // 3D Card Tilt Component
@@ -691,6 +692,41 @@ export const Projects = () => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* View More Projects Button */}
+      <motion.div
+        className="mt-12 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 text-white font-black px-10 py-7 text-lg rounded-full shadow-2xl group border-2 border-white/20"
+            asChild
+          >
+            <a href="https://github.com/Murphine22" target="_blank" rel="noopener noreferrer">
+              <motion.div
+                animate={{ rotate: [0, 360, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                <Github className="w-5 h-5 mr-2" />
+              </motion.div>
+              View More Projects
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ExternalLink className="w-5 h-5 ml-2 group-hover:rotate-45 transition-transform" />
+              </motion.div>
+            </a>
+          </Button>
+        </motion.div>
+      </motion.div>
     </motion.div>
   )
 }
