@@ -279,7 +279,7 @@ export const AboutHero = ({ onNavigate }: AboutHeroProps) => {
                 size="lg"
                 className="bg-gradient-to-r from-primary to-purple-600 hover:opacity-90 group"
                 onClick={() => {
-                  window.open("https://www.dropbox.com/scl/fi/splfbsk5ieu9zbtg7aury/My-Frontend-Dev-Resume-2026.pdf?rlkey=k0hkafy3hf0056lz3w8qol68y&st=9l5zskn0&dl=0")
+                  window.open("https://www.dropbox.com/scl/fi/cj07r4p8f3fn83okhh0b9/Elisha-s-Full-Stack-Resume.pdf?rlkey=zyim0u93y1eo1iyn468bjg1f8&st=r52t9mk0&dl=0")
                 }}
               >
                 <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
