@@ -105,7 +105,7 @@ export const About = ({ onNavigate }: AboutProps) => {
       year: 2025, 
       event: "Operations Manager",
       company: "Koinder Global Ltd",
-      period: "November 2025 - Present",
+      period: "November 2025 - June 2026",
       icon: Briefcase,
       gradient: "from-emerald-500 to-teal-600",
       description: "Leading operations and digital transformation across multiple platforms",
@@ -156,12 +156,12 @@ export const About = ({ onNavigate }: AboutProps) => {
     {
       title: "Operations Manager",
       company: "Koinder Global Ltd",
-      period: "November 2025 - Present",
+      period: "November 2025 - May 2026",
       color: "from-emerald-500 to-teal-600",
       lightColor: "from-emerald-500/20 to-teal-600/20",
       location: "Abuja, Nigeria",
       responsibilities: [
-        "Lead daily operational activities across three digital platforms (Koinder, Taste Naija, Made Naija), improving cross-platform efficiency by ~40%",
+        "Lead daily operational activities across multiple digital platforms and sub-companies(Glain Energy Services Ltd, Koinder Global Ltd, Taste Naija, Made Naija, Glain Oaks, Lizean and Koinsounds), improving cross-platform efficiency by ~40%",
         "Implemented KPI-driven performance tracking system for staff accountability, boosting team productivity by 35%",
         "Successfully coordinated and managed the launch of Taste Naija platform (December 18, 2025), achieving 50% user growth in first month",
         "Oversee digital marketing strategy and social media management, increasing brand engagement by 45% across all platforms",
